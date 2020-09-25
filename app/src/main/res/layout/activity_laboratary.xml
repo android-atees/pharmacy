@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.DoctorActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        app:title="Remedio"
+        app:titleTextColor="@android:color/white">
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/lay1"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/pr_gradient">
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:elevation="@dimen/margin_8"
+            android:padding="@dimen/margin_8"
+            android:textColor="@android:color/white"
+            android:text="LABORATORY"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/txt"
+            android:layout_marginTop="@dimen/margin_4"
+            android:weightSum="10"
+            android:padding="@dimen/margin_8"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_department"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Laboratory"
+                android:layout_weight="3"
+                android:focusable="false"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:maxLines="1"
+                android:minLines="1"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:background="@android:drawable/editbox_background_normal"/>
+
+            <EditText
+                android:id="@+id/et_constituency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Constituency"
+                android:layout_weight="3"
+                android:focusable="false"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:maxLines="1"
+                android:minLines="1"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:background="@android:drawable/editbox_background_normal"/>
+
+            <ImageView
+                android:id="@+id/im_search"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="4"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_marginRight="@dimen/margin_30"
+                android:tint="@color/colorAccent"
+                android:background="@android:drawable/editbox_background_normal"
+                android:src="@drawable/ic_search"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_laboratory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lay1"
+        android:background="@android:color/white">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Remedio</string>
+    <string name="upload">Upload</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="more">More</string>
+    <string name="slide_one">EXPRESS DELIVERY\nAT YOUR DOORSTEP</string>
+    <string name="skip">Skip</string>
+    <string name="hint_enter_number">Mobile number</string>
+    <string name="hint_enter_password">Password</string>
+    <string name="terms_and_conditions">Terms And Conditions</string>
+    <string name="hint_email">Your Email Address</string>
+    <string name="hint_add_password">Set Password</string>
+    <string name="hint_name">Full Name</string>
+    <string name="hint_enter_mobile_number">Mobile Number(for order updates)</string>
+    <string name="referAndEarn">Hi, \n  Refer to your family and friends, \n  and welcome them to the world of remedio. </string>
+    <string name="hint_add_otp">OTP</string>
+    <string name="hint_enter_Referal_id">Enter the Referal ID</string>
+    <string name="hint_mobile_number">Enter your mobile number</string>
+    <string name="cart_empty">You don\'t have any items\nright now</string>
+    <string name="no_products">Products will be\ncoming soon</string>
+    <string name="surgical_products">Surgical products will be\ncoming soon</string>
+    <string name="close">CLOSE</string>
+    <string name="select_or_search">Select or search</string>
+    <string name="upload_sucess">Your order has been received \n our representative will call you soon!</string>
+    <string name="upload_failed">Failed your prescription upoading \n try again!</string>
+    <string name="remedio_medicine_order">REMEDIO\nMEDICINE ORDER</string>
+    <string name="delivery_address">DELIVERY ADDRESS</string>
+    <string name="doc_image">Doctors_image</string>
+    <string name="doc_name">Doctors_name</string>
+    <string name="medicine_heading">GET YOUR\nMEDICINES IN SIMPLE STEPS</string>
+    <string name="find_doctor">FIND YOUR\nDOCTOR</string>
+    <string name="general_medicine">GENERAL\nMEDICINE</string>
+    <string name="otc">OTC</string>
+    <string name="permission_rationale_location">Contacts permissions are needed for providing location completions.</string>
+    <string name="hospital_direc">Hospital\nDirectory</string>
+    <string name="Labora_direc">Laboratory\nDirectory</string>
+    <string name="offer">Offer</string>
+
+    <string name="search_hint">Search</string>
+
+    <string-array name="stepLabels">
+        <item>Draft</item>
+        <item>Confirmed</item>
+        <item>Processing</item>
+        <item>Shipped</item>
+        <item>Delivered</item>
+
+    </string-array>
+    <string name="title_activity_maps_tracking">Map</string>
+    <string name="slide_three">THE NEW WAY OF\nPURCHASING YOUR CURE...</string>
+    <string name="cancel_order">Cancel order</string>
+
+</resources>

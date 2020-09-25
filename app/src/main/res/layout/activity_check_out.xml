@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.CheckOutActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        app:title="Remedio"
+        app:titleTextColor="@android:color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/addAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add delivery address"
+                style="@style/UIButtonGreen"
+                android:layout_margin="20dp"/>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/margin_2"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/margin_2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_10">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:text="Reo Paul"/>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="@dimen/margin_2"
+                        app:cardElevation="@dimen/margin_2"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/margin_2">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="edit"
+                            android:paddingRight="@dimen/margin_8"
+                            android:paddingLeft="@dimen/margin_8"
+                            android:paddingTop="@dimen/margin_2"
+                            android:paddingBottom="@dimen/margin_2"
+                            android:textColor="@color/colorPrimary" />
+
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/margin_8"
+                        android:layout_below="@+id/name"
+                        android:text="Atees Infomedia"/>
+
+                    <TextView
+                        android:id="@+id/number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="9567658464"
+                        android:layout_below="@+id/address"/>
+
+                    <TextView
+                        android:id="@+id/city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="Thrissur,kerala"
+                        android:layout_below="@+id/number"/>
+
+                    <TextView
+                        android:id="@+id/pincode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text=""
+                        android:layout_below="@+id/city"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <RadioGroup
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButtonCod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="COD"
+                    android:textSize="16sp"/>
+
+                <RadioButton
+                    android:id="@+id/radioButtonpayNow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:text="Pay now"
+                    android:textSize="16sp"/>
+
+            </RadioGroup>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclercartItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_marginLeft="20dp">
+
+            <!--<TextView-->
+                <!--android:id="@+id/txtt1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Sub total : "-->
+                <!--android:padding="@dimen/margin_4"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/txtt2"-->
+                <!--android:layout_below="@+id/txtt1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Delivery Fee : "-->
+                <!--android:padding="@dimen/margin_4"/>-->
+
+            <TextView
+                android:id="@+id/txtt3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:text="Grand total : "
+                android:padding="@dimen/margin_4"/>
+
+            <!--<TextView-->
+                <!--android:id="@+id/subTotalPrice"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="16sp"-->
+                <!--android:padding="2dp"-->
+                <!--android:text="Rs.3897"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignRight="@+id/txtt1"-->
+                <!--android:layout_alignEnd="@+id/txtt1"/>-->
+            <!--<TextView-->
+                <!--android:id="@+id/deliceryFeePrice"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:layout_below="@+id/subTotalPrice"-->
+                <!--android:padding="2dp"-->
+                <!--android:textSize="16sp"-->
+                <!--android:text="Rs.3897"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignRight="@+id/txtt2"-->
+                <!--android:layout_alignEnd="@+id/txtt2"/>-->
+
+            <TextView
+                android:id="@+id/grandTotalAmt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:padding="@dimen/margin_4"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="Rs.3897"
+                android:layout_alignParentRight="true"
+                android:layout_alignRight="@+id/txtt3"
+                android:layout_alignEnd="@+id/txtt3"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnCheckOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            android:text="CHECKOUT"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+

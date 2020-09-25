@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/reference_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/nodata"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="There is no rewards for you."/>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/tprice_card"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:layout_alignParentBottom="true"
+        app:cardElevation="2dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Grand Total (RE+SE)"
+                android:gravity="center"/>
+
+
+            <TextView
+                android:id="@+id/tprice_amt"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/colorAccent"
+                android:text="$ 30"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_4"
+        android:elevation="@dimen/margin_4"
+        android:layout_marginTop="@dimen/margin_8">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/titleMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_8"
+                    android:layout_weight="1"
+                    android:background="@color/grey_light"
+                    android:text="ITEM DETAILS"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_cancel_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_8"
+                    android:gravity="right"
+                    android:background="@color/grey_light"
+                    android:layout_weight="1"
+                    android:text="Cancel item"
+                    android:textColor="@color/colorAccent"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/menuImage"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_below="@+id/titleMain"
+                android:padding="@dimen/margin_10"
+                android:scaleType="fitCenter"/>
+
+            <TextView
+                android:id="@+id/resName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/menuImage"
+                android:layout_below="@+id/titleMain"
+                android:layout_marginTop="20dp"
+                android:text=""/>
+
+            <TextView
+                android:id="@+id/menuName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/menuImage"
+                android:layout_below="@+id/resName"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="8dp"
+                android:text=""/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/menuImage">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/heading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TRACK"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        android:padding="@dimen/margin_8"
+                        android:background="@color/grey_light"/>
+
+                    <TextView
+                        android:id="@+id/tv_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Order cancelled"
+                        android:layout_below="@+id/heading"
+                        android:visibility="gone"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorAccent"
+                        android:padding="@dimen/margin_8"/>
+
+                    <com.badoualy.stepperindicator.StepperIndicator
+                        android:id="@+id/tracker"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/heading"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:visibility="visible"
+                        app:stpi_circleColor="@color/colorAccent"
+                        app:stpi_animDuration="100000"
+                        app:stpi_indicatorColor="@color/colorAccent"
+                        app:stpi_circleStrokeWidth="1dp"
+                        app:stpi_lineMargin="@dimen/margin_6"
+                        app:stpi_lineStrokeWidth="2dp"
+                        app:stpi_circleRadius="10dp"
+                        app:stpi_lineColor="@color/grey"
+                        app:stpi_lineDoneColor="@color/colorAccent"
+                        app:stpi_labels="@array/stepLabels"
+                        app:stpi_showDoneIcon="true"
+                        app:stpi_showLabels="true" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txt5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="PRICE"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        android:padding="@dimen/margin_8"
+                        android:background="@color/grey_light"/>
+
+                    <LinearLayout
+                        android:id="@+id/lay1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt5"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:padding="@dimen/margin_6">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Price"/>
+
+                        <TextView
+                            android:id="@+id/itemPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lay2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/lay1"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_6">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Quantity"/>
+
+                        <TextView
+                            android:id="@+id/quantity"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/lay2"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_6">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Total "/>
+
+                        <TextView
+                            android:id="@+id/totalPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"/>
+
+                    </LinearLayout>
+
+
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/txt7"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_below="@+id/txt6"-->
+                        <!--android:text="deliver fee "/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/txt8"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_below="@+id/txt7"-->
+                        <!--android:text="total "/>-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Rs.3454"-->
+                        <!--android:layout_toRightOf="@+id/txt6"-->
+                        <!--android:layout_below="@+id/txt5"-->
+                        <!--android:layout_alignEnd="@+id/txt6"-->
+                        <!--android:layout_alignRight="@+id/txt6"/>-->
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

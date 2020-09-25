@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_4">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/ratingCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/margin_2"
+            app:cardElevation="@dimen/margin_1">
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 "
+                android:textSize="10sp"
+                android:drawablePadding="@dimen/margin_4"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:paddingLeft="@dimen/margin_6"
+                android:paddingRight="@dimen/margin_6"
+                android:paddingBottom="@dimen/margin_2"
+                android:paddingTop="@dimen/margin_2"
+                android:background="#449f24"
+                android:drawableRight="@drawable/ic_white_star"/>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="reo"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@+id/ratingCard"/>
+
+        <TextView
+            android:id="@+id/review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="nice product"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/margin_8"
+            android:padding="@dimen/margin_2"
+            android:layout_below="@+id/name"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="18/09/18"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/review"
+            android:padding="@dimen/margin_2"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"
+            android:layout_below="@+id/date"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

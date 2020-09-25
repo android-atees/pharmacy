@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add delivery address"
+        android:padding="@dimen/margin_10"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_name"
+                android:layout_width="match_parent"
+                android:layout_marginTop="6dp"
+                android:layout_below="@+id/tit"
+                android:padding="@dimen/margin_10"
+                android:hint="Full Name*"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:focusableInTouchMode="true"
+                    android:textSize="16sp"
+                    android:imeOptions="actionNext"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_address"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tit"
+                android:padding="@dimen/margin_10"
+                android:layout_height="wrap_content"
+                android:hint="Address*">
+
+                <!--<EditText-->
+                    <!--android:id="@+id/et_address"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:inputType="text"-->
+                    <!--android:focusableInTouchMode="true"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:imeOptions="actionNext"-->
+                    <!--android:hint="Address*" />-->
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionSearch" />
+
+                <!--android:importantForAutofill="noExcludeDescendants"-->
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_number"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tit"
+                android:padding="@dimen/margin_10"
+                android:hint="Mobile Number*"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:focusableInTouchMode="true"
+                    android:textSize="16sp"
+                    android:imeOptions="actionNext" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_alt_number"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tit"
+                android:padding="@dimen/margin_10"
+                android:hint="Alternative Number(optional)"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_alt_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:focusableInTouchMode="true"
+                    android:textSize="16sp"
+                    android:imeOptions="actionNext"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_city"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/tit"
+                    android:padding="@dimen/margin_10"
+                    android:layout_weight="1"
+                    android:hint="City Or District*"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:textSize="16sp"
+                        android:imeOptions="actionNext"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_state"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/tit"
+                    android:padding="@dimen/margin_10"
+                    android:layout_weight="1"
+                    android:hint="State*"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:textSize="16sp"
+                        android:imeOptions="actionNext"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_pin"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tit"
+                android:padding="@dimen/margin_10"
+                android:hint="Pincode*"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_pincode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:focusableInTouchMode="true"
+                    android:textSize="16sp"
+                    android:imeOptions="actionDone"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                style="@style/UIButtonGreen"
+                android:layout_margin="@dimen/margin_10"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

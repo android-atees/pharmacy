@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/margin_4"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_margin="@dimen/margin_4"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_8"
+            android:text="medical"
+            android:textColor="@color/colorPrimary"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_8"
+    android:layout_marginLeft="@dimen/margin_8"
+    android:layout_marginRight="@dimen/margin_8"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="@dimen/margin_2"
+        android:layout_margin="@dimen/margin_2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <RelativeLayout
+                        android:id="@+id/lay1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/user_img"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_profile"
+                        android:padding="@dimen/margin_2"/>
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reo Paul"
+                        android:padding="@dimen/margin_2"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/user_img"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/lay2"
+                        android:layout_below="@+id/lay1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/mob_img"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_phone"
+                            android:padding="@dimen/margin_2"/>
+
+                        <TextView
+                            android:id="@+id/number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="9567658464"
+                            android:padding="@dimen/margin_2"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"
+                            android:layout_toRightOf="@+id/mob_img"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorAccent"
+                    android:text="30"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:padding="@dimen/margin_4"
+                android:text="18/29/18"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:src="@drawable/remedio_main"
+        android:visibility="visible"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"/>
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_10"
+        android:gravity="center"
+        android:text="@string/slide_one"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <com.github.florent37.arclayout.ArcLayout
+        android:id="@+id/arcLay"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:arc_cropDirection="cropInside"
+        app:arc_position="top"
+        android:layout_alignParentBottom="true"
+        app:arc_height="60dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/sl_gradient"/>
+
+            <!--<ImageView-->
+                <!--android:id="@+id/img"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:src="@drawable/ic_splash"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="100dp"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/img"-->
+                <!--android:layout_marginTop="@dimen/margin_10"-->
+                <!--android:gravity="center"-->
+                <!--android:text="@string/slide_one"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textStyle="bold" />-->
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:scaleType="fitXY"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_slider_bg"/>
+
+        </RelativeLayout>
+
+    </com.github.florent37.arclayout.ArcLayout>
+
+</RelativeLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.github.florent37.arclayout.ArcLayout
+        android:id="@+id/arcLay"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        app:arc_cropDirection="cropOutside"
+        app:arc_position="bottom"
+        app:arc_height="60dp"
+        android:layout_marginBottom="150dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/sl_gradient"/>
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_delivery_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"/>
+
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img"
+                android:layout_marginTop="@dimen/margin_10"
+                android:gravity="center"
+                android:text="@string/slide_one"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:scaleType="fitXY"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_slider_bg"/>
+
+        </RelativeLayout>
+
+    </com.github.florent37.arclayout.ArcLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="87dp"
+        android:src="@drawable/remedio_main" />
+
+</RelativeLayout>

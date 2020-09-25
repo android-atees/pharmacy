@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.OrderDetailsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        app:title="Remedio"
+        app:titleTextColor="@android:color/white">
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/light_grey">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/margin_8"
+        android:textColor="@android:color/black"
+        android:text="@string/remedio_medicine_order"/>
+
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="@dimen/margin_8"-->
+        <!--app:cardElevation="@dimen/margin_2"-->
+        <!--app:cardCornerRadius="@dimen/margin_2">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="@dimen/margin_8"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="@dimen/margin_2"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="Item name "/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/itemName"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textColor="@color/colorAccent"-->
+                    <!--android:text="Complan"/>-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="@dimen/margin_2"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="Price "/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/itemPrice"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:text="200"/>-->
+
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="@dimen/margin_2"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="Quantity "/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/itemQuantity"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_gravity="right"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:text="02"/>-->
+
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="@dimen/margin_2"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="GST% "/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/gstPercentage"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:text="8%"/>-->
+
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="@dimen/margin_2"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="GST Amount "/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/gstAmount"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:text="32"/>-->
+
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="@dimen/margin_2"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="Total "/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/total"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:text="432"/>-->
+
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
+
+    <!--</android.support.v7.widget.CardView>-->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/order_items_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/margin_8">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Grand Total"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/grandTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    android:layout_gravity="right"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/margin_8">
+
+                <TextView
+                    android:id="@+id/tvViewInMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="View in Map"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:padding="@dimen/margin_8"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:background="?attr/selectableItemBackground"/>
+
+                <TextView
+                    android:id="@+id/tvImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Prescription Image"
+                    android:gravity="right"
+                    android:padding="@dimen/margin_8"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:visibility="visible"
+                    android:background="?attr/selectableItemBackground"/>
+
+            </LinearLayout>
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvViewInMap"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="View in Map"-->
+                <!--android:layout_gravity="right"-->
+                <!--android:padding="@dimen/margin_8"-->
+                <!--android:textColor="@color/colorAccent"-->
+                <!--android:textStyle="bold"-->
+                <!--android:clickable="true"-->
+                <!--android:visibility="visible"-->
+                <!--android:background="?attr/selectableItemBackground"/>-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:alpha=".2"
+        android:layout_marginLeft="@dimen/margin_8"
+        android:layout_marginRight="@dimen/margin_8"/>
+
+            <LinearLayout
+                android:id="@+id/deliverLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delivery_address"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:padding="@dimen/margin_8"/>
+
+                <TextView
+                    android:id="@+id/edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="edit"
+                    android:padding="@dimen/margin_8"
+                    android:textColor="@color/colorAccent"/>
+
+            </LinearLayout>
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="@dimen/margin_8"-->
+                <!--android:background="@android:color/white"-->
+                <!--android:text="Add delivery address"-->
+                <!--android:textColor="@color/colorAccent"/>-->
+
+            <RelativeLayout
+                android:id="@+id/addresslay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:visibility="visible"
+                android:clickable="true"
+                android:padding="@dimen/margin_8"
+                android:background="?attr/selectableItemBackground"
+                android:layout_below="@+id/heading">
+
+                <TextView
+                    android:id="@+id/txtAddAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add new address+"
+                    android:textColor="@color/colorAccent"
+                    android:textAllCaps="true"/>
+
+                <ImageView
+                    android:id="@+id/imaddAddress"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:tint="@color/colorAccent"
+                    android:src="@drawable/ic_plus"/>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8"
+                android:visibility="visible"
+                app:cardElevation="@dimen/margin_2"
+                app:cardCornerRadius="@dimen/margin_2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_8"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Name "/>
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorAccent"
+                            android:text=""/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Phone number "/>
+
+                        <TextView
+                            android:id="@+id/number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:text=""/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Pincode "/>
+
+                        <TextView
+                            android:id="@+id/pincode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_gravity="right"
+                            android:textColor="@color/black"
+                            android:text=""/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="Address "/>
+
+                        <TextView
+                            android:id="@+id/address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:textColor="@color/black"
+                            android:text=""/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_2"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="City/Town/District "/>
+
+                        <TextView
+                            android:id="@+id/city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:text="sdfdsdfbgsdfbgdfgsdfgbsdfbgdsfbdfsbdfsdfbsdfbsdfdfsbs"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_2"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="State "/>
+
+                        <TextView
+                            android:id="@+id/state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:text=""/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:alpha=".2"
+                android:layout_marginLeft="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_8"/>
+
+            <RelativeLayout
+                android:id="@+id/trackLay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TRACK"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:padding="@dimen/margin_8"/>
+
+                <TextView
+                    android:id="@+id/tvCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Order cancelled"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_below="@+id/heading"
+                    android:padding="@dimen/margin_8"/>
+
+                <com.badoualy.stepperindicator.StepperIndicator
+                    android:id="@+id/tracker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/heading"
+                    android:visibility="visible"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    app:stpi_circleColor="@color/colorAccent"
+                    app:stpi_animDuration="100000"
+                    app:stpi_indicatorColor="@color/colorAccent"
+                    app:stpi_circleStrokeWidth="1dp"
+                    app:stpi_lineMargin="@dimen/margin_6"
+                    app:stpi_lineStrokeWidth="2dp"
+                    app:stpi_circleRadius="10dp"
+                    app:stpi_lineColor="@color/grey"
+                    app:stpi_lineDoneColor="@color/colorAccent"
+                    app:stpi_labels="@array/stepLabels"
+                    app:stpi_showDoneIcon="true"
+                    app:stpi_showLabels="true" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttons_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_8"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Cancel"
+            android:layout_margin="@dimen/margin_8"
+            android:layout_weight="1"
+            style="@style/UIButtonGreen"/>
+
+        <Button
+            android:id="@+id/btnConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Confirm"
+            android:layout_margin="@dimen/margin_8"
+            android:layout_weight="1"
+            style="@style/UIButtonGreen"/>
+
+    </LinearLayout>
+
+</LinearLayout>

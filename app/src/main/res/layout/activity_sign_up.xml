@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:padding="@dimen/margin_8"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginBottom="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_10"
+                android:src="@drawable/remedio_main"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:id="@+id/imageView2" />
+
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Sign uP"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="16sp"/>-->
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--<LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">-->
+                <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:src="@mipmap/ic_full_name_icon_sign_up"-->
+                <!--android:layout_width="12dp"-->
+                <!--android:layout_height="match_parent" />-->
+
+                <!--<TextView-->
+                <!--android:text="First Name"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<EditText-->
+                <!--android:id="@+id/et_register_fname"-->
+                <!--android:inputType="textPersonName"-->
+                <!--android:minLines="1"-->
+                <!--android:maxLines="1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#cac9c9">
+
+                    <EditText
+                        android:id="@+id/et_register_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:textSize="16sp"
+                        android:background="@drawable/edt_bg_selector"
+                        android:imeOptions="actionNext"
+                        android:hint="@string/hint_email" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:src="@mipmap/ic_full_name_icon_sign_up"-->
+                <!--android:layout_width="12dp"-->
+                <!--android:layout_height="match_parent" />-->
+
+                <!--<TextView-->
+                <!--android:text="Last Name"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<EditText-->
+                <!--android:id="@+id/et_register_lname"-->
+                <!--android:inputType="textPersonName"-->
+                <!--android:minLines="1"-->
+                <!--android:maxLines="1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+                <!--</LinearLayout>-->
+
+                <RelativeLayout
+                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#cac9c9">
+
+                        <EditText
+                            android:id="@+id/et_register_pass"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:textSize="16sp"
+                            android:background="@drawable/edt_bg_selector"
+                            android:imeOptions="actionNext"
+                            android:hint="@string/hint_add_password" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <TextView
+                        android:id="@+id/show"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/margin_4"
+                        android:text="Show" />
+
+                </RelativeLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_name"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#cac9c9">
+
+                    <EditText
+                        android:id="@+id/et_register_fullname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        android:background="@drawable/edt_bg_selector"
+                        android:imeOptions="actionNext"
+                        android:hint="@string/hint_name" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <RelativeLayout
+                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_otp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#cac9c9">
+
+                        <EditText
+                            android:id="@+id/et_register_otp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:textSize="16sp"
+                            android:background="@drawable/edt_bg_selector"
+                            android:imeOptions="actionNext"
+                            android:hint="@string/hint_add_otp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <TextView
+                        android:id="@+id/resend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/margin_4"
+                        android:text="Resend OTP" />
+
+                </RelativeLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_number"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#cac9c9">
+
+                    <EditText
+                        android:id="@+id/et_register_pnone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:textSize="16sp"
+                        android:background="@drawable/edt_bg_selector"
+                        android:imeOptions="actionDone"
+                        android:hint="@string/hint_enter_mobile_number" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <CheckBox
+                    android:id="@+id/checkboxReferal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="I have referal ID"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_referal"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    android:textColorHint="#cac9c9"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_register_referal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:background="@drawable/edt_bg_selector"
+                        android:imeOptions="actionDone"
+                        android:hint="@string/hint_enter_Referal_id" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:src="@mipmap/ic_email_icon_sign_up_page"-->
+                <!--android:layout_width="12dp"-->
+                <!--android:layout_height="match_parent" />-->
+
+                <!--<TextView-->
+                <!--android:text="Email ID"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<EditText-->
+                <!--android:inputType="textEmailAddress"-->
+                <!--android:minLines="1"-->
+                <!--android:maxLines="1"-->
+                <!--android:id="@+id/et_register_email"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+                <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<LinearLayout-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">&ndash;&gt;-->
+
+                <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:src="@mipmap/ic_phone_number_sign_up_page"-->
+                <!--android:layout_width="12dp"-->
+                <!--android:layout_height="match_parent" />-->
+
+                <!--<TextView-->
+                <!--android:text="Phone"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<EditText-->
+                <!--android:inputType="textEmailAddress"-->
+                <!--android:minLines="1"-->
+                <!--android:maxLines="1"-->
+                <!--android:id="@+id/et_register_pnone"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:src="@mipmap/ic_otp_sign_up_page"-->
+                <!--android:layout_width="12dp"-->
+                <!--android:layout_height="match_parent" />-->
+
+                <!--<TextView-->
+                <!--android:text="@string/hint_add_password"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<EditText-->
+                <!--android:inputType="textPassword"-->
+                <!--android:minLines="1"-->
+                <!--android:maxLines="1"-->
+                <!--android:id="@+id/et_register_pass"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--<in.atees.nadoo.widget.masked.MaskedEditText-->
+                <!--android:drawablePadding="8dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:textSize="21sp"-->
+                <!--android:id="@+id/et_register_pnone"-->
+                <!--android:inputType="phone"-->
+                <!--android:typeface="monospace"-->
+                <!--mask:allowed_chars="1234567890"-->
+                <!--mask:mask="+91 ###-###-##-##"-->
+                <!--android:maxLines="1"-->
+                <!--app:keep_hint="true"/>-->
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">-->
+
+                <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:src="@mipmap/ic_otp_sign_up_page"-->
+                <!--android:layout_width="12dp"-->
+                <!--android:layout_height="match_parent" />-->
+
+                <!--<TextView-->
+                <!--android:text="@string/enter_otp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<in.ateesinfomedia.delicio.widget.pintext.PinEntryEditText-->
+                <!--android:paddingLeft="8dp"-->
+                <!--android:drawableLeft="@mipmap/ic_name_icon_sign_up"-->
+                <!--android:drawablePadding="8dp"-->
+                <!--android:id="@+id/et_register_otp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:cursorVisible="false"-->
+                <!--android:digits="1234567890"-->
+                <!--android:inputType="number"-->
+                <!--android:maxLength="4"-->
+                <!--android:textIsSelectable="false"-->
+                <!--android:maxLines="1"-->
+                <!--android:textSize="20sp" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout
+                    android:orientation="vertical"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">-->
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="20dp"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <CheckBox
+                        android:id="@+id/checkboxTerms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes,I have read and accept
+Remedio's terms and conditions."/>
+
+                    <Button
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="28dp"
+                        android:id="@+id/bttn_register_terms"
+                        android:textAllCaps="false"
+                        android:padding="@dimen/margin_4"
+                        android:text="@string/terms_and_conditions"
+                        style="@style/UITextButtonGreen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <!--Yes,I have read and accept-->
+
+
+                <Button
+                    android:id="@+id/ib_register_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Up"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp"
+                    style="@style/UIButtonGreen"/>
+
+                <!--<ImageButton-->
+                <!--android:layout_gravity="end"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:src="@drawable/button_next"-->
+                <!--android:id="@+id/ib_register_next"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:layout_width="48dp"-->
+                <!--android:layout_height="48dp" />-->
+                <!--
+                        </LinearLayout>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_margin="@dimen/margin_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Have an account? "
+                    android:textColor="@color/black"/>
+
+                <Button
+                    android:id="@+id/login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Login here"
+                    android:textAllCaps="false"
+                    style="@style/UITextButtonRed"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <com.github.florent37.arclayout.ArcLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:arc_position="top"
+        android:background="@android:color/transparent"
+        app:arc_cropDirection="cropInside"
+        android:layout_alignParentBottom="true"
+        app:arc_height="60dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/sl_gradient"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_slider_bg"/>
+
+    </com.github.florent37.arclayout.ArcLayout>
+
+</LinearLayout>

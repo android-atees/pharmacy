@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--android:orientation="horizontal"-->
+<!--android:layout_width="match_parent"-->
+<!--android:gravity="center"-->
+<!--app:cardCornerRadius="0dp"-->
+<!--android:layout_height="wrap_content">-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:gravity="center"
+    android:background="@android:color/white"
+    android:layout_height="wrap_content">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:gravity="center"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
+        android:id="@+id/ll_more_item_container"
+        android:padding="@dimen/margin_6"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_margin="@dimen/margin_8"
+            android:id="@+id/icons"
+            android:padding="1dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+
+        <TextView
+            android:layout_marginLeft="@dimen/margin_4"
+            android:id="@+id/names"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Seminar"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"/>
+
+    </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:background="@android:color/black"-->
+        <!--android:padding="3dp"-->
+        <!--android:id="@+id/premium"-->
+        <!--android:textSize="12sp"-->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:text="Premium"-->
+        <!--android:textColor="#edc446" />-->
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:padding="@dimen/margin_4"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_8"
+        android:src="@drawable/ic_right_arrow"/>
+
+</RelativeLayout>
+
+    <!--</android.support.v7.widget.CardView>-->

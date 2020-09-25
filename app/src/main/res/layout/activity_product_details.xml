@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.ProductDetailsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        app:title="Remedio"
+        app:titleTextColor="@android:color/white">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
+
+                    <ImageView
+                        android:id="@+id/offer_tag"
+                        android:layout_width="80dp"
+                        android:layout_height="55dp"
+                        android:elevation="10dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_offer_main"/>
+
+                    <ImageView
+                        android:id="@+id/thumbnail"
+                        android:layout_width="match_parent"
+                        android:padding="8dp"
+                        android:layout_height="250dp"/>
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/thumbnailrecycler"
+                    android:layout_width="match_parent"
+                    android:padding="8dp"
+                    android:layout_height="80dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/itemName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:textColor="@android:color/black"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:textColor="@android:color/black"
+                        android:text="Price : "/>
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:text=""/>
+
+                    <TextView
+                        android:id="@+id/strikeprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:text=""/>
+
+                    <TextView
+                        android:id="@+id/offPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:textColor="@color/colorPrimary"
+                        android:text=""/>
+
+                </LinearLayout>
+
+                <me.himanshusoni.quantityview.QuantityView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/quantityCountPicker"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_4"
+                    android:layout_marginBottom="@dimen/margin_4"
+                    app:qv_addButtonTextColor="@color/colorAccent"
+                    app:qv_removeButtonTextColor="@color/colorPrimary"
+                    app:qv_quantityTextColor="@color/black"
+                    app:qv_quantityBackground="@color/white"
+                    app:qv_addButtonBackground="@color/white"
+                    app:qv_removeButtonBackground="@color/white"
+                    app:qv_quantity="1"
+                    app:qv_maxQuantity="10"
+                    app:qv_quantityDialog="false"
+                    app:qv_minQuantity="1"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Details"
+                    android:padding="8dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/itemdetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"/>
+
+                <LinearLayout
+                    android:id="@+id/reviewLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reviews"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvAddReview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add review"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_alignParentRight="true"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/reviewrecycler"
+                    android:layout_width="match_parent"
+                    android:padding="8dp"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="add to cart"
+            style="@style/UIButtonGreenRipple"/>
+
+    </LinearLayout>
+
+</LinearLayout>
