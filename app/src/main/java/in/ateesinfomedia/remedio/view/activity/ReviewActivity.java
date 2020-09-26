@@ -1,7 +1,6 @@
 package in.ateesinfomedia.remedio.view.activity;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +25,6 @@ import in.ateesinfomedia.remedio.interfaces.NetworkCallback;
 import in.ateesinfomedia.remedio.managers.MyPreferenceManager;
 import in.ateesinfomedia.remedio.managers.NetworkManager;
 import in.ateesinfomedia.remedio.models.ReviewModel;
-import in.ateesinfomedia.remedio.models.ReviewsModel;
 
 import static in.ateesinfomedia.remedio.configurations.Global.isChanged;
 

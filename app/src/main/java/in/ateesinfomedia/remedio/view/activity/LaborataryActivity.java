@@ -3,12 +3,12 @@ package in.ateesinfomedia.remedio.view.activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -26,15 +26,12 @@ import in.ateesinfomedia.remedio.models.ConstituencyModel;
 import in.ateesinfomedia.remedio.models.DepartmentModel;
 import in.ateesinfomedia.remedio.models.DoctorsModel;
 import in.ateesinfomedia.remedio.models.LaboratoryModel;
-import in.ateesinfomedia.remedio.view.adapter.DoctorsAdapter;
 import in.ateesinfomedia.remedio.view.adapter.LaborataryAdapter;
 import in.ateesinfomedia.remedio.widgets.searchdialog.OnSearchItemSelected;
 import in.ateesinfomedia.remedio.widgets.searchdialog.SearchListItem;
 import in.ateesinfomedia.remedio.widgets.searchdialog.SearchableDialog;
 
 import static in.ateesinfomedia.remedio.configurations.Global.ConstituencyList;
-import static in.ateesinfomedia.remedio.configurations.Global.DepartmentList;
-import static in.ateesinfomedia.remedio.configurations.Global.DoctorsList;
 import static in.ateesinfomedia.remedio.configurations.Global.LaborataryList;
 
 public class LaborataryActivity extends AppCompatActivity implements DoctorsClickListner {

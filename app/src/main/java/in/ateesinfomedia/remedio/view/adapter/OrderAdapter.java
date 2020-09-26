@@ -1,10 +1,10 @@
 package in.ateesinfomedia.remedio.view.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,6 @@ import java.util.List;
 import in.ateesinfomedia.remedio.R;
 import in.ateesinfomedia.remedio.interfaces.AdapterClickListner;
 import in.ateesinfomedia.remedio.models.OrderModel;
-import in.ateesinfomedia.remedio.view.activity.OrderDetailsActivity;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder> {
 

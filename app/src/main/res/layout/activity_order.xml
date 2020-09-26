@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.OrderActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -14,9 +14,9 @@
         app:title="Remedio"
         app:titleTextColor="@android:color/white">
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -28,7 +28,7 @@
         style="@style/Base.Widget.Design.TabLayout"
         app:tabGravity="fill"/>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

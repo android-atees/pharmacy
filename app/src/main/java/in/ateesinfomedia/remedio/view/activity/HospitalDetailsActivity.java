@@ -9,11 +9,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -38,7 +38,6 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static in.ateesinfomedia.remedio.configurations.Global.Latitude;
 import static in.ateesinfomedia.remedio.configurations.Global.Longitude;
-import static in.ateesinfomedia.remedio.configurations.Global.PinCode;
 
 public class HospitalDetailsActivity extends AppCompatActivity {
 

@@ -2,8 +2,8 @@ package in.ateesinfomedia.remedio.view.activity;
 
 import android.animation.Animator;
 import android.content.Intent;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -23,13 +23,10 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import in.ateesinfomedia.remedio.R;
 import in.ateesinfomedia.remedio.components.LoadingDialog;
 import in.ateesinfomedia.remedio.interfaces.NetworkCallback;
-import in.ateesinfomedia.remedio.interfaces.SmsListener;
 //import in.ateesinfomedia.remedio.components.SmsReceiver;
 import in.ateesinfomedia.remedio.configurations.Apis;
 import in.ateesinfomedia.remedio.managers.NetworkManager;
@@ -152,7 +149,9 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
 
                     doRegister(fname, otp, email, phone, pass, referal);
                 } else {
-                    Toast.makeText(SignUpActivity.this, "Please accept the Terms and Condition for the successful registration.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this,
+                            "Please accept the Terms and Condition for the successful registration.",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });

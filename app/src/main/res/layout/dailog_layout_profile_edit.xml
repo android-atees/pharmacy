@@ -15,7 +15,7 @@
                 android:padding="@dimen/margin_10"
                 android:textColor="@color/black"/>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_name"
                 android:layout_width="match_parent"
                 android:layout_marginTop="6dp"
@@ -33,9 +33,9 @@
                     android:imeOptions="actionNext"
                     android:hint="Full Name*" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_email"
                 android:layout_width="match_parent"
                 android:layout_below="@+id/tit"
@@ -52,7 +52,7 @@
                     android:imeOptions="actionNext"
                     android:hint="Email*" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!--<android.support.design.widget.TextInputLayout-->
                 <!--android:id="@+id/input_layout_number"-->

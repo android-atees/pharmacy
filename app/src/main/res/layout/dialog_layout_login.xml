@@ -14,7 +14,7 @@
         android:layout_marginLeft="-5dp"
         android:padding="@dimen/margin_10"/>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout_number"
         android:layout_width="match_parent"
         android:layout_marginTop="8dp"
@@ -30,9 +30,9 @@
             android:textSize="16sp"
             android:imeOptions="actionDone" />
 
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout_otp"
         android:layout_width="match_parent"
         android:layout_marginTop="8dp"
@@ -50,9 +50,9 @@
             android:imeOptions="actionNext"
             android:hint="Enter OTP" />
 
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout_password"
         android:layout_width="match_parent"
         android:layout_marginTop="8dp"
@@ -70,7 +70,7 @@
             android:imeOptions="actionDone"
             android:hint="Enter new password" />
 
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/getOtp"

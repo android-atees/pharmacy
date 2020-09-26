@@ -3,7 +3,7 @@ package in.ateesinfomedia.remedio.Gallery;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 
 import com.felipecsl.asymmetricgridview.library.Utils;

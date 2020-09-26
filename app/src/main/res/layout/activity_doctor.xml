@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.DoctorActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -14,7 +14,7 @@
         app:title="Remedio"
         app:titleTextColor="@android:color/white">
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
         android:id="@+id/lay1"
@@ -90,13 +90,13 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_doctors"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/lay1"
         android:background="@android:color/white">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

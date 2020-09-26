@@ -1,21 +1,18 @@
 package in.ateesinfomedia.remedio.view.fragment;
 
-import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,12 +35,12 @@ import in.ateesinfomedia.remedio.interfaces.NetworkCallback;
 import in.ateesinfomedia.remedio.managers.MyPreferenceManager;
 import in.ateesinfomedia.remedio.managers.NetworkManager;
 import in.ateesinfomedia.remedio.managers.PermissionManager;
-import in.ateesinfomedia.remedio.models.DoctorsDetailModel;
 import in.ateesinfomedia.remedio.view.activity.LoginActivity;
 import in.ateesinfomedia.remedio.view.activity.MainActivity;
 import in.ateesinfomedia.remedio.view.activity.OrderActivity;
 import in.ateesinfomedia.remedio.view.activity.ReferActivity;
 import in.ateesinfomedia.remedio.view.activity.RewardsActivity;
+import in.ateesinfomedia.remedio.view.activity.SignUpActivity;
 import in.ateesinfomedia.remedio.view.activity.UploadPresActivity;
 import in.ateesinfomedia.remedio.view.adapter.MoreMenusAdapter;
 
@@ -114,12 +111,18 @@ public class MoreFragment extends Fragment implements AdapterClickListner, Netwo
                 startActivity(intent);
                 break;
             case 4:
-                Intent referIntent = new Intent(getActivity(), ReferActivity.class);
-                startActivity(referIntent);
+                /*Intent referIntent = new Intent(getActivity(), ReferActivity.class);
+                startActivity(referIntent);*/
+                Toast.makeText(requireContext(),
+                        "Coming Soon...",
+                        Toast.LENGTH_SHORT).show();
                 break;
             case 5:
-                Intent rewardIntent = new Intent(getActivity(), RewardsActivity.class);
-                startActivity(rewardIntent);
+                /*Intent rewardIntent = new Intent(getActivity(), RewardsActivity.class);
+                startActivity(rewardIntent);*/
+                Toast.makeText(requireContext(),
+                        "Coming Soon...",
+                        Toast.LENGTH_SHORT).show();
                 break;
             case 6:
 //                if (mPermissionManager.isPermissionAvailable()){

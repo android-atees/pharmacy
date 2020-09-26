@@ -8,7 +8,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
     
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -65,7 +65,7 @@
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:hint="@string/hint_enter_number"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:textColorHint="#cac9c9">
 
-            <android.support.v7.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="phone"
@@ -84,7 +84,7 @@
                 android:background="@drawable/edt_bg_selector"
                 android:id="@+id/et_login_number" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--<android.support.design.widget.TextInputLayout-->
         <!--android:layout_marginRight="50dp"-->
@@ -111,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
                     android:imeOptions="actionDone"
                     android:hint="@string/hint_enter_password" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/txtShow"
@@ -239,7 +239,7 @@
 
         </RelativeLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
     
     <com.github.florent37.arclayout.ArcLayout
         android:layout_width="match_parent"

@@ -12,14 +12,14 @@ public class Apis {
 //    private static final String IMAGE_BASE_URL = "http://ateesdemo.com/remedio/assets/";
 
 //    --------------------------local---------------------------------
-//    private static final String BASE_URL = "http://192.168.1.100:8080/remedio/Api/";
-//    private static final String IMAGE_BASE_URL = "http://192.168.1.100:8080/remedio/assets/";
+    private static final String BASE_URL = " http://ateesdemo.com/pharmacy/Api/";
+    private static final String IMAGE_BASE_URL = "http://ateesdemo.com/pharmacy/assets/";
 //    --------------------------local---------------------------------
 
 
     //    --------------------------live---------------------------------
-    private static final String BASE_URL = "http://www.remedio.in/Api/";
-    private static final String IMAGE_BASE_URL = "http://www.remedio.in/assets/";
+//    private static final String BASE_URL = "http://www.remedio.in/Api/";
+//    private static final String IMAGE_BASE_URL = "http://www.remedio.in/assets/";
 //    --------------------------live---------------------------------
 
 

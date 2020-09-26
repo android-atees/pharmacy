@@ -1,18 +1,17 @@
 package in.ateesinfomedia.remedio.view.activity;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +20,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +38,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +60,6 @@ import spencerstudios.com.bungeelib.Bungee;
 
 import static in.ateesinfomedia.remedio.components.ConnectivityReceiver.isConnected;
 import static in.ateesinfomedia.remedio.configurations.Global.CartList;
-import static in.ateesinfomedia.remedio.configurations.Global.PinCode;
 import static in.ateesinfomedia.remedio.configurations.Global.dialogWarning;
 
 public class CheckOutActivity extends AppCompatActivity implements NetworkCallback,GoogleApiClient.OnConnectionFailedListener,

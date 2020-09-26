@@ -1,7 +1,6 @@
 package in.ateesinfomedia.remedio.view.activity;
 
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.app.Activity;
 
@@ -9,7 +8,7 @@ import in.ateesinfomedia.remedio.components.PlaceArrayAdapter;
 import in.ateesinfomedia.remedio.view.adapter.OrderItemsAdapter;
 import instamojo.library.InstapayListener;
 import instamojo.library.InstamojoPay;
-import instamojo.library.Config;
+
 import org.json.JSONObject;
 import org.json.JSONException;
 
@@ -17,14 +16,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +54,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,10 +64,8 @@ import in.ateesinfomedia.remedio.interfaces.NetworkCallback;
 import in.ateesinfomedia.remedio.managers.MyPreferenceManager;
 import in.ateesinfomedia.remedio.managers.NetworkManager;
 import in.ateesinfomedia.remedio.models.DeliveryAddressModel;
-import in.ateesinfomedia.remedio.models.DoctorsModel;
 import in.ateesinfomedia.remedio.models.OrderDetails;
 import in.ateesinfomedia.remedio.models.OrderModel;
-import in.ateesinfomedia.remedio.view.fragment.ProfileFragment;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 import spencerstudios.com.bungeelib.Bungee;

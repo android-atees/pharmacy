@@ -1,21 +1,19 @@
 package in.ateesinfomedia.remedio.view.activity;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -24,15 +22,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mikepenz.actionitembadge.library.ActionItemBadge;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,7 +46,6 @@ import in.ateesinfomedia.remedio.view.adapter.OtcOrderDeatailsAdapter;
 import in.ateesinfomedia.remedio.view.adapter.OtcOrderModel;
 
 import static in.ateesinfomedia.remedio.components.ConnectivityReceiver.isConnected;
-import static in.ateesinfomedia.remedio.configurations.Global.COUNT;
 
 public class OtcOrderDetailActivity extends AppCompatActivity implements NetworkCallback, AdapterView.OnItemSelectedListener, AdapterClickListner {
 

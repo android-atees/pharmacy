@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.ProductsActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -14,14 +14,14 @@
         app:title="Remedio"
         app:titleTextColor="@android:color/white">
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <in.ateesinfomedia.remedio.widgets.searchview.MaterialSearchView
         android:id="@+id/sv_material"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productsRecycler"
         android:padding="8dp"
         android:background="@android:color/white"
@@ -29,6 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

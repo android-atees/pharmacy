@@ -2,7 +2,7 @@ package in.ateesinfomedia.remedio.Gallery;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.felipecsl.asymmetricgridview.library.model.AsymmetricItem;
 import com.felipecsl.asymmetricgridview.library.widget.RowItem;

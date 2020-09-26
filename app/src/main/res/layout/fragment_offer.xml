@@ -3,22 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/offerCateRecycler"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:foregroundGravity="center_vertical">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/offerproductsrecycler"
         android:layout_below="@+id/offerCateRecycler"
         android:layout_marginBottom="@dimen/margin_8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </RelativeLayout>

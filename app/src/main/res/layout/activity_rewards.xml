@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.RewardsActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -14,7 +14,7 @@
         app:title="Remedio"
         app:titleTextColor="@android:color/white">
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
         android:orientation="vertical"
         android:layout_above="@id/tprice_card">
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             style="@style/Base.Widget.Design.TabLayout"
             app:tabGravity="fill"/>
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -47,7 +47,7 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/tprice_card"
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_50"
@@ -85,6 +85,6 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

@@ -6,24 +6,22 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Base64;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,12 +38,10 @@ import java.util.List;
 
 import in.ateesinfomedia.remedio.R;
 import in.ateesinfomedia.remedio.configurations.Apis;
-import in.ateesinfomedia.remedio.configurations.Global;
 import in.ateesinfomedia.remedio.interfaces.AdapterClickListner;
 import in.ateesinfomedia.remedio.managers.PermissionManager;
 import in.ateesinfomedia.remedio.models.DoctorsDetailModel;
 import in.ateesinfomedia.remedio.models.DoctorsModel;
-import in.ateesinfomedia.remedio.view.adapter.DoctorsAdapter;
 import in.ateesinfomedia.remedio.view.adapter.HospitalsAdapter;
 
 import static in.ateesinfomedia.remedio.configurations.Global.DoctorsDetailsList;

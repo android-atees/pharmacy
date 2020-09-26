@@ -5,7 +5,7 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:fillViewport="true"
@@ -77,7 +77,7 @@
                 <!--android:layout_height="wrap_content" />-->
 
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_layout_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                         android:imeOptions="actionNext"
                         android:hint="@string/hint_email" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <!--<LinearLayout-->
                 <!--android:orientation="horizontal"-->
@@ -128,7 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_layout_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                             android:imeOptions="actionNext"
                             android:hint="@string/hint_add_password" />
 
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
                     <TextView
@@ -160,7 +160,7 @@
                 </RelativeLayout>
 
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_layout_name"
                     android:layout_width="match_parent"
                     android:layout_marginTop="8dp"
@@ -177,7 +177,7 @@
                         android:imeOptions="actionNext"
                         android:hint="@string/hint_name" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <RelativeLayout
                     android:orientation="vertical"
@@ -185,7 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_layout_otp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -201,7 +201,7 @@
                             android:imeOptions="actionNext"
                             android:hint="@string/hint_add_otp" />
 
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
                     <TextView
@@ -216,7 +216,7 @@
 
                 </RelativeLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_layout_number"
                     android:layout_width="match_parent"
                     android:layout_marginTop="8dp"
@@ -233,15 +233,16 @@
                         android:imeOptions="actionDone"
                         android:hint="@string/hint_enter_mobile_number" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <CheckBox
                     android:id="@+id/checkboxReferal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="I have referal ID"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_layout_referal"
                     android:layout_width="match_parent"
                     android:layout_marginTop="8dp"
@@ -258,7 +259,7 @@
                         android:imeOptions="actionDone"
                         android:hint="@string/hint_enter_Referal_id" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <!--<LinearLayout-->
                 <!--android:orientation="horizontal"-->
@@ -419,7 +420,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Yes,I have read and accept
-Remedio's terms and conditions."/>
+Relief's terms and conditions."/>
 
                     <Button
                         android:layout_gravity="left"
@@ -484,7 +485,7 @@ Remedio's terms and conditions."/>
 
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <com.github.florent37.arclayout.ArcLayout
         android:layout_width="match_parent"

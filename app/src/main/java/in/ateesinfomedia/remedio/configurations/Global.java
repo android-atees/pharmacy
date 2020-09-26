@@ -2,7 +2,7 @@ package in.ateesinfomedia.remedio.configurations;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,6 @@ import in.ateesinfomedia.remedio.models.EarningsModel;
 import in.ateesinfomedia.remedio.models.LaboratoryModel;
 import in.ateesinfomedia.remedio.models.ProductsModel;
 import in.ateesinfomedia.remedio.models.ReviewModel;
-import in.ateesinfomedia.remedio.models.ReviewsModel;
 import in.ateesinfomedia.remedio.view.adapter.OtcOrderModel;
 
 public class Global {
