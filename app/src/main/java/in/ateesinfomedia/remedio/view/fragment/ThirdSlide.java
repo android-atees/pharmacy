@@ -22,7 +22,7 @@ public class ThirdSlide extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.third_slider, container, false);
 
-        mTxtContent = (TextView) mView.findViewById(R.id.txt1);
+        //mTxtContent = (TextView) mView.findViewById(R.id.txt1);
 
 //        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "Futura_Medium.otf");
 //        mTxtContent.setTypeface(font);

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.asksira.loopingviewpager.LoopingViewPager;
@@ -59,8 +60,8 @@ import static in.ateesinfomedia.remedio.configurations.Global.dialogWarning;
 public class HomeFragment extends Fragment implements NetworkCallback {
 
     private View mView;
-    private Button mBtnUploadPres;
-    private CardView mCardSurgical,mCardgeneralMedicine,mCardFind,mCardLaboratary,mcardHospital;
+    private ImageView mBtnUploadPres;
+    //private CardView mCardSurgical,mCardgeneralMedicine,mCardFind,mCardLaboratary,mcardHospital;
     private int REQUEST_GET_DOCTORS_LIST_ID = 8900;
     private int TAG_GET_PROFILE_ID = 7865;
     private MyPreferenceManager manager;
@@ -94,12 +95,12 @@ public class HomeFragment extends Fragment implements NetworkCallback {
 
 
         manager = new MyPreferenceManager(getActivity());
-        mBtnUploadPres = (Button) mView.findViewById(R.id.btnUploadPres);
-        mCardgeneralMedicine = (CardView) mView.findViewById(R.id.card_general_med);
-        mCardSurgical = (CardView) mView.findViewById(R.id.card_durgical);
-        mCardFind = (CardView) mView.findViewById(R.id.card_find);
-        mCardLaboratary = (CardView) mView.findViewById(R.id.card_laboratary);
-        mcardHospital = (CardView) mView.findViewById(R.id.card_hospital);
+        mBtnUploadPres = mView.findViewById(R.id.btnUploadPres);
+        //mCardgeneralMedicine = (CardView) mView.findViewById(R.id.card_general_med);
+        //mCardSurgical = (CardView) mView.findViewById(R.id.card_durgical);
+        //mCardFind = (CardView) mView.findViewById(R.id.card_find);
+        //mCardLaboratary = (CardView) mView.findViewById(R.id.card_laboratary);
+        //mcardHospital = (CardView) mView.findViewById(R.id.card_hospital);
         mLVPSlider = (LoopingViewPager) mView.findViewById(R.id.lvp_news_slider);
         mPIVindication = (PageIndicatorView) mView.findViewById(R.id.pageIndicatorView);
         nestedScrollView = (NestedScrollView) mView.findViewById(R.id.nestedScroll);
@@ -158,7 +159,7 @@ public class HomeFragment extends Fragment implements NetworkCallback {
             }
         });
 
-        mCardLaboratary.setOnClickListener(new View.OnClickListener() {
+        /*mCardLaboratary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -195,7 +196,7 @@ public class HomeFragment extends Fragment implements NetworkCallback {
             public void onClick(View v) {
                 getDoctersList();
             }
-        });
+        });*/
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

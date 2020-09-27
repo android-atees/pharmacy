@@ -19,8 +19,8 @@ public class WelcomeActivity extends AppIntro2 {
 
     @Override
     public void init(Bundle savedInstanceState) {
-        addSlide(new SecondSlide());
         addSlide(new FirstSlide());
+        addSlide(new SecondSlide());
         addSlide(new ThirdSlide());
 
 //        setFlowAnimation();

@@ -28,7 +28,7 @@
     <string name="delivery_address">DELIVERY ADDRESS</string>
     <string name="doc_image">Doctors_image</string>
     <string name="doc_name">Doctors_name</string>
-    <string name="medicine_heading">GET YOUR\nMEDICINES IN SIMPLE STEPS</string>
+    <string name="medicine_heading">Get your medicines\nin simple steps</string>
     <string name="find_doctor">FIND YOUR\nDOCTOR</string>
     <string name="general_medicine">GENERAL\nMEDICINE</string>
     <string name="otc">OTC</string>
@@ -50,5 +50,16 @@
     <string name="title_activity_maps_tracking">Map</string>
     <string name="slide_three">THE NEW WAY OF\nPURCHASING YOUR CURE...</string>
     <string name="cancel_order">Cancel order</string>
+    <string name="slider_header_1">Order medicines online</string>
+    <string name="slider_middle_1"><![CDATA[Upload prescription & get them delivered]]></string>
+    <string name="slider_header_2">See with clarity</string>
+    <string name="slider_middle_2">Reputed optical services</string>
+    <string name="slider_header_3">We care the juniors</string>
+    <string name="slider_middle_3"><![CDATA[Kids items & essentials]]></string>
+    <string name="medicine">Medicine</string>
+    <string name="non_medicine">Non\nMedicine</string>
+    <string name="newborn_essentials"><![CDATA[Newborn\nEssentials &\nKids Wear]]></string>
+    <string name="toys">Toys</string>
+    <string name="book_your_doctor">Book\nYour Doctor</string>
 
 </resources>

@@ -25,5 +25,6 @@
     <color name="grey_light">#f2eeee</color>
 
     <color name="search_layover_bg">#50000000</color>
+    <color name="home_tiles_bg">#41CAEF</color>
 
 </resources>
