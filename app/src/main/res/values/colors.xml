@@ -27,4 +27,9 @@
     <color name="search_layover_bg">#50000000</color>
     <color name="home_tiles_bg">#41CAEF</color>
 
+    <color name="blackFF">#FF000000</color>
+
+    <color name="smallMic">#c2185b</color>
+    <color name="slideText">#6e6e6e</color>
+
 </resources>

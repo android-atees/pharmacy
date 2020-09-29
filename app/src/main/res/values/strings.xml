@@ -61,5 +61,7 @@
     <string name="newborn_essentials"><![CDATA[Newborn\nEssentials &\nKids Wear]]></string>
     <string name="toys">Toys</string>
     <string name="book_your_doctor">Book\nYour Doctor</string>
+    <string name="slide_to_cancel">Slide to cancel</string>
+    <string name="opticals">Opticals</string>
 
 </resources>

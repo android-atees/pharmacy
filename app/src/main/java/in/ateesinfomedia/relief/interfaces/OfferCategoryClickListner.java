@@ -1,0 +1,5 @@
+package in.ateesinfomedia.relief.interfaces;
+
+public interface OfferCategoryClickListner {
+    void titleSelected(String name, int position);
+}

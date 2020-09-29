@@ -11,12 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
-        app:title="Remedio"
+        app:title="@string/app_name"
         app:titleTextColor="@android:color/white">
 
     </androidx.appcompat.widget.Toolbar>
 
-    <in.ateesinfomedia.remedio.widgets.searchview.MaterialSearchView
+    <in.ateesinfomedia.relief.widgets.searchview.MaterialSearchView
         android:id="@+id/sv_material"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

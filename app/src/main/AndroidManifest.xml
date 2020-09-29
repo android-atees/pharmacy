@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="in.ateesinfomedia.remedio">
+    package="in.ateesinfomedia.relief">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,12 +15,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.STORAGE" />
 
 
 
     <application
         android:usesCleartextTraffic="true"
-        android:name=".components.MainApplication"
+        android:name="in.ateesinfomedia.relief.components.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -30,15 +33,15 @@
 
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
-        <activity android:name=".view.activity.UploadsActivity"/>
-        <activity android:name=".view.activity.RemediotcActivity" />
-        <activity android:name=".view.activity.ImageShowActivity" />
+        <activity android:name="in.ateesinfomedia.relief.view.activity.UploadsActivity"/>
+        <activity android:name="in.ateesinfomedia.relief.view.activity.RemediotcActivity" />
+        <activity android:name="in.ateesinfomedia.relief.view.activity.ImageShowActivity" />
         <activity
-            android:name=".view.activity.NoLocationActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.NoLocationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.SplashActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
@@ -49,39 +52,39 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activity.LoginActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen" />
         <activity
-            android:name=".view.activity.SignUpActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.SignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen" />
         <activity
-            android:name=".view.activity.MainActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.WelcomeActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen" />
         <activity
-            android:name=".view.activity.UploadPresActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.UploadPresActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.CartActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.CartActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.NotificationActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.NotificationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.ReferActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.ReferActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.DoctorActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.DoctorActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- <receiver -->
         <!-- android:name=".components.SmsReceiver" -->
@@ -92,89 +95,89 @@
         <!-- </intent-filter> -->
         <!-- </receiver> -->
         <activity
-            android:name=".view.activity.SurgicalActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.SurgicalActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.ProductsActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.ProductsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.CategoryActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.CategoryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.DoctorDetailsActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.DoctorDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.OrderActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.OrderActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.OrderDetailsActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.OrderDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="instamojo.orderauth.url"
             android:value="http://ateesdemo.com/remedio/instamojoMobile/access_token.php" /> <!-- Firebase Notifications -->
-        <service android:name=".components.MyFirebaseMessagingService">
+        <service android:name="in.ateesinfomedia.relief.components.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".components.MyFirebaseInstanceIDService">
+        <service android:name="in.ateesinfomedia.relief.components.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service> <!-- ./Firebase Notifications -->
         <activity
-            android:name=".view.activity.RewardsActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.RewardsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.ProductDetailsActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.ProductDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.CheckOutActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.CheckOutActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.OtcOrderDetailActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.OtcOrderDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.LaborataryActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.LaborataryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.HospitalActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.HospitalActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.LaborataryDetailsActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.LaborataryDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.activity.HospitalDetailsActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.HospitalDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.activity.ReviewActivity" />
+        <activity android:name="in.ateesinfomedia.relief.view.activity.ReviewActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC5nVrhUClcCnkz3zSQBQWfuCboeC6-jDE" />
 
         <activity
-            android:name=".view.activity.MapsTrackingActivity"
+            android:name="in.ateesinfomedia.relief.view.activity.MapsTrackingActivity"
             android:label="@string/title_activity_maps_tracking"
             android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="in.ateesinfomedia.remedio"
+            android:authorities="in.ateesinfomedia.relief"
             android:exported="false"
             android:grantUriPermissions="true"
             tools:replace="android:authorities">
