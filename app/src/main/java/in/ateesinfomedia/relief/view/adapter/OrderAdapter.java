@@ -58,7 +58,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
             float total = Float.valueOf(mOrderList.get(position).getTotal());
             holder.tvTotal.setText("₹ "+total);
         }
-        holder.tvTotalItems.setText(mOrderList.get(position).getTotal());
+        //holder.tvTotalItems.setText(mOrderList.get(position).getTotal());
 
     }
 
@@ -75,10 +75,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            tvPresOrProdu = (TextView) itemView.findViewById(R.id.tvPresOrProdu);
+            //tvPresOrProdu = (TextView) itemView.findViewById(R.id.tvPresOrProdu);
             tvTrack = (TextView) itemView.findViewById(R.id.tvTrack);
             tvProcess = (TextView) itemView.findViewById(R.id.tvProcess);
-            tvTotalItems = (TextView) itemView.findViewById(R.id.tvTotalItems);
+            //tvTotalItems = (TextView) itemView.findViewById(R.id.tvTotalItems);
             tvTotal = (TextView) itemView.findViewById(R.id.tvTotal);
             tvDate = (TextView) itemView.findViewById(R.id.tvDate);
             tvPresId = (TextView) itemView.findViewById(R.id.tvPresId);

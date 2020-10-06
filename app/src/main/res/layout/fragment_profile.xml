@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,35 +8,32 @@
     xmlns:fab="http://schemas.android.com/tools"
     android:fitsSystemWindows="false">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:orientation="vertical">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            xmlns:fab="http://schemas.android.com/apk/res-auto">
+            android:fillViewport="true">
 
             <RelativeLayout
-                android:id="@+id/lay1"
                 android:layout_width="match_parent"
-                android:layout_height="180dp">
+                android:layout_height="match_parent">
 
-                <ImageView
+                <RelativeLayout
+                    android:id="@+id/lay1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/pr_gradient"/>
+                    android:layout_height="180dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/profile_grad" />
+
+                    <!--<de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -50,300 +48,596 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@drawable/ic_slider_bg"
-                    android:layout_alignParentBottom="true"/>
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/margin_8"
-                android:layout_below="@+id/lay1">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/margin_10"
-                    android:paddingBottom="@dimen/margin_10"
-                    android:paddingLeft="@dimen/margin_20"
-                    android:paddingRight="@dimen/margin_20">
-
-                    <TextView
-                        android:id="@+id/txt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Name"/>
-
-                    <ImageView
-                        android:id="@+id/imEditPro"
-                        android:layout_width="23dp"
-                        android:layout_height="23dp"
-                        android:background="@drawable/ic_edit"
-                        android:tint="@color/white"
-                        android:layout_margin="@dimen/margin_4"
-                        android:layout_alignParentRight="true"/>
-
-                    <TextView
-                        android:id="@+id/userName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorAccent"
-                        android:layout_below="@+id/txt"/>
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/black"
-                    android:alpha=".2"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/margin_10"
-                    android:paddingBottom="@dimen/margin_10"
-                    android:paddingLeft="@dimen/margin_20"
-                    android:paddingRight="@dimen/margin_20">
-
-                    <TextView
-                        android:id="@+id/txt1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mobile"/>
-
-                    <!--<ImageView-->
-                    <!--android:layout_width="16dp"-->
-                    <!--android:layout_height="16dp"-->
-                    <!--android:background="@drawable/ic_edit"-->
-                    <!--android:tint="@color/white"-->
-                    <!--android:layout_margin="@dimen/margin_4"-->
-                    <!--android:layout_alignParentRight="true"/>-->
-
-                    <TextView
-                        android:id="@+id/userNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorAccent"
-                        android:layout_below="@+id/txt1"/>
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/black"
-                    android:alpha=".2"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/margin_10"
-                    android:paddingBottom="@dimen/margin_10"
-                    android:paddingLeft="@dimen/margin_20"
-                    android:paddingRight="@dimen/margin_20">
-
-                    <TextView
-                        android:id="@+id/txt2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Email"/>
-
-                    <!--<ImageView-->
-                    <!--android:layout_width="16dp"-->
-                    <!--android:layout_height="16dp"-->
-                    <!--android:background="@drawable/ic_edit"-->
-                    <!--android:tint="@color/white"-->
-                    <!--android:layout_margin="@dimen/margin_4"-->
-                    <!--android:layout_alignParentRight="true"/>-->
-
-                    <TextView
-                        android:id="@+id/userMail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorAccent"
-                        android:layout_below="@+id/txt2"/>
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/black"
-                    android:alpha=".2"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_8"
-                    android:layout_marginLeft="@dimen/margin_20"
-                    android:text="Delivery address"/>
-
-                <RelativeLayout
-                    android:id="@+id/deliveryAddLay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:visibility="visible"
-                    android:clickable="true"
-                    android:paddingLeft="@dimen/margin_20"
-                    android:paddingRight="@dimen/margin_20"
-                    android:paddingTop="@dimen/margin_8"
-                    android:paddingBottom="@dimen/margin_8"
-                    android:background="?attr/selectableItemBackground"
-                    android:layout_below="@+id/heading">
-
-                    <TextView
-                        android:id="@+id/txtAddAddress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add new address+"
-                        android:textColor="@color/colorAccent"
-                        android:textAllCaps="true"/>
-
-                    <ImageView
-                        android:id="@+id/imaddAddress"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:tint="@color/colorAccent"
-                        android:src="@drawable/ic_plus"/>
+                    android:layout_alignParentBottom="true"/>-->
 
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/cardAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:paddingTop="@dimen/margin_10"
-                    android:paddingBottom="@dimen/margin_10"
-                    android:paddingLeft="@dimen/margin_20"
-                    android:paddingRight="@dimen/margin_20"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:layout_below="@+id/lay">
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
 
                     <TextView
-                        android:id="@+id/namee"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/profile_main_title"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:text=""/>
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_horizontal"
+                        android:text=""
+                        android:textColor="#fff"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardEdit"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/profile_main_cardView"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="@dimen/margin_2"
-                        app:cardElevation="@dimen/margin_2"
-                        android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:layout_alignParentRight="true"
-                        android:layout_margin="@dimen/margin_2">
+                        android:layout_below="@+id/profile_main_title"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="70dp"
+                        android:layout_marginRight="30dp"
+                        android:elevation="4dp"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        app:cardCornerRadius="@dimen/margin_10">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/margin_50"
+                            android:layout_marginBottom="@dimen/margin_32"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingStart="@dimen/margin_10"
+                                android:paddingEnd="@dimen/margin_10"
+                                android:paddingTop="@dimen/margin_4"
+                                android:paddingBottom="@dimen/margin_4">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_32"
+                                    app:srcCompat="@drawable/ic_person_filled" />
+
+                                <TextView
+                                    android:id="@+id/userName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_20"
+                                    android:textColor="@color/gradEnd"
+                                    android:layout_gravity="center"
+                                    tools:text="John Tharakan" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingStart="@dimen/margin_10"
+                                android:paddingEnd="@dimen/margin_10"
+                                android:paddingTop="@dimen/margin_4"
+                                android:paddingBottom="@dimen/margin_4">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_32"
+                                    app:srcCompat="@drawable/ic_email_filled" />
+
+                                <TextView
+                                    android:id="@+id/userMail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_20"
+                                    android:textColor="@color/gradEnd"
+                                    android:layout_gravity="center"
+                                    tools:text="Johntharakan@gmail.com" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingStart="@dimen/margin_10"
+                                android:paddingEnd="@dimen/margin_10"
+                                android:paddingTop="@dimen/margin_4"
+                                android:paddingBottom="@dimen/margin_4">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_32"
+                                    app:srcCompat="@drawable/ic_phone_filled" />
+
+                                <TextView
+                                    android:id="@+id/userNumber"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_20"
+                                    android:textColor="@color/gradEnd"
+                                    android:layout_gravity="center"
+                                    tools:text="+91 9012523265" />
+
+                            </LinearLayout>
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/imEditPro"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:layout_marginEnd="@dimen/margin_16"
+                                app:srcCompat="@drawable/ic_edit" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_below="@+id/profile_main_title"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
+                        android:elevation="@dimen/margin_10"
+                        android:background="@drawable/profile_image_bg"
+                        android:src="@drawable/profile_placeholder" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_below="@+id/profile_main_cardView"
+                        android:layout_marginTop="@dimen/margin_16">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin_10">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_32"
+                                app:srcCompat="@drawable/ic_location_filled" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_20"
+                                android:text="Delivery address"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"/>
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/cardEdit"
+                                android:visibility="gone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:layout_marginEnd="@dimen/margin_16"
+                                android:layout_marginStart="@dimen/margin_16"
+                                app:srcCompat="@drawable/ic_edit" />
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/deliveryAddLay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:layout_marginEnd="@dimen/margin_32"
+                            android:layout_marginStart="@dimen/margin_32"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:paddingLeft="@dimen/margin_20"
+                            android:paddingTop="@dimen/margin_8"
+                            android:paddingRight="@dimen/margin_20"
+                            android:paddingBottom="@dimen/margin_8"
+                            android:visibility="visible"
+                            android:focusable="true">
+
+                            <TextView
+                                android:id="@+id/txtAddAddress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Add new address+"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorAccent" />
+
+                            <ImageView
+                                android:id="@+id/imaddAddress"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/ic_plus"
+                                android:tint="@color/colorAccent" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/cardAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:layout_marginEnd="64dp"
+                            android:layout_marginStart="64dp"
+                            android:paddingLeft="@dimen/margin_20"
+                            android:paddingTop="@dimen/margin_10"
+                            android:paddingRight="@dimen/margin_20"
+                            android:paddingBottom="@dimen/margin_10"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:id="@+id/namee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                            <!--<androidx.cardview.widget.CardView
+                                android:id="@+id/cardEdit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_margin="@dimen/margin_2"
+                                android:clickable="true"
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardCornerRadius="@dimen/margin_2"
+                                app:cardElevation="@dimen/margin_2">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="@dimen/margin_8"
+                                    android:paddingTop="@dimen/margin_2"
+                                    android:paddingRight="@dimen/margin_8"
+                                    android:paddingBottom="@dimen/margin_2"
+                                    android:text="edit"
+                                    android:textColor="@color/colorPrimary" />
+
+                            </androidx.cardview.widget.CardView>-->
+
+                            <TextView
+                                android:id="@+id/address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/namee"
+                                android:layout_marginTop="@dimen/margin_8"
+                                android:text=""
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/numberr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/address"
+                                android:text=""
+                                android:textColor="@color/black" />
+
+                            <!--<TextView-->
+                            <!--android:id="@+id/city"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:textColor="@color/black"-->
+                            <!--android:text="Thrissur,kerala"-->
+                            <!--android:layout_below="@+id/numberr"/>-->
+
+                            <TextView
+                                android:id="@+id/pincode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/numberr"
+                                android:text=""
+                                android:textColor="@color/black" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <!--<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lay1"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_8"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/margin_20"
+                        android:paddingTop="@dimen/margin_10"
+                        android:paddingRight="@dimen/margin_20"
+                        android:paddingBottom="@dimen/margin_10">
 
                         <TextView
+                            android:id="@+id/txt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="edit"
-                            android:paddingRight="@dimen/margin_8"
-                            android:paddingLeft="@dimen/margin_8"
-                            android:paddingTop="@dimen/margin_2"
-                            android:paddingBottom="@dimen/margin_2"
-                            android:textColor="@color/colorPrimary" />
+                            android:text="Name" />
 
-                    </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:id="@+id/imEditPro"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="@dimen/margin_4"
+                            android:background="@drawable/ic_edit"
+                            android:tint="@color/white" />
+
+                        <TextView
+                            android:id="@+id/userName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:alpha=".2"
+                        android:background="@color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/margin_20"
+                        android:paddingTop="@dimen/margin_10"
+                        android:paddingRight="@dimen/margin_20"
+                        android:paddingBottom="@dimen/margin_10">
+
+                        <TextView
+                            android:id="@+id/txt1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mobile" />
+
+                        &lt;!&ndash;<ImageView&ndash;&gt;
+                        &lt;!&ndash;android:layout_width="16dp"&ndash;&gt;
+                        &lt;!&ndash;android:layout_height="16dp"&ndash;&gt;
+                        &lt;!&ndash;android:background="@drawable/ic_edit"&ndash;&gt;
+                        &lt;!&ndash;android:tint="@color/white"&ndash;&gt;
+                        &lt;!&ndash;android:layout_margin="@dimen/margin_4"&ndash;&gt;
+                        &lt;!&ndash;android:layout_alignParentRight="true"/>&ndash;&gt;
+
+                        <TextView
+                            android:id="@+id/userNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt1"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:alpha=".2"
+                        android:background="@color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/margin_20"
+                        android:paddingTop="@dimen/margin_10"
+                        android:paddingRight="@dimen/margin_20"
+                        android:paddingBottom="@dimen/margin_10">
+
+                        <TextView
+                            android:id="@+id/txt2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Email" />
+
+                        &lt;!&ndash;<ImageView&ndash;&gt;
+                        &lt;!&ndash;android:layout_width="16dp"&ndash;&gt;
+                        &lt;!&ndash;android:layout_height="16dp"&ndash;&gt;
+                        &lt;!&ndash;android:background="@drawable/ic_edit"&ndash;&gt;
+                        &lt;!&ndash;android:tint="@color/white"&ndash;&gt;
+                        &lt;!&ndash;android:layout_margin="@dimen/margin_4"&ndash;&gt;
+                        &lt;!&ndash;android:layout_alignParentRight="true"/>&ndash;&gt;
+
+                        <TextView
+                            android:id="@+id/userMail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt2"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:alpha=".2"
+                        android:background="@color/black" />
 
                     <TextView
-                        android:id="@+id/address"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
+                        android:layout_marginLeft="@dimen/margin_20"
                         android:layout_marginTop="@dimen/margin_8"
-                        android:layout_below="@+id/namee"
-                        android:text=""/>
+                        android:text="Delivery address" />
 
-                    <TextView
-                        android:id="@+id/numberr"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:id="@+id/deliveryAddLay"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text=""
-                        android:layout_below="@+id/address"/>
+                        android:layout_below="@+id/heading"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:paddingLeft="@dimen/margin_20"
+                        android:paddingTop="@dimen/margin_8"
+                        android:paddingRight="@dimen/margin_20"
+                        android:paddingBottom="@dimen/margin_8"
+                        android:visibility="visible">
 
-                    <!--<TextView-->
-                        <!--android:id="@+id/city"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textColor="@color/black"-->
-                        <!--android:text="Thrissur,kerala"-->
-                        <!--android:layout_below="@+id/numberr"/>-->
+                        <TextView
+                            android:id="@+id/txtAddAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Add new address+"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorAccent" />
 
-                    <TextView
-                        android:id="@+id/pincode"
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/imaddAddress"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_plus"
+                            android:tint="@color/colorAccent" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/cardAddress"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text=""
-                        android:layout_below="@+id/numberr"/>
+                        android:layout_below="@+id/lay"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:paddingLeft="@dimen/margin_20"
+                        android:paddingTop="@dimen/margin_10"
+                        android:paddingRight="@dimen/margin_20"
+                        android:paddingBottom="@dimen/margin_10"
+                        android:visibility="gone">
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/namee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
 
-            </LinearLayout>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="@dimen/margin_2"
+                            android:clickable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardCornerRadius="@dimen/margin_2"
+                            app:cardElevation="@dimen/margin_2">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/margin_8"
+                                android:paddingTop="@dimen/margin_2"
+                                android:paddingRight="@dimen/margin_8"
+                                android:paddingBottom="@dimen/margin_2"
+                                android:text="edit"
+                                android:textColor="@color/colorPrimary" />
 
-            <com.getbase.floatingactionbutton.FloatingActionsMenu
-                android:id="@+id/right_labels"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                fab:fab_addButtonColorNormal="@color/colorPrimary"
-                fab:fab_addButtonColorPressed="@color/white_pressed"
-                fab:fab_addButtonPlusIconColor="@color/white"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="right"
-                fab:fab_addButtonSize="normal"
-                fab:fab_expandDirection="up"
-                fab:fab_labelStyle="@style/menu_labels_style"
-                fab:fab_labelsPosition="left">
+                        </androidx.cardview.widget.CardView>
 
-                <com.getbase.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_change_pass"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    fab:fab_colorNormal="@color/colorPrimary"
-                    fab:fab_size="mini"
-                    fab:fab_icon="@drawable/ic_change_pass"
-                    fab:fab_title="Change password"
-                    fab:fab_colorPressed="@color/white_pressed"/>
+                        <TextView
+                            android:id="@+id/address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/namee"
+                            android:layout_marginTop="@dimen/margin_8"
+                            android:text=""
+                            android:textColor="@color/black" />
 
-                <com.getbase.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_change_mob"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    fab:fab_colorNormal="@color/colorPrimary"
-                    fab:fab_size="mini"
-                    fab:fab_icon="@drawable/ic_change_phone"
-                    fab:fab_title="Change mobile number"
-                    fab:fab_colorPressed="@color/white_pressed"/>
+                        <TextView
+                            android:id="@+id/numberr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/address"
+                            android:text=""
+                            android:textColor="@color/black" />
 
-            </com.getbase.floatingactionbutton.FloatingActionsMenu>
+                        &lt;!&ndash;<TextView&ndash;&gt;
+                        &lt;!&ndash;android:id="@+id/city"&ndash;&gt;
+                        &lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;
+                        &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;
+                        &lt;!&ndash;android:textColor="@color/black"&ndash;&gt;
+                        &lt;!&ndash;android:text="Thrissur,kerala"&ndash;&gt;
+                        &lt;!&ndash;android:layout_below="@+id/numberr"/>&ndash;&gt;
+
+                        <TextView
+                            android:id="@+id/pincode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/numberr"
+                            android:text=""
+                            android:textColor="@color/black" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>-->
 
             </RelativeLayout>
 
-        </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
 
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@+id/linearLayout"
+        app:layout_anchorGravity="center">
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/right_labels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="right"
+            app:fab_addButtonColorNormal="@color/colorPrimary"
+            app:fab_addButtonColorPressed="@color/white_pressed"
+            app:fab_addButtonPlusIconColor="@color/white"
+            app:fab_addButtonSize="normal"
+            app:fab_expandDirection="up"
+            app:fab_labelStyle="@style/menu_labels_style"
+            app:fab_labelsPosition="left">
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_change_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="@color/colorPrimary"
+                app:fab_colorPressed="@color/white_pressed"
+                app:fab_icon="@drawable/ic_change_pass"
+                app:fab_size="mini"
+                app:fab_title="Change password" />
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_change_mob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="@color/colorPrimary"
+                app:fab_colorPressed="@color/white_pressed"
+                app:fab_icon="@drawable/ic_change_phone"
+                app:fab_size="mini"
+                app:fab_title="Change mobile number" />
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

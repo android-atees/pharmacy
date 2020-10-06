@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_10"
-        android:text="Select payment type"/>
+        android:text="Select payment type"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
 
     <RadioGroup
         android:id="@+id/radio_group"
@@ -22,18 +24,20 @@
         android:gravity="left"
         android:layout_marginLeft="@dimen/margin_20">
 
-        <RadioButton
+        <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/radio_cod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="COD"/>
+            android:text="COD"
+            android:textColor="@color/black"/>
 
-        <RadioButton
+        <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/radio_paynow"
             android:enabled="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pay now"/>
+            android:text="Pay now"
+            android:textColor="@color/black"/>
 
     </RadioGroup>
 

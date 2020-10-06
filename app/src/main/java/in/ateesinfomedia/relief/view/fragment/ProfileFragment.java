@@ -80,7 +80,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
     private TextView mTvUserName;
     private TextView mTvUserNumber;
     private RelativeLayout cardAddress;
-    private CardView cardEdit;
+    private ImageView cardEdit;
     private TextView pincode;
     private TextView city;
     private TextView numberr;
@@ -145,7 +145,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
 
         cardAddress = (RelativeLayout) mView.findViewById(R.id.cardAddress);
         mAddDelivery = (RelativeLayout) mView.findViewById(R.id.deliveryAddLay);
-        cardEdit = (CardView) mView.findViewById(R.id.cardEdit);
+        cardEdit = (ImageView) mView.findViewById(R.id.cardEdit);
 
         mFabChangeMob.setOnClickListener(this);
         mFabChangePass.setOnClickListener(this);
@@ -1097,6 +1097,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
                 LoadingDialog.cancelLoading();
                 cardAddress.setVisibility(View.VISIBLE);
                 mAddDelivery.setVisibility(View.GONE);
+                cardEdit.setVisibility(View.VISIBLE);
                 mNamee.setText(nameee);
                 address.setText(addres);
                 numberr.setText(phone);
@@ -1175,6 +1176,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
 
                     cardAddress.setVisibility(View.VISIBLE);
                     mAddDelivery.setVisibility(View.GONE);
+                    cardEdit.setVisibility(View.VISIBLE);
 
                     mNamee.setText(jsonObject2.optString("name"));
                     address.setText(jsonObject2.optString("address"));

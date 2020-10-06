@@ -110,29 +110,29 @@ public class MoreFragment extends Fragment implements AdapterClickListner, Netwo
             case 4:
                 /*Intent referIntent = new Intent(getActivity(), ReferActivity.class);
                 startActivity(referIntent);*/
-                Toast.makeText(requireContext(),
-                        "Coming Soon...",
-                        Toast.LENGTH_SHORT).show();
+                showDialogToCall("9995517342");
                 break;
             case 5:
                 /*Intent rewardIntent = new Intent(getActivity(), RewardsActivity.class);
-                startActivity(rewardIntent);*/
+                startActivity(rewardIntent);
                 Toast.makeText(requireContext(),
                         "Coming Soon...",
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_SHORT).show();*/
+                doRating();
                 break;
             case 6:
 //                if (mPermissionManager.isPermissionAvailable()){
-                    showDialogToCall("6282286867");
+                    //showDialogToCall("6282286867");
 //                } else {
 //                    mPermissionManager.makePermissionRequest(this);
 //                }
+                doLogout();
                 break;
             case 7:
-                doRating();
+                //doRating();
                 break;
             case 8:
-                doLogout();
+                //doLogout();
                 break;
         }
     }
@@ -247,7 +247,7 @@ public class MoreFragment extends Fragment implements AdapterClickListner, Netwo
 
     @Override
     public void onGrandPermission() {
-        showDialogToCall("6282286867");
+        showDialogToCall("9995517342");
     }
 
     @Override

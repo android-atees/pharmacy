@@ -1,18 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/sign_up_logo_img"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/remedio"
+            app:layout_constraintBottom_toTopOf="@+id/sign_up_edit_text_ll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/sign_up_edit_text_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/sign_up_go_to_login_ll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sign_up_logo_img">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_32"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_32"
+                android:hint="@string/hint_email"
+                android:textColorHint="@color/hintTextColor">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_register_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edt_bg_selector"
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawablePadding="@dimen/margin_16"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:paddingTop="@dimen/margin_10"
+                    android:paddingBottom="@dimen/margin_10"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_32"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_32"
+                android:hint="@string/hint_add_password"
+                android:textColorHint="@color/hintTextColor"
+                app:passwordToggleEnabled="true">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_register_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edt_bg_selector"
+                    android:drawableStart="@drawable/ic_password"
+                    android:drawablePadding="@dimen/margin_16"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_32"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_32"
+                android:hint="@string/hint_name"
+                android:textColorHint="@color/hintTextColor">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_register_fullname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edt_bg_selector"
+                    android:drawableStart="@drawable/ic_user"
+                    android:drawablePadding="@dimen/margin_16"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:paddingTop="@dimen/margin_10"
+                    android:paddingBottom="@dimen/margin_10"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_32"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_32"
+                android:hint="@string/hint_enter_mobile_number"
+                android:textColorHint="@color/hintTextColor">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_register_pnone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edt_bg_selector"
+                    android:drawableStart="@drawable/ic_phone"
+                    android:drawablePadding="@dimen/margin_16"
+                    android:imeOptions="actionDone"
+                    android:inputType="phone"
+                    android:paddingTop="@dimen/margin_10"
+                    android:paddingBottom="@dimen/margin_10"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_layout_otp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_32"
+                    android:layout_marginEnd="@dimen/margin_32"
+                    android:hint="@string/hint_add_otp"
+                    android:textColorHint="@color/hintTextColor">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_register_otp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edt_bg_selector"
+                        android:drawableStart="@drawable/ic_otp"
+                        android:drawablePadding="@dimen/margin_16"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:paddingTop="@dimen/margin_10"
+                        android:paddingBottom="@dimen/margin_10"
+                        android:textSize="16sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
+                    android:id="@+id/resend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/margin_36"
+                    android:text="Get OTP" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="24dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/checkboxTerms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes, I have read and accept\nRelief's terms and conditions." />
+
+                <Button
+                    android:id="@+id/bttn_register_terms"
+                    style="@style/UITextButtonGreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="28dp"
+                    android:padding="@dimen/margin_4"
+                    android:text="@string/terms_and_conditions"
+                    android:textAllCaps="false" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/ib_register_next"
+                style="@style/UIButtonGrad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_48"
+                android:layout_marginEnd="@dimen/margin_48"
+                android:layout_gravity="center"
+                android:text="Sign Up" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sign_up_go_to_login_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sign_up_edit_text_ll">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Have an account? "
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/login"
+                style="@style/UITextButtonRed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login here"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
+<!--<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.core.widget.NestedScrollView
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:fillViewport="true"
-        android:layout_weight="1"
-        android:layout_height="match_parent">
+        android:layout_weight="1">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:padding="@dimen/margin_8"
@@ -30,14 +277,6 @@
                 android:layout_height="100dp"
                 android:id="@+id/imageView2" />
 
-            <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Sign uP"-->
-            <!--android:gravity="center"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:textSize="16sp"/>-->
-
             <LinearLayout
                 android:layout_gravity="center"
                 android:layout_marginRight="20dp"
@@ -45,37 +284,6 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <!--<LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">-->
-                <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<ImageView-->
-                <!--android:layout_marginRight="8dp"-->
-                <!--android:src="@mipmap/ic_full_name_icon_sign_up"-->
-                <!--android:layout_width="12dp"-->
-                <!--android:layout_height="match_parent" />-->
-
-                <!--<TextView-->
-                <!--android:text="First Name"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/et_register_fname"-->
-                <!--android:inputType="textPersonName"-->
-                <!--android:minLines="1"-->
-                <!--android:maxLines="1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_layout_email"
@@ -94,33 +302,6 @@
                         android:hint="@string/hint_email" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<ImageView-->
-                <!--android:layout_marginRight="8dp"-->
-                <!--android:src="@mipmap/ic_full_name_icon_sign_up"-->
-                <!--android:layout_width="12dp"-->
-                <!--android:layout_height="match_parent" />-->
-
-                <!--<TextView-->
-                <!--android:text="Last Name"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--<EditText-->
-                <!--android:id="@+id/et_register_lname"-->
-                <!--android:inputType="textPersonName"-->
-                <!--android:minLines="1"-->
-                <!--android:maxLines="1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-                <!--</LinearLayout>-->
 
                 <RelativeLayout
                     android:orientation="vertical"
@@ -261,151 +442,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<ImageView-->
-                <!--android:layout_marginRight="8dp"-->
-                <!--android:src="@mipmap/ic_email_icon_sign_up_page"-->
-                <!--android:layout_width="12dp"-->
-                <!--android:layout_height="match_parent" />-->
-
-                <!--<TextView-->
-                <!--android:text="Email ID"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--<EditText-->
-                <!--android:inputType="textEmailAddress"-->
-                <!--android:minLines="1"-->
-                <!--android:maxLines="1"-->
-                <!--android:id="@+id/et_register_email"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-                <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;<LinearLayout-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">&ndash;&gt;-->
-
-                <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<ImageView-->
-                <!--android:layout_marginRight="8dp"-->
-                <!--android:src="@mipmap/ic_phone_number_sign_up_page"-->
-                <!--android:layout_width="12dp"-->
-                <!--android:layout_height="match_parent" />-->
-
-                <!--<TextView-->
-                <!--android:text="Phone"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--<EditText-->
-                <!--android:inputType="textEmailAddress"-->
-                <!--android:minLines="1"-->
-                <!--android:maxLines="1"-->
-                <!--android:id="@+id/et_register_pnone"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-
-                <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<ImageView-->
-                <!--android:layout_marginRight="8dp"-->
-                <!--android:src="@mipmap/ic_otp_sign_up_page"-->
-                <!--android:layout_width="12dp"-->
-                <!--android:layout_height="match_parent" />-->
-
-                <!--<TextView-->
-                <!--android:text="@string/hint_add_password"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--<EditText-->
-                <!--android:inputType="textPassword"-->
-                <!--android:minLines="1"-->
-                <!--android:maxLines="1"-->
-                <!--android:id="@+id/et_register_pass"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-
-                <!--<in.atees.nadoo.widget.masked.MaskedEditText-->
-                <!--android:drawablePadding="8dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:textSize="21sp"-->
-                <!--android:id="@+id/et_register_pnone"-->
-                <!--android:inputType="phone"-->
-                <!--android:typeface="monospace"-->
-                <!--mask:allowed_chars="1234567890"-->
-                <!--mask:mask="+91 ###-###-##-##"-->
-                <!--android:maxLines="1"-->
-                <!--app:keep_hint="true"/>-->
-
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">-->
-
-                <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<ImageView-->
-                <!--android:layout_marginRight="8dp"-->
-                <!--android:src="@mipmap/ic_otp_sign_up_page"-->
-                <!--android:layout_width="12dp"-->
-                <!--android:layout_height="match_parent" />-->
-
-                <!--<TextView-->
-                <!--android:text="@string/enter_otp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--<in.ateesinfomedia.delicio.widget.pintext.PinEntryEditText-->
-                <!--android:paddingLeft="8dp"-->
-                <!--android:drawableLeft="@mipmap/ic_name_icon_sign_up"-->
-                <!--android:drawablePadding="8dp"-->
-                <!--android:id="@+id/et_register_otp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:cursorVisible="false"-->
-                <!--android:digits="1234567890"-->
-                <!--android:inputType="number"-->
-                <!--android:maxLength="4"-->
-                <!--android:textIsSelectable="false"-->
-                <!--android:maxLines="1"-->
-                <!--android:textSize="20sp" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout
-                    android:orientation="vertical"
-                    android:layout_gravity="end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">-->
-
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -434,7 +470,6 @@ Relief's terms and conditions."/>
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
-                <!--Yes,I have read and accept-->
 
 
                 <Button
@@ -445,18 +480,6 @@ Relief's terms and conditions."/>
                     android:layout_marginRight="30dp"
                     android:layout_marginLeft="30dp"
                     style="@style/UIButtonGreen"/>
-
-                <!--<ImageButton-->
-                <!--android:layout_gravity="end"-->
-                <!--android:background="@android:color/transparent"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:src="@drawable/button_next"-->
-                <!--android:id="@+id/ib_register_next"-->
-                <!--android:scaleType="fitXY"-->
-                <!--android:layout_width="48dp"-->
-                <!--android:layout_height="48dp" />-->
-                <!--
-                        </LinearLayout>-->
 
             </LinearLayout>
 
@@ -510,4 +533,4 @@ Relief's terms and conditions."/>
 
     </com.github.florent37.arclayout.ArcLayout>
 
-</LinearLayout>
+</LinearLayout>-->

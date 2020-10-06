@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
         manager =new MyPreferenceManager(this);
 
@@ -167,13 +170,13 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
         // Create items
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.home, R.drawable.ic_home, R.color.bottomBarDefaultTextColor);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.profile, R.drawable.ic_profile, R.color.bottomBarDefaultTextColor);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.offer, R.drawable.ic_bottom_offer, R.color.bottomBarDefaultTextColor);
+        //AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.offer, R.drawable.ic_bottom_offer, R.color.bottomBarDefaultTextColor);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.more, R.drawable.ic_bottom_more, R.color.bottomBarDefaultTextColor);
 
 // Add items
         bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);
-        bottomNavigation.addItem(item3);
+        //bottomNavigation.addItem(item3);
         bottomNavigation.addItem(item4);
 
         // Set background color
@@ -223,16 +226,16 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame, ProfileFragment.getInstance()).commit();
                     setTitle("Profile");
                     isBack = false;
-                } else if (position == 3){
+                } else if (position == 2){
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame, MoreFragment.getInstance()).commit();
                     setTitle("More");
                     isBack = false;
                 }
-                else if (position == 2){
+                /*else if (position == 2){
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame, OfferFragment.getInstance()).commit();
                     setTitle("Offer");
                     isBack = false;
-                }
+                }*/
                 return true;
             }
         });
@@ -262,12 +265,12 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
             setTitle("Profile");
             isBack = false;
             bottomNavigation.setCurrentItem(1);
-        } else if (i == 2) {
+        } /*else if (i == 2) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame,OfferFragment.getInstance(),"OFFER_FRAGMENT").commit();
             setTitle("Offers");
             isBack = false;
             bottomNavigation.setCurrentItem(2);
-        }
+        }*/
     }
 
     @Override
@@ -296,6 +299,7 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
     @Override
     protected void onResume() {
         super.onResume();
+        toolbar.setTitle("");
 //        if (manager.isLogin()){
             if (manager.getCartCount()> 0) {
                 ActionItemBadge.update(this, mMenu, FontAwesome.Icon.faw_cart_arrow_down, ActionItemBadge.BadgeStyles.RED, manager.getCartCount());

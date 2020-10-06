@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.asksira.loopingviewpager.LoopingViewPager;
@@ -41,6 +42,7 @@ import in.ateesinfomedia.relief.models.DeliveryAddressModel;
 import in.ateesinfomedia.relief.models.DepartmentModel;
 import in.ateesinfomedia.relief.models.DoctorsModel;
 import in.ateesinfomedia.relief.models.LaboratoryModel;
+import in.ateesinfomedia.relief.view.activity.ComingSoonActivity;
 import in.ateesinfomedia.relief.view.activity.DoctorActivity;
 import in.ateesinfomedia.relief.view.activity.CategoryActivity;
 import in.ateesinfomedia.relief.view.activity.HospitalActivity;
@@ -61,6 +63,9 @@ public class HomeFragment extends Fragment implements NetworkCallback {
     private View mView;
     private ImageView mBtnUploadPres;
     private ImageView mBtnWhatsApp;
+    private LinearLayout topLayout;
+    private LinearLayout middleLayout;
+    private LinearLayout bottomLayout;
     //private CardView mCardSurgical,mCardgeneralMedicine,mCardFind,mCardLaboratary,mcardHospital;
     private int REQUEST_GET_DOCTORS_LIST_ID = 8900;
     private int TAG_GET_PROFILE_ID = 7865;
@@ -105,6 +110,30 @@ public class HomeFragment extends Fragment implements NetworkCallback {
         mLVPSlider = (LoopingViewPager) mView.findViewById(R.id.lvp_news_slider);
         mPIVindication = (PageIndicatorView) mView.findViewById(R.id.pageIndicatorView);
         nestedScrollView = (NestedScrollView) mView.findViewById(R.id.nestedScroll);
+        topLayout = (LinearLayout) mView.findViewById(R.id.home_frag_top_ll);
+        middleLayout = (LinearLayout) mView.findViewById(R.id.home_frag_middle_ll);
+        bottomLayout = (LinearLayout) mView.findViewById(R.id.home_frag_bottom_ll);
+
+        topLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toastComingSoon();
+            }
+        });
+
+        middleLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toastComingSoon();
+            }
+        });
+
+        bottomLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toastComingSoon();
+            }
+        });
 
         imagArrayList.clear();
         if (ImagArrayList.size() == 0 || ImagArrayList == null){
@@ -233,6 +262,14 @@ public class HomeFragment extends Fragment implements NetworkCallback {
         getProfile();
 
         return mView;
+    }
+
+    private void toastComingSoon() {
+        Toast.makeText(requireContext(),
+                "Coming Soon...",
+                Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), ComingSoonActivity.class);
+        startActivity(intent);
     }
 
     private void openWhatsApp() {

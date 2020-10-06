@@ -171,7 +171,8 @@ public class PrescriptionOrderFragment extends Fragment implements NetworkCallba
 
             } else {
                 orderDetailsList.clear();
-                JSONArray jsonArray = jsonObject.optJSONArray("data");
+                //JSONArray jsonArray = jsonObject.optJSONArray("data");
+                JSONArray jsonArray = jsonObject.optJSONArray("order_data");
                 for (int i = 0;i<jsonArray.length();i++) {
                     JSONObject jsonObject1 = jsonArray.optJSONObject(i);
 
@@ -211,7 +212,7 @@ public class PrescriptionOrderFragment extends Fragment implements NetworkCallba
                     orderDetails.setmLat(jsonObject1.optString("latitude"));
                     orderDetails.setMlong(jsonObject1.optString("longitude"));
                     orderDetails.setTracking(jsonObject1.optString("tracking"));
-                    orderDetails.setPres_image(jsonObject1.optString("presc_photo"));
+                    orderDetails.setPres_image(jsonObject1.optString("prescription"));
 
 
 //                    orderDetailsModel = orderDetails;

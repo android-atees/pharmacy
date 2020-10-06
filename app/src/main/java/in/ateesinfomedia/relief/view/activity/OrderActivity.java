@@ -86,7 +86,10 @@ public class OrderActivity extends AppCompatActivity implements NetworkCallback,
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
         manager = new MyPreferenceManager(this);
 //        mOrderRecycler = (RecyclerView) findViewById(R.id.orderRecycler);
@@ -157,6 +160,7 @@ public class OrderActivity extends AppCompatActivity implements NetworkCallback,
 
     @Override
     public void onResponse(int status, String response, int requestId) {
+        Log.d("requestId", ""+requestId);
         if (status == NetworkManager.SUCCESS){
             if (requestId == REQUEST_ORDERS_LIST_ID){
                 processOrderList(response);
@@ -178,6 +182,7 @@ public class OrderActivity extends AppCompatActivity implements NetworkCallback,
             boolean error = jsonObject.optBoolean("error");
             if (error){
                 LoadingDialog.cancelLoading();
+                Log.d("order_list", orderModel.toString());
                 Intent intent = new Intent(OrderActivity.this,OrderDetailsActivity.class);
                 intent.putExtra("order_list", (Serializable) orderModel);
                 intent.putExtra("order_details", (Serializable) orderDetailsList);
@@ -203,6 +208,8 @@ public class OrderActivity extends AppCompatActivity implements NetworkCallback,
                     manager.saveDeliveryAddress(deliveryAddressModel);
                 }
                 LoadingDialog.cancelLoading();
+                Log.d("orderDetailsList", orderDetailsList.toString());
+                Log.d("order_list", orderModel.toString());
                 Intent intent = new Intent(OrderActivity.this,OrderDetailsActivity.class);
                 intent.putExtra("order_list", (Serializable) orderModel);
                 intent.putExtra("order_details", (Serializable) orderDetailsList);
@@ -216,6 +223,7 @@ public class OrderActivity extends AppCompatActivity implements NetworkCallback,
     }
 
     private void processOrderDetails(String response) {
+        Log.d("error", "Hello");
         try {
             JSONObject jsonObject = new JSONObject(response);
             boolean error = jsonObject.optBoolean("error");
@@ -225,7 +233,9 @@ public class OrderActivity extends AppCompatActivity implements NetworkCallback,
 
             } else {
                 orderDetailsList.clear();
-                JSONArray jsonArray = jsonObject.optJSONArray("data");
+                //JSONArray jsonArray = jsonObject.optJSONArray("data");
+                JSONArray jsonArray = jsonObject.optJSONArray("order_data");
+                Log.d("jsonArray", jsonArray.toString());
                 for (int i = 0;i<jsonArray.length();i++) {
                     JSONObject jsonObject1 = jsonArray.optJSONObject(i);
 
@@ -265,10 +275,11 @@ public class OrderActivity extends AppCompatActivity implements NetworkCallback,
                     orderDetails.setmLat(jsonObject1.optString("latitude"));
                     orderDetails.setMlong(jsonObject1.optString("longitude"));
                     orderDetails.setTracking(jsonObject1.optString("tracking"));
-                    orderDetails.setPres_image(jsonObject1.optString("presc_photo"));
+                    orderDetails.setPres_image(jsonObject1.optString("prescription"));
 //                    orderDetails.setGst_percentage(jsonObject1.optString("gst_percentage"));
 
 //                    orderDetailsModel = orderDetails;
+                    Log.d("orderDetailsList Object", orderDetailsList.toString());
                     orderDetailsList.add(orderDetails);
                 }
 
@@ -417,4 +428,9 @@ public class OrderActivity extends AppCompatActivity implements NetworkCallback,
         return true;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        toolbar.setTitle("");
+    }
 }

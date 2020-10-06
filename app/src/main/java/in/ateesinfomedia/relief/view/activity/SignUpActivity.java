@@ -41,15 +41,15 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
     private EditText mETEmail;
     private EditText mETPhone;
     private EditText mETOtp;
-    private EditText mETReferal;
+    //private EditText mETReferal;
     private EditText mETPass;
     private Button mIBLogin;
     private Button mIBTerms;
-    private TextView mTvShow;
+    //private TextView mTvShow;
     private TextView mTvResend;
-    private CheckBox checkBox;
+    //private CheckBox checkBox;
     private CheckBox checkBox1;
-    private TextInputLayout mInLayReferal;
+    //private TextInputLayout mInLayReferal;
     private boolean isShow;
     private String fname,otp,email,phone,pass,referal;
     private int REQUEST_REGISTRATION = 9090;
@@ -68,22 +68,24 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
         mETEmail = (EditText) findViewById(R.id.et_register_email);
         mETPhone = (EditText) findViewById(R.id.et_register_pnone);
         mETOtp = (EditText) findViewById(R.id.et_register_otp);
-        mInLayReferal = (TextInputLayout) findViewById(R.id.input_layout_referal);
-        mETReferal = (EditText) findViewById(R.id.et_register_referal);
+        //mInLayReferal = (TextInputLayout) findViewById(R.id.input_layout_referal);
+        //mETReferal = (EditText) findViewById(R.id.et_register_referal);
         mETPass = (EditText) findViewById(R.id.et_register_pass);
         mIBLogin= (Button) findViewById(R.id.login);
         mIBTerms= (Button) findViewById(R.id.bttn_register_terms);
-        mTvShow = (TextView)  findViewById(R.id.show);
+        //mTvShow = (TextView)  findViewById(R.id.show);
         mTvResend = (TextView)  findViewById(R.id.resend);
 
-        checkBox = (CheckBox)  findViewById(R.id.checkboxReferal);
+        //checkBox = (CheckBox)  findViewById(R.id.checkboxReferal);
         checkBox1 = (CheckBox)  findViewById(R.id.checkboxTerms);
 
         intent_number = getIntent().getStringExtra("number");
 
-        mETPhone.setText(intent_number);
-        mETPhone.setEnabled(false);
-        mETPhone.setClickable(false);
+        if (intent_number != null) {
+            mETPhone.setText(intent_number);
+            mETPhone.setEnabled(false);
+            mETPhone.setClickable(false);
+        }
 
         mIBTerms.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
                 startActivity(intent);
             }
         });
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (checkBox.isChecked()){
@@ -101,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
                     hideReferalLayAnim();
                 }
             }
-        });
+        });*/
 
         mTvResend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +113,7 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
             }
         });
 
-        mTvShow.setOnClickListener(new View.OnClickListener() {
+        /*mTvShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isShow){
@@ -130,7 +132,7 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
                     isShow = true;
                 }
             }
-        });
+        });*/
 
         mBtnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +147,8 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
                     email = mETEmail.getText().toString();
                     phone = mETPhone.getText().toString();
                     pass = mETPass.getText().toString();
-                    referal = mETReferal.getText().toString();
+                    referal = "";
+                    //referal = mETReferal.getText().toString();
 
                     doRegister(fname, otp, email, phone, pass, referal);
                 } else {
@@ -225,7 +228,7 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
         mETPhone.setError(null);
         mETPass.setError(null);
         mETOtp.setError(null);
-        mETReferal.setError(null);
+        //mETReferal.setError(null);
 
         if (!isDataValid(fname)){
             isError = true;
@@ -257,13 +260,13 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
             mFocusView = mETOtp;
         }
 
-        if (checkBox.isChecked()){
+        /*if (checkBox.isChecked()){
             if (!isDataValid(referal)){
                 isError = true;
                 mETReferal.setError("Field can't be empty");
                 mFocusView = mETReferal;
             }
-        }
+        }*/
 
         if (!isValidEmail(email)){
             isError = true;
@@ -290,11 +293,12 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
                 map.put("userMobile",phone);
                 map.put("passwords",pass);
                 map.put("otp",otp);
-                if (checkBox.isChecked()){
+                map.put("refid","");
+                /*if (checkBox.isChecked()){
                     map.put("refid",referal);
                 } else {
                     map.put("refid","");
-                }
+                }*/
 
                 new NetworkManager(this).doPost(map, Apis.API_POST_USER_REGISTRATION,"TAG_REGISTRATION",REQUEST_REGISTRATION,this);
 
@@ -305,7 +309,7 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
         }
     }
 
-    private void showReferalLayAnim() {
+    /*private void showReferalLayAnim() {
         YoYo.with(Techniques.FadeInDown)
                 .duration(1000)
                 .repeat(0)
@@ -355,7 +359,7 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
                     }
                 })
                 .playOn(mInLayReferal);
-    }
+    }*/
 
     @Override
     public void onResponse(int status, String response, int requestId) {
@@ -381,6 +385,13 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
             if (error){
 
                 Toast.makeText(this, "Something went wrong...", Toast.LENGTH_SHORT).show();
+            } else {
+                String msg = jsonObject.optString("message");
+                if (!msg.equals("Otp Sent")){
+                    dialogWarning(SignUpActivity.this, msg);
+                } else  {
+                    mTvResend.setText("Resend OTP");
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

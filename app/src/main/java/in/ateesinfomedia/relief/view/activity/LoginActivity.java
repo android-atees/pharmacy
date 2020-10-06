@@ -44,13 +44,14 @@ import static in.ateesinfomedia.relief.configurations.Global.dialogWarning;
 public class LoginActivity extends AppCompatActivity implements NetworkCallback {
 
     private Button mBtnLogin;
-    private Button mBtnRegister;
-    private Button mIBNext;
+    //private Button mBtnRegister;
+    //private Button mIBNext;
     private TextView mTvForgot;
-    private TextView mTvShow;
+    private TextView mTvGoToSignUp;
+    //private TextView mTvShow;
     private EditText mETPass;
     private EditText mETNumber;
-    private RelativeLayout mPassLay;
+    //private RelativeLayout mPassLay;
     private int REQUEST_LOGIN = 8989;
     private int REQUEST_CHECK_MOBILE_EXIST = 9099;
     private boolean isPassLay;
@@ -78,18 +79,55 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mBtnLogin = (Button) findViewById(R.id.ib_login_next);
+        mBtnLogin = (Button) findViewById(R.id.login_submit_btn);
         manager = new MyPreferenceManager(this);
 
-        mPassLay = (RelativeLayout) findViewById(R.id.pass_lay);
-        mETNumber = (EditText) findViewById(R.id.et_login_number);
-        mETPass = (EditText) findViewById(R.id.et_login_password);
-        mTvShow = (TextView) findViewById(R.id.txtShow);
-        mIBNext = (Button) findViewById(R.id.ib_login_next);
-        mBtnRegister = (Button) findViewById(R.id.btnRegister);
-        mTvForgot = (TextView) findViewById(R.id.forgot);
+        //mPassLay = (RelativeLayout) findViewById(R.id.pass_lay);
+        mETNumber = (EditText) findViewById(R.id.login_number_txt);
+        mETPass = (EditText) findViewById(R.id.login_password_txt);
+        //mTvShow = (TextView) findViewById(R.id.txtShow);
+        //mIBNext = (Button) findViewById(R.id.ib_login_next);
+        //mBtnRegister = (Button) findViewById(R.id.btnRegister);
+        mTvForgot = (TextView) findViewById(R.id.login_forgot_txt);
+        mTvGoToSignUp = (TextView) findViewById(R.id.login_goto_sign_up_txt);
 
-        mTvShow.setOnClickListener(new View.OnClickListener() {
+        mBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = mETNumber.getText().toString();
+                String pass = mETPass.getText().toString();
+                doSubmitLogin(number,pass);
+
+                /*Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                startActivity(intent);
+                finish();
+
+                if (isPassLay){
+                    String number = mETNumber.getText().toString();
+                    String pass = mETPass.getText().toString();
+                    doSubmitLogin(number,pass);
+                } else {
+                    number = mETNumber.getText().toString();
+                    doSubmitNumber(number);
+                }*/
+            }
+        });
+
+        mTvForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogEditEduQua(LoginActivity.this,"forgot");
+            }
+        });
+
+        mTvGoToSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadRegister();
+            }
+        });
+
+        /*mTvShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isShow){
@@ -110,37 +148,12 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
             }
         });
 
-        mBtnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
-//                startActivity(intent);
-//                finish();
-
-                if (isPassLay){
-                    String number = mETNumber.getText().toString();
-                    String pass = mETPass.getText().toString();
-                    doSubmitLogin(number,pass);
-                } else {
-                    number = mETNumber.getText().toString();
-                    doSubmitNumber(number);
-                }
-            }
-        });
-
-        mTvForgot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialogEditEduQua(LoginActivity.this,"forgot");
-            }
-        });
-
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadRegister();
             }
-        });
+        });*/
     }
 
     private void dialogEditEduQua(final Context context, final String type) {
@@ -376,7 +389,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
         }
     }
 
-    private void doSubmitNumber(String number) {
+    /*private void doSubmitNumber(String number) {
         boolean isError = false;
         View mFocusView = null;
 
@@ -405,7 +418,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
 
             LoadingDialog.showLoadingDialog(this,"Loading...");
         }
-    }
+    }*/
 
     public boolean isDataValid(String mETFirstName) {
         if (mETFirstName.equals("") || mETFirstName.isEmpty()){
@@ -427,7 +440,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
     public void onResponse(int status, String response, int requestId) {
         if (status == NetworkManager.SUCCESS){
             if (requestId == REQUEST_CHECK_MOBILE_EXIST){
-                ProcessJsonCheckMobileExist(response);
+                //ProcessJsonCheckMobileExist(response);
             } else if (requestId == REQUEST_LOGIN){
                 ProcessJsonLogin(response);
             } else if (requestId == REQUEST_RESEND_OTP){
@@ -633,7 +646,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
 //        LoadingDialog.showLoadingDialog(this,"Loading...");
     }
 
-    private void ProcessJsonCheckMobileExist(String response) {
+    /*private void ProcessJsonCheckMobileExist(String response) {
         try {
             JSONObject jsonObject = new JSONObject(response);
             boolean error = jsonObject.optBoolean("error");
@@ -654,14 +667,14 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
             LoadingDialog.cancelLoading();
             dialogWarning(LoginActivity.this, "Sorry ! Can't connect to server, try later");
         }
-    }
+    }*/
 
     public  static String getDeviceId(Context context){
         String m_androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         return m_androidId;
     }
 
-    private void showPassLayAnim() {
+    /*private void showPassLayAnim() {
         YoYo.with(Techniques.BounceInUp)
                 .duration(1000)
                 .repeat(0)
@@ -687,11 +700,11 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
                     }
                 })
                 .playOn(mPassLay);
-    }
+    }*/
 
     private void loadRegister() {
         Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
-        intent.putExtra("number",number);
+        //intent.putExtra("number",number);
         startActivity(intent);
     }
 

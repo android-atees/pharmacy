@@ -110,7 +110,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements NetworkCa
     private String[] main2 = new String[]{"Draft","Confirmed","Processing","Shipped","Returned"};
     private String[] main3 = new String[]{"Draft","Confirmed","Processing","Shipped","Cancelled"};
     private List<OrderDetails> orderItemsList = new ArrayList<>();
-    private RecyclerView order_items_recycler;
+    //private RecyclerView order_items_recycler;
     private OrderItemsAdapter mAdapter;
     private float grand_total_price;
     private boolean isCancelled;
@@ -215,7 +215,10 @@ public class OrderDetailsActivity extends AppCompatActivity implements NetworkCa
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Places.GEO_DATA_API)
@@ -233,11 +236,10 @@ public class OrderDetailsActivity extends AppCompatActivity implements NetworkCa
         orderItemsList = (ArrayList<OrderDetails>) getIntent().getSerializableExtra("order_details");
         orderList=(ArrayList<OrderModel>)getIntent().getSerializableExtra("order_status");
 
-        order_items_recycler = (RecyclerView) findViewById(R.id.order_items_recycler);
-//        itemName = (TextView) findViewById(R.id.itemName);
-//        itemPrice = (TextView) findViewById(R.id.itemPrice);
-//        itemQuantity = (TextView) findViewById(R.id.itemQuantity);
-//        gstPercentage = (TextView) findViewById(R.id.gstPercentage);
+        //Log.d("orderItemsList", orderItemsList.toString());
+        //Log.d("orderModel", orderModel.toString());
+
+        //order_items_recycler = (RecyclerView) findViewById(R.id.order_items_recycler);
         grandTotal = (TextView) findViewById(R.id.grandTotal);
         tvCancel = (TextView) findViewById(R.id.tvCancel);
         tvViewInMap = (TextView) findViewById(R.id.tvViewInMap);
@@ -262,19 +264,12 @@ public class OrderDetailsActivity extends AppCompatActivity implements NetworkCa
         city = (TextView) findViewById(R.id.city);
         state = (TextView) findViewById(R.id.state);
 
-//        itemName.setText(orderDetails.getMedicine_name());
-//        itemPrice.setText(orderDetails.getMedicine_price());
-//        itemQuantity.setText(orderDetails.getQuantity());
-//        gstPercentage.setText(orderDetails.getGst_percentage());
-//        gstAmount.setText(orderDetails.getGst());
-//        total.setText(orderDetails.getTotal_amount());
-
-        order_items_recycler.setNestedScrollingEnabled(false);
+        /*order_items_recycler.setNestedScrollingEnabled(false);
         mAdapter = new OrderItemsAdapter(this,orderItemsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        order_items_recycler.setLayoutManager(mLayoutManager/*mLayoutManager*/);
+        order_items_recycler.setLayoutManager(mLayoutManager*//*mLayoutManager*//*);
         order_items_recycler.setItemAnimator(new DefaultItemAnimator());
-        order_items_recycler.setAdapter(mAdapter);
+        order_items_recycler.setAdapter(mAdapter);*/
 
         grand_total_price = Float.valueOf(orderModel.getTotal());
         grandTotal.setText("₹ "+grand_total_price);
@@ -301,40 +296,10 @@ public class OrderDetailsActivity extends AppCompatActivity implements NetworkCa
 
         if (orderModel.getUser_status().equals("1")){
             edit.setVisibility(View.GONE);
-
-            /*name.setText(orderItemsList.get(0).getName());
-            number.setText(orderItemsList.get(0).getNumber());
-            pincode.setText(orderItemsList.get(0).getPinCode());
-            address.setText(orderItemsList.get(0).getAddress());
-            mLat = orderItemsList.get(0).getmLat();
-            mLong = orderItemsList.get(0).getMlong();
-
-            if (orderItemsList.get(0).getTracking().equals("0")){
-                tvViewInMap.setVisibility(View.GONE);
-            } else if (orderItemsList.get(0).getTracking().equals("1")){
-                tvViewInMap.setVisibility(View.VISIBLE);
-            } else if (orderItemsList.get(0).getTracking().equals("2")){
-                tvViewInMap.setVisibility(View.GONE);
-            }*/
-//            city.setText(orderItemsList.get(0).getCityOrDistrict());
-//            state.setText(orderItemsList.get(0).getState());
-
             buttons_lay.setVisibility(View.GONE);
             trackLay.setVisibility(View.VISIBLE);
         } else if (orderModel.getUser_status().equals("2")){
             edit.setVisibility(View.GONE);
-
-//            name.setText(orderItemsList.get(0).getName());
-//            number.setText(orderItemsList.get(0).getNumber());
-//            pincode.setText(orderItemsList.get(0).getPinCode());
-//            address.setText(orderItemsList.get(0).getAddress());
-//            city.setText(orderItemsList.get(0).getCityOrDistrict());
-//            state.setText(orderItemsList.get(0).getState());
-//
-//            buttons_lay.setVisibility(View.GONE);
-//            trackLay.setVisibility(View.VISIBLE);
-//            tracker.setLabels(main3);
-//            tracker.setCurrentStep(5);
             buttons_lay.setVisibility(View.GONE);
             tracker.setVisibility(View.GONE);
             tvCancel.setVisibility(View.VISIBLE);
@@ -370,8 +335,6 @@ public class OrderDetailsActivity extends AppCompatActivity implements NetworkCa
             tracker.setLabels(main2);
             tracker.setCurrentStep(5);
         } else if (orderModel.getOrder_status().equals("0")){
-//            tracker.setLabels(main3);
-//            tracker.setCurrentStep(5);
             tracker.setVisibility(View.GONE);
             tvCancel.setVisibility(View.VISIBLE);
             deliverLay.setVisibility(View.GONE);
@@ -414,9 +377,11 @@ public class OrderDetailsActivity extends AppCompatActivity implements NetworkCa
         tvPresImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OrderDetailsActivity.this,ImageShowActivity.class);
-                intent.putExtra("image",orderItemsList.get(0).getPres_image());
-                startActivity(intent);
+                if (orderItemsList.get(0).getPres_image() != null) {
+                    Intent intent = new Intent(OrderDetailsActivity.this,ImageShowActivity.class);
+                    intent.putExtra("image",orderItemsList.get(0).getPres_image());
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -572,25 +537,12 @@ public class OrderDetailsActivity extends AppCompatActivity implements NetworkCa
             title.setText("Edit delivery address");
             DeliveryAddressModel deliveryAddressModel = manager.getDeliveryAddress();
             etpincode.setText(deliveryAddressModel.getPinCode());
-//            state.setText("Kerala");
-//            city.setText("Thrissur");
-//            city.setFocusable(false);
-//            city.setEnabled(false);
-//            state.setFocusable(false);
-//            state.setEnabled(false);
             alt_number.setText(deliveryAddressModel.getAlternativeNumber());
             number.setText(deliveryAddressModel.getNumber());
             autoCompleteTextView.setText(deliveryAddressModel.getAddress());
             name.setText(deliveryAddressModel.getName());
         } else {
             title.setText("Add delivery address");
-//            city.setText("Thrissur");
-//            state.setText("Kerala");
-//            city.setFocusable(false);
-//            city.setEnabled(false);
-//            state.setFocusable(false);
-//            state.setEnabled(false);
-//            pincode.setText(Global.PinCode);
         }
 
         btnSave.setOnClickListener(new View.OnClickListener() {

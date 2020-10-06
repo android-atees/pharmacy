@@ -66,6 +66,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
+            android:id="@+id/home_frag_top_ll"
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:orientation="horizontal">
@@ -73,7 +74,171 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="8dp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:layout_marginStart="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_4"
+                android:layout_weight="1"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="@dimen/margin_2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/home_top_tiles_bg_1">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        app:srcCompat="@drawable/home_vitamin_supplements" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_2"
+                        android:text="Min 40% off"
+                        android:textSize="10sp"
+                        android:background="@color/gradStart"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/margin_2"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_2"
+                        android:text="Vitamin Supplements"
+                        android:textSize="10sp"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:layout_marginStart="@dimen/margin_4"
+                android:layout_marginEnd="@dimen/margin_4"
+                android:layout_weight="1"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="@dimen/margin_2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@color/home_top_tiles_bg_2">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        app:srcCompat="@drawable/home_medicine_organiser" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_2"
+                        android:text="Min 60% off"
+                        android:textSize="10sp"
+                        android:background="@color/gradStart"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/margin_2"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_2"
+                        android:text="Medicine Organiser"
+                        android:textSize="10sp"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:layout_marginStart="@dimen/margin_4"
+                android:layout_marginEnd="@dimen/margin_8"
+                android:layout_weight="1"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="@dimen/margin_2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:gravity="center"
+                    android:background="@color/home_top_tiles_bg_3">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        app:srcCompat="@drawable/home_medical_equipment" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_2"
+                        android:text="Min 50% off"
+                        android:textSize="10sp"
+                        android:background="@color/gradStart"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/margin_2"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_2"
+                        android:text="Medical Equipments"
+                        android:textSize="10sp"
+                        android:layout_gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_frag_middle_ll"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_4"
                 android:layout_weight="1"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="@dimen/margin_2">
@@ -81,12 +246,12 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="8dp"
                     android:background="@color/home_tiles_bg">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/margin_8"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
                         app:srcCompat="@drawable/home_medicine" />
@@ -95,8 +260,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/medicine"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/margin_16"
                         android:layout_marginEnd="@dimen/margin_16"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_alignParentStart="true"
                         android:textColor="@android:color/black" />
 
@@ -107,7 +274,10 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="8dp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:layout_marginStart="@dimen/margin_4"
+                android:layout_marginEnd="@dimen/margin_4"
                 android:layout_weight="1"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="@dimen/margin_2">
@@ -115,12 +285,12 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="8dp"
                     android:background="@color/home_tiles_bg">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/margin_8"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
                         app:srcCompat="@drawable/home_non_medicine" />
@@ -129,8 +299,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/non_medicine"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/margin_16"
                         android:layout_marginEnd="@dimen/margin_16"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_alignParentStart="true"
                         android:textColor="@android:color/black" />
 
@@ -141,7 +313,10 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="8dp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:layout_marginStart="@dimen/margin_4"
+                android:layout_marginEnd="@dimen/margin_16"
                 android:layout_weight="1"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="@dimen/margin_2">
@@ -149,12 +324,12 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="8dp"
                     android:background="@color/home_tiles_bg">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/margin_8"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
                         app:srcCompat="@drawable/home_new_born" />
@@ -163,8 +338,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/newborn_essentials"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/margin_16"
                         android:layout_marginEnd="@dimen/margin_16"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_alignParentStart="true"
                         android:textColor="@android:color/black" />
 
@@ -175,14 +352,18 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/home_frag_bottom_ll"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="120dp"
             android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="8dp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_4"
                 android:layout_weight="1"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="@dimen/margin_2">
@@ -190,12 +371,12 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="8dp"
                     android:background="@color/home_tiles_bg">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/margin_8"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
                         app:srcCompat="@drawable/home_toys" />
@@ -204,8 +385,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/toys"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/margin_16"
                         android:layout_marginEnd="@dimen/margin_16"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_alignParentStart="true"
                         android:textColor="@android:color/black" />
 
@@ -216,7 +399,10 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="8dp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:layout_marginStart="@dimen/margin_4"
+                android:layout_marginEnd="@dimen/margin_4"
                 android:layout_weight="1"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="@dimen/margin_2">
@@ -224,12 +410,12 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="8dp"
                     android:background="@color/home_tiles_bg">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/margin_8"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
                         app:srcCompat="@drawable/home_opticals" />
@@ -238,8 +424,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/opticals"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/margin_16"
                         android:layout_marginEnd="@dimen/margin_16"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_alignParentStart="true"
                         android:textColor="@android:color/black" />
 
@@ -250,7 +438,10 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="8dp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:layout_marginStart="@dimen/margin_4"
+                android:layout_marginEnd="@dimen/margin_16"
                 android:layout_weight="1"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="@dimen/margin_2">
@@ -258,12 +449,12 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="8dp"
                     android:background="@color/home_tiles_bg">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_marginEnd="@dimen/margin_8"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
                         app:srcCompat="@drawable/home_book_doctor" />
@@ -272,8 +463,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/book_your_doctor"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/margin_16"
                         android:layout_marginEnd="@dimen/margin_16"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:layout_alignParentStart="true"
                         android:textColor="@android:color/black" />
 

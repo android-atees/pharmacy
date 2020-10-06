@@ -11,10 +11,34 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
-        app:title="@string/app_name"
+        app:title=""
         app:titleTextColor="@android:color/white">
 
     </androidx.appcompat.widget.Toolbar>
+
+    <include
+        layout="@layout/toolbar_relief_img"/>
+
+    <LinearLayout
+        android:id="@+id/orders_heading_ll"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:layout_below="@+id/toolbar"
+        android:gravity="center"
+        android:background="@drawable/orders_bg_gradient">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MY ORDERS"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -33,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        android:layout_below="@+id/tabs"
+        android:layout_below="@+id/orders_heading_ll"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
 
     <!--<RelativeLayout-->

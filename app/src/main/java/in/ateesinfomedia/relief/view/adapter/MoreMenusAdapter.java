@@ -20,7 +20,7 @@ public class MoreMenusAdapter extends RecyclerView.Adapter<MoreMenusAdapter.MyVi
 //    String [] names = new String[] { "Profile","My Orders", "Home",
 //            "Upload Order"/*, "View Offers"*/, "Rewards", "Rate App", "Customers Support", "Refer And Earn","Sign Out"};
 
-    String [] names = new String[] {"Home","Profile","Upload Order","My Orders","Refer And Earn","Rewards","Customers Support","Rate App","Sign Out" };
+    String [] names = new String[] {"Home","Profile","Upload Order","My Orders"/*,"Refer And Earn","Rewards"*/,"Customers Support","Rate App","Sign Out" };
 
 //    Integer [] images = new Integer[] {R.drawable.ic_more_profile,R.drawable.ic_more_orders,
 //            R.drawable.ic_more_home,R.drawable.ic_more_upload/*,R.drawable.ic_more_offers*/,
@@ -28,8 +28,8 @@ public class MoreMenusAdapter extends RecyclerView.Adapter<MoreMenusAdapter.MyVi
 //            R.drawable.ic_more_refer,R.drawable.ic_more_logout};
 
     Integer [] images = new Integer[] {R.drawable.ic_more_home,R.drawable.ic_more_profile,
-            R.drawable.ic_more_upload,R.drawable.ic_more_orders,R.drawable.ic_more_refer,
-            R.drawable.ic_more_rewards,R.drawable.ic_more_customer_support,R.drawable.ic_more_rate_us,
+            R.drawable.ic_more_upload,R.drawable.ic_more_orders/*,R.drawable.ic_more_refer,
+            R.drawable.ic_more_rewards*/,R.drawable.ic_more_customer_support,R.drawable.ic_more_rate_us,
             R.drawable.ic_more_logout};
 
     public MoreMenusAdapter(Context context, AdapterClickListner adapterClickListner) {

@@ -7,18 +7,19 @@
         android:id="@+id/action_notification"
         android:icon="@drawable/ic_notification"
         android:title="Add Cart"
-        app:showAsAction="always"></item>
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_addcart"
         android:icon="@drawable/ic_cart"
         android:title="Add Cart"
-        app:showAsAction="always"></item>
+        android:visible="false"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_action_action_search"
         android:title="Search"
-        app:showAsAction="always"></item>
+        app:showAsAction="always"/>
 
 </menu>

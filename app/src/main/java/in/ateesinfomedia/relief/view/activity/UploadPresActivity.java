@@ -114,6 +114,8 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
     private Toolbar toolbar;
     private ImageView mImUpload;
     private ImageView mImUpload2;
+    private ImageView mImUploadClose;
+    private ImageView mImUpload2Close2;
     private int CAMERA_IMAGE_REQUEST_ID = 7777;
     private int CAMERA_IMAGE_REQUEST_ID_2 = 7778;
     private int GALLERY_IMAGE_REQUEST_ID = 8987;
@@ -189,6 +191,8 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mImUpload = (ImageView) findViewById(R.id.uploadImage);
         mImUpload2 = (ImageView) findViewById(R.id.uploadImage2);
+        mImUploadClose = (ImageView) findViewById(R.id.upload_image_close);
+        mImUpload2Close2 = (ImageView) findViewById(R.id.upload_image_2_close);
         mImCalendar = (ImageView) findViewById(R.id.calendar);
         mEtTextField = (EditText) findViewById(R.id.et_textfield);
         mEtRemark = (EditText) findViewById(R.id.et_remarks);
@@ -200,7 +204,10 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         //btn_send = findViewById(R.id.recordBtn);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
         mPermissionManager = new PermissionManager(this);
 
@@ -232,7 +239,6 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
                 dialog.show(getSupportFragmentManager(), "tag");
             }
         });
-
 
         mImUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,7 +278,6 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
             }
         });
 
-
         mImUpload2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -308,6 +313,22 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
                 } else {
                     mPermissionManager.makePermissionRequest(UploadPresActivity.this);
                 }
+            }
+        });
+
+        mImUploadClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Glide.with(UploadPresActivity.this).load(R.drawable.im_placeholder).into(mImUpload);
+                thumbnail = null;
+            }
+        });
+
+        mImUpload2Close2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Glide.with(UploadPresActivity.this).load(R.drawable.im_placeholder).into(mImUpload2);
+                thumbnail2 = null;
             }
         });
 
@@ -529,6 +550,8 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         mPlayer.seekTo(lastProgress);
         seekBar.setMax(mPlayer.getDuration());
         seekUpdation();
+        chronometer.stop();
+        chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.start();
 
 
@@ -1618,7 +1641,11 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         }
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        toolbar.setTitle("");
+    }
 
     //.............................................Camera Algorithm.............................................
 }

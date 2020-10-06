@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
+        app:cardCornerRadius="10dp"
         app:cardElevation="@dimen/margin_2"
         android:layout_marginTop="@dimen/margin_6"
         android:layout_marginBottom="@dimen/margin_2"
@@ -16,6 +18,98 @@
         android:layout_marginRight="@dimen/margin_2">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tvPresId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:padding="@dimen/margin_2"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    tools:text="PRE_13144"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:gravity="center"
+                    android:padding="@dimen/margin_2"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"
+                    tools:text="2020-09-30 01:42:13"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/tvTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_2"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:layout_gravity="end|center"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/tvProcess"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_2"
+                    android:layout_gravity="center"
+                    android:text="Processing your order"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:visibility="visible"
+                    android:background="@drawable/order_processing_bg"
+                    android:textColor="@android:color/darker_gray"
+                    android:focusable="true"
+                    tools:targetApi="m" />
+
+                <TextView
+                    android:id="@+id/tvTrack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Track"
+                    android:layout_gravity="end|center"
+                    android:visibility="gone"
+                    android:paddingLeft="@dimen/margin_20"
+                    android:paddingRight="@dimen/margin_20"
+                    android:paddingTop="@dimen/margin_2"
+                    android:paddingBottom="@dimen/margin_2"
+                    android:background="@color/black"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:textColor="@android:color/white"
+                    android:focusable="true"
+                    tools:targetApi="m" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/margin_4"
@@ -44,7 +138,9 @@
                     android:text=""
                     android:padding="@dimen/margin_2"
                     android:gravity="center"
-                    android:textColor="@color/colorAccent"/>
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    tools:text="PRE_13144"/>
 
                 <TextView
                     android:id="@+id/tvDate"
@@ -94,8 +190,8 @@
                     android:clickable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:visibility="visible"
-                    android:background="@color/grey"
-                    android:textColor="@android:color/white"/>
+                    android:background="@drawable/order_processing_bg"
+                    android:textColor="@android:color/darker_gray"/>
 
                 <TextView
                     android:id="@+id/tvTrack"
@@ -108,15 +204,15 @@
                     android:paddingRight="@dimen/margin_20"
                     android:paddingTop="@dimen/margin_2"
                     android:paddingBottom="@dimen/margin_2"
-                    android:background="@drawable/ab_gradient"
+                    android:background="@color/black"
                     android:clickable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:textColor="@android:color/white"/>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </LinearLayout>-->
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </RelativeLayout>

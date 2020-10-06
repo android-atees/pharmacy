@@ -7,35 +7,40 @@
 <!--app:cardCornerRadius="0dp"-->
 <!--android:layout_height="wrap_content">-->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:gravity="center"
     android:background="@android:color/white"
     android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal" android:layout_width="match_parent"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:gravity="center"
         android:clickable="true"
         android:background="?attr/selectableItemBackground"
         android:id="@+id/ll_more_item_container"
-        android:padding="@dimen/margin_6"
-        android:layout_height="wrap_content">
+        android:padding="@dimen/margin_8"
+        android:layout_height="wrap_content"
+        android:focusable="true">
 
         <ImageView
             android:layout_margin="@dimen/margin_8"
             android:id="@+id/icons"
             android:padding="1dp"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
+            android:layout_width="32dp"
+            android:layout_height="32dp"/>
 
         <TextView
-            android:layout_marginLeft="@dimen/margin_4"
             android:id="@+id/names"
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/margin_8"
             android:text="Seminar"
+            android:textSize="16sp"
             android:gravity="center_vertical"
             android:textColor="@android:color/black"/>
 
@@ -61,9 +66,10 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:padding="@dimen/margin_4"
-        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/margin_8"
+        android:layout_marginEnd="@dimen/margin_8"
         android:src="@drawable/ic_right_arrow"/>
 
 </RelativeLayout>

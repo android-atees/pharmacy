@@ -6,13 +6,13 @@
     <string name="more">More</string>
     <string name="slide_one">EXPRESS DELIVERY\nAT YOUR DOORSTEP</string>
     <string name="skip">Skip</string>
-    <string name="hint_enter_number">Mobile number</string>
-    <string name="hint_enter_password">Password</string>
+    <string name="hint_enter_number">Type Your Mobile Number</string>
+    <string name="hint_enter_password">Type Your Password</string>
     <string name="terms_and_conditions">Terms And Conditions</string>
     <string name="hint_email">Your Email Address</string>
     <string name="hint_add_password">Set Password</string>
     <string name="hint_name">Full Name</string>
-    <string name="hint_enter_mobile_number">Mobile Number(for order updates)</string>
+    <string name="hint_enter_mobile_number">Mobile Number (for order updates)</string>
     <string name="referAndEarn">Hi, \n  Refer to your family and friends, \n  and welcome them to the world of remedio. </string>
     <string name="hint_add_otp">OTP</string>
     <string name="hint_enter_Referal_id">Enter the Referal ID</string>
@@ -24,7 +24,7 @@
     <string name="select_or_search">Select or search</string>
     <string name="upload_sucess">Your order has been received \n our representative will call you soon!</string>
     <string name="upload_failed">Failed your prescription upoading \n try again!</string>
-    <string name="remedio_medicine_order">REMEDIO\nMEDICINE ORDER</string>
+    <string name="remedio_medicine_order">RELIEF\nMEDICINE ORDER</string>
     <string name="delivery_address">DELIVERY ADDRESS</string>
     <string name="doc_image">Doctors_image</string>
     <string name="doc_name">Doctors_name</string>
@@ -63,5 +63,7 @@
     <string name="book_your_doctor">Book\nYour Doctor</string>
     <string name="slide_to_cancel">Slide to cancel</string>
     <string name="opticals">Opticals</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
 
 </resources>

@@ -74,7 +74,7 @@
 
     <Button
         android:id="@+id/getOtp"
-        style="@style/UIButtonGreen"
+        style="@style/UIButtonGrad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
