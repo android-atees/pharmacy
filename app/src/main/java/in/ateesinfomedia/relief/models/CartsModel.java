@@ -1,6 +1,6 @@
 package in.ateesinfomedia.relief.models;
 
-public class CartModel {
+public class CartsModel {
 
     String id;
     String quantity;

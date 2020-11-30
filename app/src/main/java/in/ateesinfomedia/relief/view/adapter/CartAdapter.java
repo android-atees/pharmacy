@@ -18,7 +18,8 @@ import java.util.List;
 import in.ateesinfomedia.relief.R;
 import in.ateesinfomedia.relief.configurations.Apis;
 import in.ateesinfomedia.relief.interfaces.CartItemClickListner;
-import in.ateesinfomedia.relief.models.CartModel;
+import in.ateesinfomedia.relief.models.CartsModel;
+import in.ateesinfomedia.relief.models.cart.CartModel;
 import me.himanshusoni.quantityview.QuantityView;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
@@ -46,10 +47,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull final CartAdapter.MyViewHolder holder, int position) {
 
-        holder.mProductName.setText(mCartModels.get(position).getProduct_name());
+        holder.mProductName.setText(mCartModels.get(position).getName());
+        holder.mQuantity.setText(mCartModels.get(position).getQty());
+        Glide.with(mContext).load(mCartModels.get(position).getImage()).into(holder.mproductImage);
+        float price = Float.parseFloat(mCartModels.get(position).getPrice());
+        int qty = Integer.parseInt(mCartModels.get(position).getQty());
+        float total = price * qty;
+        holder.mPrice.setText("₹ " + String.format("%.2f", total));
+
+        holder.bind(mCartModels.get(position), mCartItemClickListner);
+
+
+        /*holder.mProductName.setText(mCartModels.get(position).getProduct_name());
         String offerprice = String.valueOf(Integer.valueOf(mCartModels.get(position).getQuantity()) * Float.valueOf(mCartModels.get(position).getProduct_total_offer()));
-//        holder.mPrice.setText("₹ "+offerprice);
-//        String offerprice = String.valueOf(SumofPrice());
         if (offerprice.contains(".")){
             String[] arrStr = offerprice.split("\\.", 2);
             if (arrStr[1].length()>=2){
@@ -72,22 +82,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             public void onQuantityChanged(int oldQuantity, int newQuantity, boolean b) {
                 Integer pos = (Integer) holder.quantityView.getTag();
                 if (newQuantity>oldQuantity){
-//                    mCartList.get(pos).setQuantity(newQuantity);
-//                    Toast.makeText(mContext, "plus", Toast.LENGTH_SHORT).show();
                     mCartItemClickListner.onEditQuantityClicked(pos,"plus",newQuantity);
                 } else {
-//                    mCartList.get(pos).setQuantity(newQuantity);
-//                    Toast.makeText(mContext, "minus", Toast.LENGTH_SHORT).show();
                     mCartItemClickListner.onEditQuantityClicked(pos,"minus",newQuantity);
                 }
             }
 
             @Override
             public void onLimitReached() {
-
                 Toast.makeText(mContext, "You reached the maximum limit.", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
     }
 
@@ -99,24 +104,49 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView mProductName,mQuantity,mPrice;
-        ImageView mproductImage;
-        Button mRemove;
-        //        StepperTouch stepperTouch;
-        QuantityView quantityView;
+        ImageView mproductImage,mRemove;
+        //QuantityView quantityView;
+        Button mCartIncrement, mCartDecrement;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            quantityView = (QuantityView) itemView.findViewById(R.id.quantityCountPickerCart);
+            //quantityView = (QuantityView) itemView.findViewById(R.id.quantityCountPickerCart);
             mProductName = (TextView) itemView.findViewById(R.id.product_name);
             mPrice = (TextView) itemView.findViewById(R.id.price);
-            mRemove = (Button) itemView.findViewById(R.id.remove);
+            mRemove = (ImageView) itemView.findViewById(R.id.remove);
             mproductImage = (ImageView) itemView.findViewById(R.id.product_image);
+            mCartIncrement = (Button) itemView.findViewById(R.id.cart_increment);
+            mCartDecrement = (Button) itemView.findViewById(R.id.cart_decrement);
+            mQuantity = (TextView) itemView.findViewById(R.id.cart_qty);
+        }
 
+        void bind(CartModel item, CartItemClickListner listener) {
+            int qty = Integer.parseInt(item.getQty());
+            mCartIncrement.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (qty == 10) {
+                        Toast.makeText(mContext, "You reached the maximum limit.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        listener.onEditQuantityClicked(getAdapterPosition(),"plus", qty + 1, item);
+                    }
+                }
+            });
+            mCartDecrement.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (qty == 1) {
+                        Toast.makeText(mContext, "You reached the minimum limit.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        listener.onEditQuantityClicked(getAdapterPosition(),"minus", qty - 1, item);
+                    }
+                }
+            });
             mRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCartItemClickListner.onRemoveItemClicked(getAdapterPosition());
+                    listener.onRemoveItemClicked(getAdapterPosition(), item);
                 }
             });
         }

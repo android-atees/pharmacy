@@ -44,7 +44,11 @@ public class ThumbnailAdapter extends RecyclerView.Adapter<ThumbnailAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        return mString.length;
+        if (mString != null) {
+            return mString.length;
+        } else {
+            return 0;
+        }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

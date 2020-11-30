@@ -31,7 +31,7 @@ public class SlidingImagesAdapter extends LoopingPagerAdapter<String> {
 
         mImage = (ImageView) convertView.findViewById(R.id.image);
 
-        Glide.with(context).load(Apis.API_POST_SLIDER_IMAGES + itemList.get(listPosition)).into(mImage);
+        Glide.with(context).load(Apis.SLIDER_BASE_URL + itemList.get(listPosition)).into(mImage);
 
     }
 }

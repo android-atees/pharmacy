@@ -37,7 +37,10 @@ public class MyPreferenceManager {
     private static final String KEY_USER_MAIL = "mail";
     private static final String KEY_USER_NUMBER = "mobile_number";
     private static final String KEY_USER_UNIQUE_ID = "unique_id";
+    private static final String KEY_USER_CART_ID = "cart_id";
     private static final String IS_USERADDRESS = "key_user_address";
+
+    private static final String KEY_USER_TOKEN = "key_user_token";
 
     private static final String KEY_NOTIFICATION_KEY = "notification_key";
     // Sharedpref file name
@@ -149,23 +152,9 @@ public class MyPreferenceManager {
         return pref.getInt(KEY_CART_COUNT,0);
     }
 
-    public String getUserName(){
-        // Clearing all data from Shared Preferences
-        return pref.getString(KEY_USER_NAME,"");
-    }
-
-    public String getUserMail(){
-        // Clearing all data from Shared Preferences
-        return pref.getString(KEY_USER_MAIL,"");
-    }
-
     public String getUserNumber(){
         // Clearing all data from Shared Preferences
         return pref.getString(KEY_USER_NUMBER,"");
-    }
-    public String getUserUniqueId(){
-        // Clearing all data from Shared Preferences
-        return pref.getString(KEY_USER_UNIQUE_ID,"");
     }
 
     public void saveDeliveryAddress(DeliveryAddressModel deliveryAddressModel){
@@ -241,4 +230,50 @@ public class MyPreferenceManager {
         setFirstLaunch(false);
         setFirstLogin(false);
     }
+
+    public void saveUserToken(String token){
+        editor.putString(KEY_USER_TOKEN, token);
+        editor.commit();
+    }
+
+    public String getUserToken() {
+        return pref.getString(KEY_USER_TOKEN,"");
+    }
+
+    public void saveUserName(String name) {
+        editor.putString(KEY_USER_NAME,name);
+        editor.commit();
+    }
+
+    public String getUserName() {
+        return pref.getString(KEY_USER_NAME,"");
+    }
+
+    public void saveUserEmail(String mail) {
+        editor.putString(KEY_USER_MAIL,mail);
+        editor.commit();
+    }
+
+    public String getUserMail() {
+        return pref.getString(KEY_USER_MAIL,"");
+    }
+
+    public void saveUserUniqueId(String uniqueId) {
+        editor.putString(KEY_USER_UNIQUE_ID,uniqueId);
+        editor.commit();
+    }
+
+    public String getUserUniqueId() {
+        return pref.getString(KEY_USER_UNIQUE_ID,"");
+    }
+
+    public void saveCartId(String mail) {
+        editor.putString(KEY_USER_CART_ID,mail);
+        editor.commit();
+    }
+
+    public String getCartId() {
+        return pref.getString(KEY_USER_CART_ID,"");
+    }
+
 }

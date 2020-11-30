@@ -34,14 +34,14 @@ import in.ateesinfomedia.relief.interfaces.NetworkCallback;
 import in.ateesinfomedia.relief.managers.MyPreferenceManager;
 import in.ateesinfomedia.relief.managers.NetworkManager;
 import in.ateesinfomedia.relief.models.NotificationModel;
+import in.ateesinfomedia.relief.view.fragment.AddAddressFragment;
 import in.ateesinfomedia.relief.view.fragment.HomeFragment;
 import in.ateesinfomedia.relief.view.fragment.MoreFragment;
-import in.ateesinfomedia.relief.view.fragment.OfferFragment;
 import in.ateesinfomedia.relief.view.fragment.ProfileFragment;
 
 import static in.ateesinfomedia.relief.configurations.Global.COUNT;
 
-public class MainActivity extends AppCompatActivity implements NetworkCallback {
+public class MainActivity extends AppCompatActivity implements NetworkCallback, AddAddressFragment.OnAddAddressListener {
 
     private Toolbar toolbar;
     private AHBottomNavigation bottomNavigation;
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
     private MenuItem mMenu;
     private MenuItem mMenu1;
     private Menu menu;
+    private ProfileFragment profileFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,37 +94,21 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.cart_menu,menu);
-//        return super.onCreateOptionsMenu(menu);
-
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.cart_menu, menu);
         this.menu = menu;
         this.mMenu = menu.findItem(R.id.action_addcart);
         this.mMenu1 = menu.findItem(R.id.action_notification);
 
         if (manager.getCartCount() == 0){
-            ActionItemBadge.hide(menu.findItem(R.id.action_addcart));
+            //ActionItemBadge.hide(menu.findItem(R.id.action_addcart));
         } else {
-            ActionItemBadge.update(this, menu.findItem(R.id.action_addcart), FontAwesome.Icon.faw_cart_arrow_down, ActionItemBadge.BadgeStyles.RED, manager.getCartCount());
+            //ActionItemBadge.update(this, menu.findItem(R.id.action_addcart), FontAwesome.Icon.faw_cart_arrow_down, ActionItemBadge.BadgeStyles.RED, manager.getCartCount());
         }
-//        ActionItemBadge.hide(menu.findItem(R.id.action_addcart));
         if (COUNT.equals("0") || COUNT.isEmpty()){
-            ActionItemBadge.hide(menu.findItem(R.id.action_notification));
+            //ActionItemBadge.hide(menu.findItem(R.id.action_notification));
         } else {
-            ActionItemBadge.update(this, menu.findItem(R.id.action_notification), FontAwesome.Icon.faw_bell2, ActionItemBadge.BadgeStyles.RED, Integer.valueOf(COUNT));
+            //ActionItemBadge.update(this, menu.findItem(R.id.action_notification), FontAwesome.Icon.faw_bell2, ActionItemBadge.BadgeStyles.RED, Integer.valueOf(COUNT));
         }
-
-//        if (manager.isLogin()){
-//            if (manager.getCartCount()> 0) {
-//                ActionItemBadge.update(this, menu.findItem(R.id.action_addcart), FontAwesome.Icon.faw_cart_arrow_down, ActionItemBadge.BadgeStyles.GREY, manager.getCartCount());
-//            } else {
-//                ActionItemBadge.hide(menu.findItem(R.id.action_addcart));
-//            }
-//
-//        } else {
-//            ActionItemBadge.hide(menu.findItem(R.id.action_addcart));
-//        }
 
         return super.onCreateOptionsMenu(menu);
 
@@ -141,9 +126,7 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
                 return true;
             case R.id.action_notification:
 
-                getNotifications();
-//                Intent intent1 = new Intent(MainActivity.this,NotificationActivity.class);
-//                startActivity(intent1);
+                //getNotifications();
 
                 return true;
             default:
@@ -223,7 +206,8 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
                     setTitle("Upload");
                     isBack = false;
                 } */else if (position == 1){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, ProfileFragment.getInstance()).commit();
+                    profileFrag = ProfileFragment.getInstance();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, profileFrag).commit();
                     setTitle("Profile");
                     isBack = false;
                 } else if (position == 2){
@@ -261,7 +245,8 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
             isBack = false;
             bottomNavigation.setCurrentItem(1);
         }*/ else if (i == 1) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame,ProfileFragment.getInstance(),"PROFILE_FRAGMENT").commit();
+            profileFrag = ProfileFragment.getInstance();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame,profileFrag,"PROFILE_FRAGMENT").commit();
             setTitle("Profile");
             isBack = false;
             bottomNavigation.setCurrentItem(1);
@@ -316,6 +301,23 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
 //        }
     }
 
+    public void updateCartCount() {
+        if (mMenu != null) {
+            if (manager.getCartCount()> 0) {
+                ActionItemBadge.update(this, mMenu, FontAwesome.Icon.faw_cart_arrow_down, ActionItemBadge.BadgeStyles.RED, manager.getCartCount());
+            } else {
+                ActionItemBadge.hide(mMenu);
+            }
+        }
+
+        /*if (COUNT.isEmpty() || COUNT.equals("null") || COUNT.equals("0")){
+            //ActionItemBadge.hide(mMenu1);
+        } else {
+            ActionItemBadge.update(this, mMenu1, FontAwesome.Icon.faw_bell2, ActionItemBadge.BadgeStyles.RED, Integer.valueOf(COUNT));
+        }*/
+
+    }
+
     private void processJsonNotification(String response) {
         try {
             JSONObject jsonObject = new JSONObject(response);
@@ -356,4 +358,8 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
     }
 
 
+    @Override
+    public void newAddress() {
+        profileFrag.newAddressFromActivity();
+    }
 }

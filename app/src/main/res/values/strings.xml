@@ -6,18 +6,23 @@
     <string name="more">More</string>
     <string name="slide_one">EXPRESS DELIVERY\nAT YOUR DOORSTEP</string>
     <string name="skip">Skip</string>
+    <string name="hint_enter_email">Type Your Email Address</string>
     <string name="hint_enter_number">Type Your Mobile Number</string>
     <string name="hint_enter_password">Type Your Password</string>
     <string name="terms_and_conditions">Terms And Conditions</string>
     <string name="hint_email">Your Email Address</string>
     <string name="hint_add_password">Set Password</string>
     <string name="hint_name">Full Name</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
     <string name="hint_enter_mobile_number">Mobile Number (for order updates)</string>
     <string name="referAndEarn">Hi, \n  Refer to your family and friends, \n  and welcome them to the world of remedio. </string>
     <string name="hint_add_otp">OTP</string>
     <string name="hint_enter_Referal_id">Enter the Referal ID</string>
     <string name="hint_mobile_number">Enter your mobile number</string>
     <string name="cart_empty">You don\'t have any items\nright now</string>
+    <string name="address_empty">Add a delivery address \nto proceed</string>
+    <string name="order_list_empty">You don\'t have any orders\nright now</string>
     <string name="no_products">Products will be\ncoming soon</string>
     <string name="surgical_products">Surgical products will be\ncoming soon</string>
     <string name="close">CLOSE</string>
@@ -65,5 +70,10 @@
     <string name="opticals">Opticals</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="login">Login</string>
+    <string name="surgicals">Surgicals</string>
+    <string name="relief_juniors_0_6_years">Relief Juniors\n0–6 years</string>
+    <string name="address_cart">ADDRESS</string>
+    <string name="change_cart">CHANGE</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

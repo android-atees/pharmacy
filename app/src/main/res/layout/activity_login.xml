@@ -36,7 +36,7 @@
             android:layout_marginStart="@dimen/margin_32"
             android:layout_marginTop="@dimen/margin_8"
             android:layout_marginEnd="@dimen/margin_32"
-            android:hint="@string/hint_enter_number"
+            android:hint="@string/hint_enter_email"
             android:textColorHint="@color/hintTextColor">
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -44,10 +44,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/edt_bg_selector"
-                android:drawableStart="@drawable/ic_phone"
+                android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="@dimen/margin_16"
                 android:imeOptions="actionDone"
-                android:inputType="phone"
+                android:inputType="textEmailAddress"
                 android:paddingTop="@dimen/margin_10"
                 android:paddingBottom="@dimen/margin_10"
                 android:textSize="16sp" />

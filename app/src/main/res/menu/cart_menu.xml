@@ -12,13 +12,13 @@
         android:id="@+id/action_notification"
         android:icon="@drawable/ic_notification"
         android:title="Add Cart"
-        app:showAsAction="always"/>
+        android:visible="false"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_addcart"
-        android:icon="@drawable/ic_cart"
+        android:icon="@drawable/ic_new_cart"
         android:title="Add Cart"
-        android:visible="false"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
 
 </menu>

@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,12 +24,17 @@ import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import in.ateesinfomedia.relief.R;
@@ -36,9 +44,14 @@ import in.ateesinfomedia.relief.interfaces.NetworkCallback;
 import in.ateesinfomedia.relief.configurations.Apis;
 import in.ateesinfomedia.relief.managers.MyPreferenceManager;
 import in.ateesinfomedia.relief.managers.NetworkManager;
+import in.ateesinfomedia.relief.models.CategoryModel;
+import in.ateesinfomedia.relief.models.login.CustomerData;
+import in.ateesinfomedia.relief.models.login.LoginModel;
+import in.ateesinfomedia.relief.models.state.AddAddressResponse;
 
 import static in.ateesinfomedia.relief.components.ConnectivityReceiver.isConnected;
 import static in.ateesinfomedia.relief.configurations.Global.COUNT;
+import static in.ateesinfomedia.relief.configurations.Global.CategoryList;
 import static in.ateesinfomedia.relief.configurations.Global.dialogWarning;
 
 public class LoginActivity extends AppCompatActivity implements NetworkCallback {
@@ -73,6 +86,11 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
     private String number = "";
     private boolean isShow;
     private int REQUEST_CART_COUNT_ID = 8976;
+    private int REQUEST_CATEGORY = 9825;
+    private List<CategoryModel> mCateList = new ArrayList<>();
+    private static final String TAG = LoginActivity.class.getName();
+    Gson gson = new Gson();
+    private int REQUEST_FORGOT_PASSWORD_NEW = 1289;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +134,8 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
         mTvForgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogEditEduQua(LoginActivity.this,"forgot");
+                //Toast.makeText(LoginActivity.this, "Adding Soon...", Toast.LENGTH_SHORT).show();
+                dialogForgotPass(LoginActivity.this,"forgot");
             }
         });
 
@@ -154,6 +173,68 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
                 loadRegister();
             }
         });*/
+    }
+
+    private void dialogForgotPass(final Context context, final String type) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        LayoutInflater layoutInflater = (LayoutInflater) this.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.dialog_layout_forgot_pass, null);
+
+        final EditText number = view.findViewById(R.id.forgot_pass_email);
+
+        Button submitEmail = view.findViewById(R.id.submitEmail);
+
+        TextInputLayout emailMainLayout = view.findViewById(R.id.input_layout_email);
+
+        builder.setView(view);
+
+        submitEmail.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                emailMainLayout.setError(null);
+                if (!isConnected()) {
+                    Toast.makeText(LoginActivity.this, "Sorry, No internet connection", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    String fEmail = number.getText().toString();
+                    if (fEmail.equals(null) || fEmail.equals("") || !isValidEmail(fEmail)) {
+                        emailMainLayout.setError("Enter valid email");
+                    } else {
+
+                        JSONObject map = new JSONObject();
+                        try {
+                            map.put("email",fEmail);
+                            map.put("template","email_reset");
+                            Log.d("doJSON Request",map.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        new NetworkManager(LoginActivity.this).doPutCustom(
+                                Apis.API_PUT_FORGOT_PASSWORD,
+                                Object.class,
+                                map,
+                                Apis.ACCESS_TOKEN,
+                                "TAG_LOGIN",
+                                REQUEST_FORGOT_PASSWORD_NEW,
+                                LoginActivity.this
+                        );
+                        LoadingDialog.showLoadingDialog(LoginActivity.this,"Loading...");
+
+                    }
+
+                }
+            }
+
+            public boolean isValidEmail(String emailAddress) {
+                return !TextUtils.isEmpty(emailAddress) && android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches();
+            }
+        });
+
+        this.mADialogLog = builder.create();
+        this.mADialogLog.setCanceledOnTouchOutside(false);
+        this.mADialogLog.show();
     }
 
     private void dialogEditEduQua(final Context context, final String type) {
@@ -364,11 +445,12 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
             mFocusView = mETNumber;
         }
 
-        if (!isValidMobile(number)){
+        /*if (!isValidMobile(number)){
             isError = true;
-            mETNumber.setError("Enter valid number");
+            //mETNumber.setError("Enter valid number");
+            mETNumber.setError("Enter valid email");
             mFocusView = mETNumber;
-        }
+        }*/
 
         if (!isDataValid(pass)){
             isError = true;
@@ -380,13 +462,50 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
             mFocusView.requestFocus();
             return;
         }else {
-            Map<String,String> map = new HashMap<String,String>();
+            /*Map<String,String> map = new HashMap<String,String>();
             map.put("userMobile",number);
             map.put("passwords",pass);
-            new NetworkManager(this).doPost(map, Apis.API_POST_USER_LOGIN,"TAG_LOGIN",REQUEST_LOGIN,this);
+            new NetworkManager(this).doPost(map, Apis.API_POST_USER_LOGIN,"TAG_LOGIN",REQUEST_LOGIN,this);*/
 
+            JSONObject map = new JSONObject();
+            try {
+                map.put("username", number);
+                map.put("password", pass);
+                map.put("type", "email");
+                Log.d("doJSON Request",map.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            /*new NetworkManager(this).doJSONPost(
+                    map,
+                    Apis.API_POST_USER_LOGIN,
+                    "TAG_LOGIN",
+                    REQUEST_LOGIN,
+                    this
+            );*/
+            new NetworkManager(this).doPostCustom(
+                    Apis.API_POST_USER_LOGIN,
+                    /*String.class,*/
+                    LoginModel[].class,
+                    map,
+                    Apis.ACCESS_TOKEN,
+                    "TAG_LOGIN",
+                    REQUEST_LOGIN,
+                    this
+            );
             LoadingDialog.showLoadingDialog(this,"Loading...");
         }
+    }
+
+    private void getCategories() {
+        new NetworkManager(this).doGet(
+                null,
+                Apis.API_GET_CATEGORY,
+                Apis.ACCESS_TOKEN,
+                "TAG_CATEGORY",
+                REQUEST_CATEGORY,
+                this
+        );
     }
 
     /*private void doSubmitNumber(String number) {
@@ -455,6 +574,10 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
                 ProcessJsonNotiCount(response);
             } else if (requestId == REQUEST_CART_COUNT_ID){
                 ProcessJsonCartCount(response);
+            } else if (requestId == REQUEST_CATEGORY) {
+                processJsonCategory(response);
+            } else if (requestId == REQUEST_FORGOT_PASSWORD_NEW) {
+                ProcessJsonPasswordForgot(response);
             }
 
         } else {
@@ -605,7 +728,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
         }
     }
 
-    private void ProcessJsonLogin(String response) {
+    /*private void ProcessJsonLogin(String response) {
         try {
             JSONObject jsonObject = new JSONObject(response);
             boolean error = jsonObject.optBoolean("error");
@@ -614,7 +737,6 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
                 String msg = jsonObject.optString("message");
                 dialogWarning(LoginActivity.this, msg);
             } else {
-//                LoadingDialog.cancelLoading();
                 manager.setLogIn(true);
                 JSONArray jsonArray = jsonObject.optJSONArray("data");
                 JSONObject jsonObject1 = jsonArray.optJSONObject(0);
@@ -634,6 +756,151 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
             LoadingDialog.cancelLoading();
             dialogWarning(LoginActivity.this, "Sorry ! Can't connect to server, try later");
         }
+    }*/
+
+    private void ProcessJsonLogin(String response) {
+        try {
+            if (response != null && !response.equals("null")) {
+                Type type = new TypeToken<ArrayList<LoginModel>>(){}.getType();
+                ArrayList<LoginModel> loginResponseList = gson.fromJson(response, type);
+                if (!loginResponseList.isEmpty()) {
+                    String message = loginResponseList.get(0).getMessage();
+                    if (!message.equals("success")) {
+                        LoadingDialog.cancelLoading();
+                        dialogWarning(LoginActivity.this, message);
+                    } else {
+                        String token = loginResponseList.get(0).getToken();
+                        CustomerData cData = loginResponseList.get(0).getCustomer_data();
+                        if (cData != null) {
+                            String mName = cData.getFirstname() + " " + cData.getLastname();
+                            String mId = cData.getId();
+                            String mEmail = cData.getEmail();
+
+                            manager.saveUserName(mName);
+                            manager.saveUserUniqueId(mId);
+                            manager.saveUserEmail(mEmail);
+                            manager.saveUserToken(token);
+                            manager.setLogIn(true);
+
+                            getCategories();
+
+                        } else {
+                            serverErrorDialog();
+                        }
+
+                        /*LoadingDialog.cancelLoading();
+
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("info","login");
+                        startActivity(intent);
+                        finish();*/
+                    }
+                } else {
+                    serverErrorDialog();
+                }
+            } else {
+                serverErrorDialog();
+            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+            try {
+                Type type = new TypeToken<ArrayList<AddAddressResponse>>(){}.getType();
+                ArrayList<AddAddressResponse> loginErrorResponseList = gson.fromJson(response, type);
+                if (loginErrorResponseList != null && !loginErrorResponseList.isEmpty()) {
+                    String message = loginErrorResponseList.get(0).getMessage();
+                    if (!message.equals("success")) {
+                        LoadingDialog.cancelLoading();
+                        dialogWarning(LoginActivity.this, message);
+                    } else {
+                        serverErrorDialog();
+                    }
+                } else {
+                    serverErrorDialog();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                serverErrorDialog();
+            }
+        }
+    }
+
+    private void processJsonCategory(String response) {
+        if(response == null){
+            Log.d(TAG, "processJson: Cant get Category");
+            dialogWarning(this, "Sorry ! Can't connect to server, try later");
+        } else {
+            try {
+                JSONObject jsonObject1 = new JSONObject(response);
+                JSONArray jsonArray1 = jsonObject1.optJSONArray("children_data");
+                JSONObject jsonObject2 = jsonArray1.optJSONObject(0);
+                JSONArray jsonArray2 = jsonObject2.optJSONArray("children_data");
+
+                mCateList.clear();
+
+                for (int i = 0;i<jsonArray2.length();i++){
+
+                    JSONObject jsonObject3 = jsonArray2.getJSONObject(i);
+
+                    CategoryModel categoryModel = new CategoryModel();
+                    categoryModel.setId(jsonObject3.optString("id"));
+                    categoryModel.setName(jsonObject3.optString("name"));
+
+                    mCateList.add(categoryModel);
+                }
+
+                CategoryList = mCateList;
+
+                LoadingDialog.cancelLoading();
+
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("info","login");
+                startActivity(intent);
+                finish();
+            } catch (JSONException e) {
+                e.printStackTrace();
+                dialogWarning(this, "Sorry ! Can't connect to server, try later");
+            }
+        }
+    }
+
+    private void ProcessJsonPasswordForgot(String response) {
+        Log.d(TAG, response);
+        try {
+            boolean passBool = Boolean.parseBoolean(response);
+            if (passBool) {
+                LoadingDialog.cancelLoading();
+                Toast.makeText(this, "Email successfully sent", Toast.LENGTH_SHORT).show();
+            } else {
+                String message = "Oops no user was found associated with this email";
+                LoadingDialog.cancelLoading();
+                dialogWarning(this, message);
+                /*Type type = new TypeToken<AddAddressResponse>(){}.getType();
+                AddAddressResponse errorMessage = gson.fromJson(response, type);
+                if (errorMessage != null) {
+                    String message = errorMessage.getMessage();
+                    LoadingDialog.cancelLoading();
+                    dialogWarning(this, message);
+                } else {
+                    serverErrorDialog();
+                }*/
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Type type = new TypeToken<AddAddressResponse>(){}.getType();
+            AddAddressResponse errorMessage = gson.fromJson(response, type);
+            if (errorMessage != null) {
+                String message = errorMessage.getMessage();
+                LoadingDialog.cancelLoading();
+                dialogWarning(this, message);
+            } else {
+                serverErrorDialog();
+            }
+        }
+    }
+
+    private void serverErrorDialog() {
+        LoadingDialog.cancelLoading();
+        dialogWarning(LoginActivity.this, "Sorry ! Can't connect to server, try later");
     }
 
     private void doUpdateFcm() {

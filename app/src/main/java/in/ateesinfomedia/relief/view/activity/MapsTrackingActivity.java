@@ -214,13 +214,13 @@ public class MapsTrackingActivity extends FragmentActivity implements OnMapReady
 //                    }
 //                }, 4000);
                 if (vehicleMarker == null) {
-                    vehicleMarker = mMap.addMarker(new MarkerOptions()
+                    /*vehicleMarker = mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(locationArray.get(0).getLati(), locationArray.get(0).getLongi()))
                             .anchor(0.5f, 0.5f)
                             .draggable(false)
                             .visible(true)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_icon_blue)));
-                    pulseMarker(markerIcon, vehicleMarker, 1000);
+                    pulseMarker(markerIcon, vehicleMarker, 1000);*/
 //                    changePositionSmoothly(vehicleMarker,new LatLng(locationArray.get(0).getLati(), locationArray.get(0).getLongi()));
 //                    mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(locationArray.get(0).getLati(), locationArray.get(0).getLongi())));
                 } else {
@@ -252,7 +252,7 @@ public class MapsTrackingActivity extends FragmentActivity implements OnMapReady
         }
     }
 
-    public void OverLay(final GroundOverlay groundOverlay){
+    /*public void OverLay(final GroundOverlay groundOverlay){
         vAnimator = ValueAnimator.ofInt(0, 2000);
         int r = 99999;
         vAnimator.setRepeatCount(r);
@@ -269,9 +269,9 @@ public class MapsTrackingActivity extends FragmentActivity implements OnMapReady
             }
         });
         vAnimator.start();
-    }
+    }*/
 
-    public void changePositionSmoothly(Marker marker, LatLng newLatLng) {
+    /*public void changePositionSmoothly(Marker marker, LatLng newLatLng) {
         if (marker == null) {
             return;
         }
@@ -286,7 +286,7 @@ public class MapsTrackingActivity extends FragmentActivity implements OnMapReady
             marker.setPosition(new LatLng(marker.getPosition().latitude + deltaLatitude * deltaStep * 1 / 100, marker.getPosition().latitude + deltaStep * deltaLongitude * 1 / 100));
         });
         animation.start();
-    }
+    }*/
 
     private void processPrescriptionTracking(String response) {
     }
@@ -295,7 +295,7 @@ public class MapsTrackingActivity extends FragmentActivity implements OnMapReady
     public void onJsonResponse(int status, String response, int requestId) {
     }
 
-    private void pulseMarker(final Bitmap markerIcon, final Marker marker, final long onePulseDuration) {
+    /*private void pulseMarker(final Bitmap markerIcon, final Marker marker, final long onePulseDuration) {
         final Handler handler = new Handler();
         final long startTime = System.currentTimeMillis();
 
@@ -309,7 +309,7 @@ public class MapsTrackingActivity extends FragmentActivity implements OnMapReady
                 handler.postDelayed(this, 16);
             }
         });
-    }
+    }*/
 
     public Bitmap scaleBitmap(Bitmap bitmap, float scaleFactor) {
         final int sizeX = Math.round(bitmap.getWidth() * scaleFactor);
@@ -368,8 +368,8 @@ public class MapsTrackingActivity extends FragmentActivity implements OnMapReady
 //        LatLng ny = new LatLng(40.7143528, -74.0059731);
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(ny));
         LatLng destination = new LatLng(Double.valueOf(lat), Double.valueOf(longi));
-        mMap.addMarker(new MarkerOptions().position(destination).title("Delivery Location").draggable(false));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(destination));
+        //mMap.addMarker(new MarkerOptions().position(destination).title("Delivery Location").draggable(false));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(destination));
     }
 
     private interface LatLngInterpolatorNew {
@@ -406,7 +406,7 @@ public class MapsTrackingActivity extends FragmentActivity implements OnMapReady
         return -1;
     }
 
-    protected Marker createMarker(double latitude, double longitude, String title, String snippet, int iconResID) {
+    /*protected Marker createMarker(double latitude, double longitude, String title, String snippet, int iconResID) {
         return mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .anchor(0.5f, 0.5f)
@@ -415,9 +415,9 @@ public class MapsTrackingActivity extends FragmentActivity implements OnMapReady
                 .draggable(false)
                 .visible(true)
                 .icon(BitmapDescriptorFactory.fromResource(iconResID)));
-    }
+    }*/
 
-    private void animateMarkerNew(final LatLng startPosition, final LatLng destination, final Marker marker) {
+    /*private void animateMarkerNew(final LatLng startPosition, final LatLng destination, final Marker marker) {
         if (marker != null) {
             final LatLng endPosition = new LatLng(destination.latitude, destination.longitude);
             final float startRotation = marker.getRotation();
@@ -466,5 +466,5 @@ public class MapsTrackingActivity extends FragmentActivity implements OnMapReady
             });
             valueAnimator.start();
         }
-    }
+    }*/
 }

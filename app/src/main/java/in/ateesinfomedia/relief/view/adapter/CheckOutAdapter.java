@@ -11,14 +11,14 @@ import android.widget.TextView;
 import java.util.List;
 
 import in.ateesinfomedia.relief.R;
-import in.ateesinfomedia.relief.models.CartModel;
+import in.ateesinfomedia.relief.models.CartsModel;
 
 public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.MyViewHolder> {
 
     private final Context mContext;
-    private final List<CartModel> mCartList;
+    private final List<CartsModel> mCartList;
 
-    public CheckOutAdapter(Context context, List<CartModel> cartList) {
+    public CheckOutAdapter(Context context, List<CartsModel> cartList) {
         this.mContext = context;
         this.mCartList = cartList;
     }

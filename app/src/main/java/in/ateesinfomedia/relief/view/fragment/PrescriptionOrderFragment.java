@@ -341,6 +341,11 @@ public class PrescriptionOrderFragment extends Fragment implements NetworkCallba
         }
     }
 
+    @Override
+    public void buttonClicked(int position, Object object) {
+        //
+    }
+
     private void getOrderDetails(String pres_id) {
         Map<String,String> map = new HashMap<>();
         map.put("user_id",manager.getdelicioId());

@@ -13,15 +13,21 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,11 +41,17 @@ import in.ateesinfomedia.relief.interfaces.NetworkCallback;
 import in.ateesinfomedia.relief.managers.MyPreferenceManager;
 import in.ateesinfomedia.relief.managers.NetworkManager;
 import in.ateesinfomedia.relief.managers.PermissionManager;
+import in.ateesinfomedia.relief.models.cart.CartCountResponse;
+import in.ateesinfomedia.relief.models.state.AddAddressResponse;
 import in.ateesinfomedia.relief.view.activity.LoginActivity;
 import in.ateesinfomedia.relief.view.activity.MainActivity;
 import in.ateesinfomedia.relief.view.activity.OrderActivity;
+import in.ateesinfomedia.relief.view.activity.OrderListActivity;
 import in.ateesinfomedia.relief.view.activity.UploadPresActivity;
 import in.ateesinfomedia.relief.view.adapter.MoreMenusAdapter;
+
+import static in.ateesinfomedia.relief.configurations.Apis.API_GET_USER_LOGOUT;
+import static in.ateesinfomedia.relief.configurations.Global.dialogWarning;
 
 public class MoreFragment extends Fragment implements AdapterClickListner, NetworkCallback, PermissionManager.PermissionCallback {
 
@@ -51,6 +63,7 @@ public class MoreFragment extends Fragment implements AdapterClickListner, Netwo
     private int REQUEST_LOGOUT_ID = 9823;
     private TextView mTvVersion;
     private PermissionManager mPermissionManager;
+    Gson gson = new Gson();
 //    private String[] permissions = new String[]{Manifest.permission.CALL_PHONE};
 
     public static MoreFragment getInstance() {
@@ -104,7 +117,8 @@ public class MoreFragment extends Fragment implements AdapterClickListner, Netwo
                 startActivity(uploadIntent);
                 break;
             case 3:
-                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                //Intent intent = new Intent(getActivity(), OrderActivity.class);
+                Intent intent = new Intent(getActivity(), OrderListActivity.class);
                 startActivity(intent);
                 break;
             case 4:
@@ -127,6 +141,7 @@ public class MoreFragment extends Fragment implements AdapterClickListner, Netwo
 //                    mPermissionManager.makePermissionRequest(this);
 //                }
                 doLogout();
+                //logout();
                 break;
             case 7:
                 //doRating();
@@ -137,12 +152,36 @@ public class MoreFragment extends Fragment implements AdapterClickListner, Netwo
         }
     }
 
-    private void doLogout() {
+    @Override
+    public void buttonClicked(int position, Object object) {
+        //
+    }
+
+    /*private void doLogout() {
         Map<String,String> map = new HashMap<>();
         map.put("user_id",manager.getdelicioId());
         map.put("device_id",getDeviceId(getActivity()));
 
         new NetworkManager(getActivity()).doPost(map, Apis.API_POST_LOGOUT,"REQUEST_LOGOUT",REQUEST_LOGOUT_ID,this);
+        LoadingDialog.showLoadingDialog(getActivity(),"Loading...");
+    }*/
+
+    private void doLogout() {
+
+        String userId = manager.getUserUniqueId();
+        String getUrl = API_GET_USER_LOGOUT + userId;
+
+        new NetworkManager(getActivity()).doGetCustom(
+                null,
+                getUrl,
+                Object.class,
+                null,
+                Apis.ACCESS_TOKEN,
+                "REQUEST_LOGOUT",
+                REQUEST_LOGOUT_ID,
+                this
+        );
+
         LoadingDialog.showLoadingDialog(getActivity(),"Loading...");
     }
 
@@ -196,7 +235,7 @@ public class MoreFragment extends Fragment implements AdapterClickListner, Netwo
         alertDialog.show();
     }
 
-    private void logout(){
+    private void logout() {
 
         String fcmID = manager.getUserNotificationTocken();
         manager.setLogOut();
@@ -223,6 +262,45 @@ public class MoreFragment extends Fragment implements AdapterClickListner, Netwo
     }
 
     private void ProcessJsonLogout(String response) {
+        Log.d("Logout", response);
+        try {
+            boolean passBool = Boolean.parseBoolean(response);
+            if (passBool) {
+                LoadingDialog.cancelLoading();
+                logout();
+                Toast.makeText(requireContext(), "Successfully Logged out", Toast.LENGTH_SHORT).show();
+            } else {
+                Type type = new TypeToken<AddAddressResponse>(){}.getType();
+                AddAddressResponse errorMessage = gson.fromJson(response, type);
+                if (errorMessage != null) {
+                    String message = errorMessage.getMessage();
+                    LoadingDialog.cancelLoading();
+                    dialogWarning(requireContext(), message);
+                } else {
+                    serverErrorDialog();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            LoadingDialog.cancelLoading();
+            Type type = new TypeToken<AddAddressResponse>(){}.getType();
+            AddAddressResponse errorMessage = gson.fromJson(response, type);
+            if (errorMessage != null) {
+                String message = errorMessage.getMessage();
+                LoadingDialog.cancelLoading();
+                dialogWarning(requireContext(), message);
+            } else {
+                serverErrorDialog();
+            }
+        }
+    }
+
+    private void serverErrorDialog() {
+        LoadingDialog.cancelLoading();
+        dialogWarning(requireContext(), "Sorry ! Can't connect to server, try later");
+    }
+
+    /*private void ProcessJsonLogout(String response) {
         try {
             JSONObject jsonObject = new JSONObject(response);
             boolean error = jsonObject.optBoolean("error");
@@ -238,7 +316,7 @@ public class MoreFragment extends Fragment implements AdapterClickListner, Netwo
             e.printStackTrace();
             LoadingDialog.cancelLoading();
         }
-    }
+    }*/
 
     @Override
     public void onJsonResponse(int status, String response, int requestId) {

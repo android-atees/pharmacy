@@ -2,44 +2,39 @@ package in.ateesinfomedia.relief.view.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.PlaceBuffer;
-import com.google.android.gms.location.places.Places;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,23 +42,31 @@ import java.util.regex.Pattern;
 import in.ateesinfomedia.relief.R;
 import in.ateesinfomedia.relief.components.LoadingDialog;
 import in.ateesinfomedia.relief.components.PlaceArrayAdapter;
-//import in.ateesinfomedia.remedio.components.SmsReceiver;
 import in.ateesinfomedia.relief.configurations.Apis;
 import in.ateesinfomedia.relief.interfaces.NetworkCallback;
 import in.ateesinfomedia.relief.managers.MyPreferenceManager;
 import in.ateesinfomedia.relief.managers.NetworkManager;
 import in.ateesinfomedia.relief.models.DeliveryAddressModel;
+import in.ateesinfomedia.relief.models.login.CustomAttributes;
+import in.ateesinfomedia.relief.models.login.CustomerAddress;
+import in.ateesinfomedia.relief.models.login.CustomerData;
+import in.ateesinfomedia.relief.models.state.StateModel;
 
 import static in.ateesinfomedia.relief.components.ConnectivityReceiver.isConnected;
+import static in.ateesinfomedia.relief.configurations.Global.AddressStateList;
+import static in.ateesinfomedia.relief.configurations.Global.CustomerAddressModel;
 import static in.ateesinfomedia.relief.configurations.Global.dialogWarning;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener, NetworkCallback,GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks {
+//import in.ateesinfomedia.remedio.components.SmsReceiver;
+
+public class ProfileFragment extends Fragment implements View.OnClickListener, NetworkCallback/*,
+        GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.ConnectionCallbacks*/ {
 
     private static final String LOG_TAG = "ProfileFragment";
-    private static final int GOOGLE_API_CLIENT_ID = 0;
+    //private static final int GOOGLE_API_CLIENT_ID = 0;
     private View mView;
-    private GoogleApiClient mGoogleApiClient;
+    //private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private FloatingActionButton mFabChangePass,mFabChangeMob;
     private int REQUEST_PROFILE_EDIT = 8909;
@@ -74,7 +77,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
     private AlertDialog mADialogLog;
     private ImageView mImEditPro;
     private int TAG_GET_PROFILE_ID = 7865;
-    private String namee,emaill,phonee;
+    private String namee,emaill,phonee = "";
     private RelativeLayout mAddDelivery;
     private TextView mTvUserMail;
     private TextView mTvUserName;
@@ -86,10 +89,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
     private TextView numberr;
     private TextView address;
     private TextView mNamee;
+    private LinearLayout mUserPhoneMainLayout;
     private int REQUEST_ADD_DELIVERY_ADDRESS_ID = 8888;
     private String phone,alt_phone,pincod,stat,cit,addres,nameee;
-    private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
-            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
+    /*private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
+            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));*/
 
     private Button getOtp;
     private EditText otp;
@@ -106,6 +110,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
     private EditText etpincode;
     String mLat,mLong;
     private AutoCompleteTextView autoCompleteTextView;
+    private int REQUEST_GET_CUSTOMER_DETAIL = 8808;
+    private Gson gson = new Gson();
+    private static final String TAG = ProfileFragment.class.getName();
+    private int REQUEST_ADDRESS_STATE_LIST = 8068;
+    private List<StateModel> stateList = new ArrayList<>();
+    private boolean add = true;
 
     public static ProfileFragment getInstance() {
         ProfileFragment profileFragment = new ProfileFragment();
@@ -119,14 +129,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
         super.onCreateView(inflater, container, savedInstanceState);
         mView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+        /*mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(getActivity(), GOOGLE_API_CLIENT_ID, this)
                 .addConnectionCallbacks(this)
-                .build();
+                .build();*/
 
-        mPlaceArrayAdapter = new PlaceArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,
-                BOUNDS_MOUNTAIN_VIEW, null);
+        /*mPlaceArrayAdapter = new PlaceArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,
+                BOUNDS_MOUNTAIN_VIEW, null);*/
 
         manager = new MyPreferenceManager(getActivity());
         mFabMenu = (FloatingActionsMenu) mView.findViewById(R.id.right_labels);
@@ -136,6 +146,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
         mTvUserName = (TextView) mView.findViewById(R.id.userName);
         mTvUserNumber = (TextView) mView.findViewById(R.id.userNumber);
         mTvUserMail = (TextView) mView.findViewById(R.id.userMail);
+        mUserPhoneMainLayout = (LinearLayout) mView.findViewById(R.id.userNumberMainLayout);
 
         mNamee = (TextView) mView.findViewById(R.id.namee);
         address = (TextView) mView.findViewById(R.id.address);
@@ -153,30 +164,39 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
         mImEditPro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogEditEduQua(getActivity());
+                Toast.makeText(getActivity(), "Adding Soon...", Toast.LENGTH_SHORT).show();
+                //dialogEditEduQua(getActivity());
             }
         });
 
         mAddDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddAddressDailog(getActivity(),"add");
+                add = true;
+                getStateList();
+                //Toast.makeText(getActivity(), "Adding Soon...", Toast.LENGTH_SHORT).show();
+                //showAddAddressDailog(getActivity(),"add");
             }
         });
 
         cardEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddAddressDailog(getActivity(),"edit");
+                add = false;
+                getStateList();
+                //Toast.makeText(getActivity(), "Adding Soon...", Toast.LENGTH_SHORT).show();
+                //showAddAddressDailog(getActivity(),"edit");
             }
         });
 
-        getProfileData();
+        //getProfileData();
+
+        getCustomerDetail();
 
         return mView;
     }
 
-    private final AdapterView.OnItemClickListener mAutocompleteClickListener
+    /*private final AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -188,9 +208,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
             placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
             Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
         }
-    };
+    };*/
 
-    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
+    /*private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
             = new ResultCallback<PlaceBuffer>() {
         @Override
         public void onResult(PlaceBuffer places) {
@@ -226,9 +246,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
 //                mAttTextView.setText(Html.fromHtml(attributions.toString()));
 //            }
         }
-    };
+    };*/
 
-    private void showAddAddressDailog(final Context context,String type) {
+    /*private void showAddAddressDailog(final Context context,String type) {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -280,7 +300,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
 
         btnSave.setOnClickListener(new View.OnClickListener() {
 
-            /*          * Enabled aggressive block sorting*/
+            *//*          * Enabled aggressive block sorting*//*
 
             public void onClick(View view) {
                 if (!isConnected()) {
@@ -391,6 +411,44 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
         this.mADialogLog = builder.create();
         this.mADialogLog.setCanceledOnTouchOutside(false);
         this.mADialogLog.show();
+    }*/
+
+    private void getCustomerDetail() {
+        try {
+            String token =manager.getUserToken();
+
+            new NetworkManager(requireContext()).doGetCustom(
+                    null,
+                    Apis.API_GET_CUSTOMER_DETAIL,
+                    CustomerData.class,
+                    null,
+                    token,
+                    "REQUEST_GET_CUSTOMER_DETAIL",
+                    REQUEST_GET_CUSTOMER_DETAIL,
+                    this
+            );
+
+            LoadingDialog.showLoadingDialog(requireContext(),"Loading...");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getStateList() {
+        String token = manager.getUserToken();
+        String getUrl = Apis.API_GET_STATE_LIST + "IN";
+        new NetworkManager(requireContext()).doGetCustom(
+                null,
+                getUrl,
+                StateModel[].class,
+                null,
+                token,
+                "REQUEST_ADDRESS_STATE_LIST",
+                REQUEST_ADDRESS_STATE_LIST,
+                this
+        );
+        LoadingDialog.showLoadingDialog(requireContext(),"Loading....");
     }
 
     private void getProfileData() {
@@ -405,14 +463,26 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.fab_change_mob:
-                dialogEditEduQua(getActivity(),"number change");
-//                Toast.makeText(getActivity(), "number changed", Toast.LENGTH_SHORT).show();
+                //dialogEditEduQua(getActivity(),"number change");
+                Toast.makeText(getActivity(), "Adding Soon...", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.fab_change_pass:
-//                Toast.makeText(getActivity(), "password changed", Toast.LENGTH_SHORT).show();
-                dialogEditEduQua(getActivity(),"forgot");
+                openChangePassDialog();
+                //Toast.makeText(getActivity(), "Adding Soon.", Toast.LENGTH_SHORT).show();
+                //dialogEditEduQua(getActivity(),"forgot");
                 break;
         }
+    }
+
+    private void openChangePassDialog() {
+
+        ChangePasswordFragment dialog = new ChangePasswordFragment();
+        if (getFragmentManager() != null) {
+            dialog.show(getFragmentManager(), "ChangePasswordDialog");
+        } else {
+            Toast.makeText(getContext(), "Change Password not available now", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void dialogEditEduQua(final Context context, final String type) {
@@ -933,12 +1003,109 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
                 processNumChange(response);
             } else if (requestId == REQUEST_NUMBER_RESEND_OTP){
                 processNumResendOtp(response);
+            } else if (requestId == REQUEST_GET_CUSTOMER_DETAIL){
+                processCustomerDetail(response);
+            } else if (requestId == REQUEST_ADDRESS_STATE_LIST){
+                processJsonStateList(response);
             }
         } else {
             LoadingDialog.cancelLoading();
             Toast.makeText(getActivity(), "Couldn't load data. The network got interrupted", Toast.LENGTH_LONG).show();
 
         }
+    }
+
+    private void processCustomerDetail(String response) {
+        Log.d(TAG, response);
+        try {
+            Type type = new TypeToken<CustomerData>(){}.getType();
+            CustomerData customerData = gson.fromJson(response, type);
+            LoadingDialog.cancelLoading();
+
+            namee = customerData.getFirstname() + " " + customerData.getLastname();
+            emaill = customerData.getEmail();
+
+            mTvUserName.setText(namee);
+            mTvUserMail.setText(emaill);
+            mUserPhoneMainLayout.setVisibility(View.GONE);
+
+            if (customerData.getCustom_attributes() != null && !customerData.getCustom_attributes().isEmpty()) {
+                ArrayList<CustomAttributes> customAttributesArrayList = customerData.getCustom_attributes();
+                for (int index = 0; index < customAttributesArrayList.size(); index ++) {
+                    if (customAttributesArrayList.get(index).getValue() != null
+                            && customAttributesArrayList.get(index).getAttribute_code().equals("mobile_number")) {
+                        phonee = customAttributesArrayList.get(index).getValue();
+                        mTvUserNumber.setText(phonee);
+                        mUserPhoneMainLayout.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            ArrayList<CustomerAddress> customerAddressArrayList = customerData.getAddresses();
+
+            if (customerAddressArrayList != null && !customerAddressArrayList.isEmpty()) {
+
+                CustomerAddress customerAddress = customerAddressArrayList.get(0);
+                CustomerAddressModel = customerAddress;
+
+                cardAddress.setVisibility(View.VISIBLE);
+                mAddDelivery.setVisibility(View.GONE);
+                cardEdit.setVisibility(View.VISIBLE);
+
+                StringBuilder aCustomerName = new StringBuilder();
+                aCustomerName.append(customerAddress.getFirstname()).append(" ").append(customerAddress.getLastname());
+
+                StringBuilder street = new StringBuilder();
+                for (int i = 0; i < customerAddress.getStreet().size(); i++) {
+                    street.append(customerAddress.getStreet().get(i)).append(", ");
+                }
+                street.append(customerAddress.getCity()).append(", ");
+
+                mNamee.setText(aCustomerName);
+                address.setText(street);
+                numberr.setText(customerAddress.getTelephone());
+            }
+        } catch (Exception e) {
+            Log.e("??ERROR",""+e);
+            e.printStackTrace();
+            LoadingDialog.cancelLoading();
+            dialogWarning(getActivity(), "Sorry ! Can't connect to server, try later");
+        }
+    }
+
+    private void processJsonStateList(String response) {
+        //Log.d(TAG, response);
+        stateList.clear();
+        try {
+            Type type = new TypeToken<ArrayList<StateModel>>(){}.getType();
+            ArrayList<StateModel> mStateList = gson.fromJson(response, type);
+            LoadingDialog.cancelLoading();
+
+            if (mStateList != null && !mStateList.isEmpty()) {
+                stateList = mStateList;
+                AddressStateList = stateList;
+
+                AddAddressFragment dialog = new AddAddressFragment();
+                Bundle bundle = new Bundle();
+                if (add) {
+                    bundle.putString("action", "add");
+                } else {
+                    bundle.putString("action", "edit");
+                }
+                dialog.setArguments(bundle);
+                if (getFragmentManager() != null) {
+                    dialog.show(getFragmentManager(), "AddressDialog");
+                } else {
+                    Toast.makeText(getContext(), "Address edit not available now", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            LoadingDialog.cancelLoading();
+            dialogWarning(getActivity(), "Sorry ! Can't connect to server, try later");
+        }
+
     }
 
     private void processNumResendOtp(String response) {
@@ -1202,7 +1369,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
 
     }
 
-    @Override
+    /*@Override
     public void onConnected(Bundle bundle) {
         mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
         Log.i(LOG_TAG, "Google Places API connected.");
@@ -1223,12 +1390,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
     public void onConnectionSuspended(int i) {
         mPlaceArrayAdapter.setGoogleApiClient(null);
         Log.e(LOG_TAG, "Google Places API connection suspended.");
-    }
+    }*/
 
     @Override
     public void onPause() {
         super.onPause();
-        mGoogleApiClient.stopAutoManage(getActivity());
-        mGoogleApiClient.disconnect();
+        /*mGoogleApiClient.stopAutoManage(getActivity());
+        mGoogleApiClient.disconnect();*/
+    }
+
+
+    public void newAddressFromActivity() {
+        getCustomerDetail();
     }
 }

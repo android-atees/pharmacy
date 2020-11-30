@@ -12,6 +12,9 @@ import android.os.Handler;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +26,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import in.ateesinfomedia.relief.R;
@@ -33,9 +40,13 @@ import in.ateesinfomedia.relief.interfaces.NetworkCallback;
 import in.ateesinfomedia.relief.managers.MyPreferenceManager;
 import in.ateesinfomedia.relief.managers.NetworkManager;
 import in.ateesinfomedia.relief.managers.PermissionManager;
+import in.ateesinfomedia.relief.models.CategoryModel;
+import in.ateesinfomedia.relief.models.cart.CartCountResponse;
+import in.ateesinfomedia.relief.models.state.AddAddressResponse;
 
 import static in.ateesinfomedia.relief.components.ConnectivityReceiver.isConnected;
 import static in.ateesinfomedia.relief.configurations.Global.COUNT;
+import static in.ateesinfomedia.relief.configurations.Global.CategoryList;
 import static in.ateesinfomedia.relief.configurations.Global.dialogWarning;
 
 public class SplashActivity extends AppCompatActivity implements PermissionManager.PermissionCallback, NetworkCallback {
@@ -49,7 +60,13 @@ public class SplashActivity extends AppCompatActivity implements PermissionManag
     private boolean isShowSnack;
     private int REQUEST_UPDATE_CHECK = 8765;
     private int REQUEST_LOGOUT_ID = 9824;
+    private int REQUEST_CATEGORY = 9825;
+    private List<CategoryModel> mCateList = new ArrayList<>();
     private static final String TAG = SplashActivity.class.getName();
+    private int REQUEST_CREATE_CART_ID = 4197;
+    private int REQUEST_CART_COUNT = 4117;
+
+    Gson gson = new Gson();
 
 //    private Context context;
     @Override
@@ -77,7 +94,8 @@ public class SplashActivity extends AppCompatActivity implements PermissionManag
 
     private void startProcess() {
         if (isConnected()){
-            checkUpdate();
+            //checkUpdate();
+            checkLoginStatus();
         } else {
             showSnack(false);
         }
@@ -196,7 +214,7 @@ public class SplashActivity extends AppCompatActivity implements PermissionManag
 
     @Override
     public void onResponse(int status, String response, int requestId) {
-        if (status == NetworkManager.SUCCESS){
+        if (status == NetworkManager.SUCCESS) {
             if (requestId == REQUEST_FEM_TOKEN_ID){
                 processFcmUpdate(response);
             } else if (requestId == REQUEST_NOTIFICATION_COUNT_ID){
@@ -207,6 +225,12 @@ public class SplashActivity extends AppCompatActivity implements PermissionManag
                 processJsonCheckUpdate(response);
             } else if (requestId == REQUEST_LOGOUT_ID){
                 ProcessJsonLogout(response);
+            } else if (requestId == REQUEST_CATEGORY) {
+                processJsonCategory(response);
+            } else if (requestId == REQUEST_CREATE_CART_ID) {
+                processJsonCreateCartId(response);
+            } else if (requestId == REQUEST_CART_COUNT) {
+                processJsonCartCount(response);
             }
 
         } else {
@@ -281,11 +305,155 @@ public class SplashActivity extends AppCompatActivity implements PermissionManag
         }
     }
 
+    private void checkLoginStatus() {
+        if (mPermissionManager.isPermissionAvailable()) {
+            if (manager.isLogin()) {
+                //getCategories();
+                postCreateCartId();
+            } else {
+                goToLogin();
+            }
+        } else {
+            mPermissionManager.makePermissionRequest(SplashActivity.this);
+        }
+    }
+
+    private void goToLogin() {
+        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void getCategories() {
+        new NetworkManager(this).doGet(
+                null,
+                Apis.API_GET_CATEGORY,
+                Apis.ACCESS_TOKEN,
+                "TAG_CATEGORY",
+                REQUEST_CATEGORY,
+                this
+        );
+    }
+
+    private void processJsonCategory(String response) {
+        if(response == null){
+            Log.d(TAG, "processJson: Cant get Category");
+            dialogWarning(this, "Sorry ! Can't connect to server, try later");
+        } else {
+            try {
+                JSONObject jsonObject1 = new JSONObject(response);
+                JSONArray jsonArray1 = jsonObject1.optJSONArray("children_data");
+                JSONObject jsonObject2 = jsonArray1.optJSONObject(0);
+                JSONArray jsonArray2 = jsonObject2.optJSONArray("children_data");
+
+                mCateList.clear();
+
+                for (int i = 0;i<jsonArray2.length();i++){
+
+                    JSONObject jsonObject3 = jsonArray2.getJSONObject(i);
+
+                    CategoryModel categoryModel = new CategoryModel();
+                    categoryModel.setId(jsonObject3.optString("id"));
+                    categoryModel.setName(jsonObject3.optString("name"));
+
+                    mCateList.add(categoryModel);
+                }
+
+                CategoryList = mCateList;
+
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                intent.putExtra("info","splash");
+                startActivity(intent);
+                finish();
+            } catch (JSONException e) {
+                e.printStackTrace();
+                dialogWarning(this, "Sorry ! Can't connect to server, try later");
+            }
+        }
+    }
+
+    private void getNewCartCount() {
+        String cartId = manager.getCartId();
+        String getUrl = Apis.API_GET_CART_COUNT + cartId;
+
+        new NetworkManager(this).doGetCustom(
+                null,
+                getUrl,
+                CartCountResponse[].class,
+                null,
+                Apis.ACCESS_TOKEN,
+                "TAG_CART_COUNT",
+                REQUEST_CART_COUNT,
+                this
+        );
+    }
+
+    private void processJsonCartCount(String response) {
+        Log.d(TAG, response);
+        try {
+            Type type = new TypeToken<ArrayList<CartCountResponse>>(){}.getType();
+            ArrayList<CartCountResponse> cartCountResponseArrayList = gson.fromJson(response, type);
+            if (cartCountResponseArrayList != null && !cartCountResponseArrayList.isEmpty()) {
+                manager.saveCartCount(cartCountResponseArrayList.get(0).getCount());
+            }
+            getCategories();
+        } catch (Exception e) {
+            e.printStackTrace();
+            LoadingDialog.cancelLoading();
+            //LogOut User
+            goToLogin();
+        }
+    }
+
+    private void postCreateCartId() {
+        try {
+            String token =manager.getUserToken();
+
+            new NetworkManager(this).doPostCustom(
+                    Apis.API_POST_CREATE_CART_ID,
+                    Object.class,
+                    null,
+                    token,
+                    "TAG_CREATE_CART_ID",
+                    REQUEST_CREATE_CART_ID,
+                    this
+            );
+
+            LoadingDialog.showLoadingDialog(this,"Loading...");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void processJsonCreateCartId(String response) {
+        Log.d(TAG, response);
+        try {
+            float quoteId = Float.parseFloat(response);
+            manager.saveCartId("" + quoteId);
+            getNewCartCount();
+        } catch (Exception e) {
+            e.printStackTrace();
+            LoadingDialog.cancelLoading();
+            //LogOut User
+            goToLogin();
+        }
+    }
+
+    private void serverErrorDialog() {
+        try {
+            LoadingDialog.cancelLoading();
+            dialogWarning(this, "Sorry ! Can't connect to server, try later");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void checkVersion(int newVersion, boolean isForced, String features) {
 
         if (isNewVersion(newVersion) && isForced){
             showVersionUpdate(isForced,features);
-        }else if(isNewVersion(newVersion) && !isForced){
+        }else if(isNewVersion(newVersion) && !isForced) {
             showVersionUpdate(isForced,features);
         }else {
             if (mPermissionManager.isPermissionAvailable()) {

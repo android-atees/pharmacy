@@ -8,16 +8,24 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.cardview.widget.CardView;
+
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -33,6 +41,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,14 +57,18 @@ import in.ateesinfomedia.relief.interfaces.CartItemClickListner;
 import in.ateesinfomedia.relief.interfaces.NetworkCallback;
 import in.ateesinfomedia.relief.managers.MyPreferenceManager;
 import in.ateesinfomedia.relief.managers.NetworkManager;
-import in.ateesinfomedia.relief.models.CartModel;
+import in.ateesinfomedia.relief.models.CartsModel;
 import in.ateesinfomedia.relief.models.DeliveryAddressModel;
+import in.ateesinfomedia.relief.models.cart.CartAttributeInfo;
+import in.ateesinfomedia.relief.models.cart.CartModel;
+import in.ateesinfomedia.relief.models.cart.CartResponse;
+import in.ateesinfomedia.relief.models.login.LoginModel;
+import in.ateesinfomedia.relief.models.state.AddAddressResponse;
 import in.ateesinfomedia.relief.view.adapter.CartAdapter;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static in.ateesinfomedia.relief.components.ConnectivityReceiver.isConnected;
-import static in.ateesinfomedia.relief.configurations.Global.CartList;
 import static in.ateesinfomedia.relief.configurations.Global.PinCode;
 import static in.ateesinfomedia.relief.configurations.Global.dialogWarning;
 import static in.ateesinfomedia.relief.configurations.Global.isChanged;
@@ -66,15 +79,16 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
     private int REQUEST_CART_ITEMS_ID = 8788;
     private List<CartModel> cartList = new ArrayList<>();
     private TextView mTxtSubTotalAmt;
-    private TextView mTxtGrandTotalAmt;
+    //private TextView mTxtGrandTotalAmt;
     private TextView mTxtAmount;
     private Button mBtnCheckOut;
     private RecyclerView recyclerView;
-    private TextView mtxtPinCode;
-    private CardView mCardChangePin;
+    //private TextView mtxtPinCode;
+    //private CardView mCardChangePin;
     private CartAdapter mAdapter;
     private RelativeLayout mNoDataLay;
     private LinearLayout mdataLay;
+    private MaterialCardView mFooterLay;
     private int REQUEST_ADD_MINUS = 7777;
     private Float price = 0.0f;
     private int quan;
@@ -94,6 +108,10 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
     private Toolbar toolbar;
     private int REQUEST_PINCODE_CHECK_DATA = 7779;
     private int TAG_GET_PROFILE_ID = 8766;
+    private static final String TAG = CartActivity.class.getName();
+    private Gson gson = new Gson();
+    private int REQUEST_UPDATE_CART_QTY = 7821;
+    private int REQUEST_DELETE_CART_ITEM = 7822;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +121,8 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-//            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             Drawable background = this.getResources().getDrawable(R.drawable.ab_gradient);
-//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(this.getResources().getColor(android.R.color.transparent));
-//            window.setNavigationBarColor(this.getResources().getColor(android.R.color.transparent));
             window.setBackgroundDrawable(background);
         }
 
@@ -122,19 +137,15 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
 
         manager = new MyPreferenceManager(this);
         mContainer = (LinearLayout) findViewById(R.id.firstmainLay);
-//        mTxtDeliveryAmt = (TextView) findViewById(R.id.deliceryFeePrice);
-        mTxtGrandTotalAmt = (TextView) findViewById(R.id.grandTotalAmt);
         mTxtAmount = (TextView) findViewById(R.id.txtAmount);
         mBtnCheckOut = (Button) findViewById(R.id.btnCheckOut);
         recyclerView = (RecyclerView) findViewById(R.id.rv_cart_items_list);
-        mtxtPinCode = (TextView) findViewById(R.id.pinCode);
-        mCardChangePin = (CardView) findViewById(R.id.cardChangePin);
         mNoDataLay = (RelativeLayout) findViewById(R.id.noDataLay);
         mdataLay = (LinearLayout) findViewById(R.id.dataLay);
+        mFooterLay = (MaterialCardView) findViewById(R.id.cart_footer_cardView);
 
         recyclerView.setNestedScrollingEnabled(false);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-//        ShimmerRecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager/*mLayoutManager*/);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -143,6 +154,15 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
         getCartItems();
 
         mBtnCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CartActivity.this, AddressListActivity.class);
+                intent.putExtra("info", "cart");
+                startActivity(intent);
+            }
+        });
+
+        /*mBtnCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mtxtPinCode.getText().toString().equals("")){
@@ -158,7 +178,7 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
             public void onClick(View v) {
                 dialogEditEduQua(CartActivity.this);
             }
-        });
+        });*/
     }
 
     private void checkPinValid(String pincode) {
@@ -235,7 +255,7 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
                     pincode = PinCode;
                     PinCode = pincode;
                     //mtxtPinCode.setText(PinCode);
-                    mtxtPinCode.setText(manager.getPincode());
+                    //mtxtPinCode.setText(manager.getPincode());
                     break;
                 default:
                     locationAddress = null;
@@ -260,7 +280,7 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
         TextView cancel = view.findViewById(R.id.btnCancel);
         notAvail = view.findViewById(R.id.notAvail);
 
-        number.setText(mtxtPinCode.getText().toString());
+        //number.setText(mtxtPinCode.getText().toString());
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -332,10 +352,23 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
     }
 
     private void getCartItems() {
-        Map<String,String> map = new HashMap<>();
+        /*Map<String,String> map = new HashMap<>();
         map.put("user_id",manager.getdelicioId());
 
         new NetworkManager(this).doPost(map, Apis.API_POST_GET_CART_ITEMS,"REQUEST_CART_ITEMS",REQUEST_CART_ITEMS_ID,this);
+        LoadingDialog.showLoadingDialog(this,"Loading....");*/
+        String token = manager.getUserToken();
+        String getUrl = Apis.API_GET_CART_LIST + manager.getCartId();
+        new NetworkManager(this).doGetCustom(
+                null,
+                getUrl,
+                CartModel[].class,
+                null,
+                token,
+                "REQUEST_CART_ITEMS",
+                REQUEST_CART_ITEMS_ID,
+                this
+        );
         LoadingDialog.showLoadingDialog(this,"Loading....");
     }
 
@@ -345,7 +378,7 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
         if (status == NetworkManager.SUCCESS){
 
             if (requestId == REQUEST_CART_ITEMS_ID){
-                processJsonCartitems(response);
+                processJsonCartItems(response);
             } else if (requestId == REQUEST_ADD_MINUS){
                 processJsonaddOrMinus(response);
             } else if (requestId == REQUEST_REMOVE){
@@ -356,9 +389,53 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
                 processJsonCheckPincodeAvail(response);
             } else if (requestId == TAG_GET_PROFILE_ID){
                 processJsonDelivery(response);
+            } else if (requestId == REQUEST_UPDATE_CART_QTY){
+                processJsonCartQty(response);
+            } else if (requestId == REQUEST_DELETE_CART_ITEM){
+                processJsonCartDelete(response);
             }
         } else {
+            LoadingDialog.cancelLoading();
+            Toast.makeText(this, "Something went wrong..", Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    private void processJsonCartQty(String response) {
+        Log.d(TAG, response);
+        try {
+            Type type = new TypeToken<CartModel>(){}.getType();
+            CartModel cartResponse = gson.fromJson(response, type);
+            Log.d(TAG, cartResponse.getQty());
+            getCartItems();
+        } catch (Exception e) {
+            e.printStackTrace();
+            LoadingDialog.cancelLoading();
+            dialogWarning(CartActivity.this, "Sorry ! Can't connect to server, try later");
+        }
+    }
+
+    private void processJsonCartDelete(String response) {
+        Log.d(TAG, response);
+        try {
+            Type type = new TypeToken<Boolean>(){}.getType();
+            Boolean deleteResponse = gson.fromJson(response, type);
+            if (deleteResponse) {
+                getCartItems();
+            } else {
+                LoadingDialog.cancelLoading();
+                Toast.makeText(this, "Something went wrong..", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e1) {
+            try {
+                Type type = new TypeToken<AddAddressResponse>(){}.getType();
+                AddAddressResponse deleteResponse = gson.fromJson(response, type);
+                LoadingDialog.cancelLoading();
+                dialogWarning(CartActivity.this, deleteResponse.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
+                LoadingDialog.cancelLoading();
+                dialogWarning(CartActivity.this, "Sorry ! Can't connect to server, try later");
+            }
         }
     }
 
@@ -415,7 +492,7 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
                 Intent intent = new Intent(CartActivity.this,NoLocationActivity.class);
                 startActivity(intent);
             } else {
-                PinCode = mtxtPinCode.getText().toString();
+                //PinCode = mtxtPinCode.getText().toString();
                 getDeliveryAddress();
 
             }
@@ -450,8 +527,8 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
                 manager.setPincode(pincode);
                 mADialogLog.dismiss();
                // mtxtPinCode.setText(pincode);
-                mtxtPinCode.setText(manager.getPincode());
-                Global.PinCode = mtxtPinCode.getText().toString();
+                //mtxtPinCode.setText(manager.getPincode());
+                //Global.PinCode = mtxtPinCode.getText().toString();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -530,7 +607,62 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
         }
     }
 
-    private void processJsonCartitems(String response) {
+    private void processJsonCartItems(String response) {
+        Log.d(TAG, response);
+        cartList.clear();
+        try {
+            Type type = new TypeToken<ArrayList<CartModel>>(){}.getType();
+            ArrayList<CartModel> cartResponse = gson.fromJson(response, type);
+
+            if (cartResponse != null) {
+                cartList = cartResponse;
+                if (cartList.size() == 0){
+                    manager.saveCartCount(0);
+                    mNoDataLay.setVisibility(View.VISIBLE);
+                    mdataLay.setVisibility(View.GONE);
+                    mFooterLay.setVisibility(View.GONE);
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle("My cart");
+                    }
+                } else {
+                    manager.saveCartCount(cartList.size());
+                    mNoDataLay.setVisibility(View.GONE);
+                    mdataLay.setVisibility(View.VISIBLE);
+                    mFooterLay.setVisibility(View.VISIBLE);
+                    mAdapter = new CartAdapter(this,cartList,this);
+                    recyclerView.setAdapter(mAdapter);
+                    mAdapter.notifyDataSetChanged();
+                    if (getSupportActionBar() != null) {
+                        getSupportActionBar().setTitle("My cart("+cartList.size()+")");
+                    }
+
+                    showTotalPrice();
+                }
+            }
+
+            LoadingDialog.cancelLoading();
+        } catch (Exception e) {
+            e.printStackTrace();
+            LoadingDialog.cancelLoading();
+            dialogWarning(CartActivity.this, "Sorry ! Can't connect to server, try later");
+        }
+
+
+    }
+
+    private void showTotalPrice() {
+        float total = 0;
+
+        for (int i = 0; i < cartList.size(); i++) {
+            float price = Float.parseFloat(cartList.get(i).getPrice());
+            int qty = Integer.parseInt(cartList.get(i).getQty());
+            total = total + (price * qty);
+        }
+
+        mTxtAmount.setText("₹ " + String.format("%.2f", total));
+    }
+
+    /*private void processJsonCartitems(String response) {
         try {
             JSONObject jsonObject = new JSONObject(response);
             boolean error = jsonObject.optBoolean("error");
@@ -582,71 +714,164 @@ public class CartActivity extends AppCompatActivity implements NetworkCallback, 
             e.printStackTrace();
             LoadingDialog.cancelLoading();
         }
-    }
+    }*/
 
-    private void showTotalPrice() {
-//        String offerprice = new DecimalFormat("##.##").format(SumofPrice());
-//        mTxtGrandTotalAmt.setText("₹ "+offerprice);
-//        mTxtAmount.setText("₹ "+offerprice);
+    /*private void showTotalPrice() {
         String offerprice = String.valueOf(SumofPrice());
         if (offerprice.contains(".")){
             String[] arrStr = offerprice.split("\\.", 2);
             if (arrStr[1].length()>=2){
                 String second = arrStr[1].substring(0,2);
-                mTxtGrandTotalAmt.setText("₹ "+arrStr[0]+"."+second);
+                //mTxtGrandTotalAmt.setText("₹ "+arrStr[0]+"."+second);
                 mTxtAmount.setText("₹ "+arrStr[0]+"."+second);
             } else {
-                mTxtGrandTotalAmt.setText("₹ "+arrStr[0]+"."+arrStr[1]);
+                //mTxtGrandTotalAmt.setText("₹ "+arrStr[0]+"."+arrStr[1]);
                 mTxtAmount.setText("₹ "+arrStr[0]+"."+arrStr[1]);
             }
         } else {
-            mTxtGrandTotalAmt.setText("₹ " + offerprice);
+            //mTxtGrandTotalAmt.setText("₹ " + offerprice);
             mTxtAmount.setText("₹ " + offerprice);
         }
-    }
+    }*/
 
     @Override
     public void onJsonResponse(int status, String response, int requestId) {
 
     }
 
+    private void updateItemQuantity(int value, CartModel item) {
+
+        try {
+            JSONObject map = new JSONObject();
+            JSONObject cartItem = new JSONObject();
+            if (item.getProduct_type().equals("configurable")) {
+                JSONObject prodOptions = new JSONObject();
+                JSONObject extAttribute = new JSONObject();
+                JSONArray configItemOptionArray = new JSONArray();
+                if (item.getOptions() != null
+                        && item.getOptions().getAttributes_info() != null
+                        && !item.getOptions().getAttributes_info().isEmpty()) {
+                    ArrayList<CartAttributeInfo> extAttributeArray = item.getOptions().getAttributes_info();
+                    for (int index = 0; index < extAttributeArray.size(); index++) {
+                        JSONObject configItemOption = new JSONObject();
+                        configItemOption.put("option_id", extAttributeArray.get(index).getOption_id());
+                        configItemOption.put("option_value", extAttributeArray.get(index).getOption_value());
+                        configItemOptionArray.put(configItemOption);
+                    }
+                }
+                extAttribute.put("configurable_item_options", configItemOptionArray);
+                prodOptions.put("extension_attributes", extAttribute);
+                cartItem.put("product_option", prodOptions);
+            }
+            cartItem.put("sku", item.getSku());
+            cartItem.put("qty", value);
+            cartItem.put("quote_id", manager.getCartId());
+            map.put("cartItem",cartItem);
+            Log.d("doJSON Request",map.toString());
+
+            String urlString = Apis.API_UPDATE_CART_QTY + item.getItem_id();
+
+            new NetworkManager(this).doPutCustom(
+                    urlString,
+                    CartModel.class,
+                    map,
+                    Apis.ACCESS_TOKEN,
+                    "TAG_UPDATE_CART_QTY",
+                    REQUEST_UPDATE_CART_QTY,
+                    this
+            );
+            LoadingDialog.showLoadingDialog(this,"Loading....");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteCartItem(CartModel item) {
+
+        try {
+            JSONObject map = new JSONObject();
+            JSONObject cartItem = new JSONObject();
+            if (item.getProduct_type().equals("configurable")) {
+                JSONObject prodOptions = new JSONObject();
+                JSONObject extAttribute = new JSONObject();
+                JSONArray configItemOptionArray = new JSONArray();
+                if (item.getOptions() != null
+                        && item.getOptions().getAttributes_info() != null
+                        && !item.getOptions().getAttributes_info().isEmpty()) {
+                    ArrayList<CartAttributeInfo> extAttributeArray = item.getOptions().getAttributes_info();
+                    for (int index = 0; index < extAttributeArray.size(); index++) {
+                        JSONObject configItemOption = new JSONObject();
+                        configItemOption.put("option_id", extAttributeArray.get(index).getOption_id());
+                        configItemOption.put("option_value", extAttributeArray.get(index).getOption_value());
+                        configItemOptionArray.put(configItemOption);
+                    }
+                }
+                extAttribute.put("configurable_item_options", configItemOptionArray);
+                prodOptions.put("extension_attributes", extAttribute);
+                cartItem.put("product_option", prodOptions);
+            }
+            cartItem.put("sku", item.getSku());
+            cartItem.put("qty", item.getQty());
+            cartItem.put("quote_id", manager.getCartId());
+            map.put("cartItem",cartItem);
+            Log.d("doJSON Request",map.toString());
+
+            String urlString = Apis.API_DELETE_CART_ITEM + manager.getCartId() + "/items/" + item.getItem_id();
+
+            new NetworkManager(this).doDeleteCustom(
+                    urlString,
+                    Object.class,
+                    map,
+                    Apis.ACCESS_TOKEN,
+                    "TAG_UPDATE_CART_QTY",
+                    REQUEST_DELETE_CART_ITEM,
+                    this
+            );
+            LoadingDialog.showLoadingDialog(this,"Loading....");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
-    public void onRemoveItemClicked(int position) {
+    public void onRemoveItemClicked(int position, CartModel item) {
         this.position = position;
 
-        Map<String,String> map = new HashMap<>();
+        deleteCartItem(item);
+
+        /*Map<String,String> map = new HashMap<>();
         map.put("user_id",manager.getdelicioId());
-//        map.put("res_id",cartList.get(position).getResId());
-        map.put("product_id",cartList.get(position).getId());
         map.put("type","remove");
 
         NetworkManager networkManager = new NetworkManager(this);
         networkManager.doPost(map, Apis.API_POST_PLUS_OR_MINUS_OR_REMOVE,"TAG_REMOVE",REQUEST_REMOVE,this);
 
-        LoadingDialog.showLoadingDialog(this,"Loading...");
+        LoadingDialog.showLoadingDialog(this,"Loading...");*/
     }
 
     @Override
-    public void onEditQuantityClicked(int position, String type, int value) {
+    public void onEditQuantityClicked(int position, String type, int value, CartModel item) {
 
-        Map<String,String> map = new HashMap<>();
+        updateItemQuantity(value, item);
+
+        /*Map<String,String> map = new HashMap<>();
         map.put("user_id",manager.getdelicioId());
-//        map.put("res_id",cartList.get(position).getResId());
-        map.put("product_id",cartList.get(position).getId());
         map.put("count",String.valueOf(value));
         map.put("type",type);
 
         new NetworkManager(this).doPost(map, Apis.API_POST_PLUS_OR_MINUS_OR_REMOVE,"TAG_REMOVE",REQUEST_ADD_MINUS,this);
 
-        LoadingDialog.showLoadingDialog(this,"Loading...");
+        LoadingDialog.showLoadingDialog(this,"Loading...");*/
     }
 
     public float SumofPrice(){
         float sum = 0;
-        for(CartModel d : cartList)
+        //for(CartsModel d : cartList)
 //            price = Float.valueOf(d.getProduct_total());
 //            quan = Integer.valueOf(d.getQu)
-            sum += Integer.valueOf(d.getQuantity()) * Float.valueOf(d.getProduct_total_offer());
+            //sum += Integer.valueOf(d.getQuantity()) * Float.valueOf(d.getProduct_total_offer());
         return sum;
     }
 

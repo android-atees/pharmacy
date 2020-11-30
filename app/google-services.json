@@ -1,43 +1,42 @@
 {
   "project_info": {
-    "project_number": "1079502237002",
-    "firebase_url": "https://pharmacy-96cf2.firebaseio.com",
-    "project_id": "pharmacy-96cf2",
-    "storage_bucket": "pharmacy-96cf2.appspot.com"
+    "project_number": "151752818877",
+    "firebase_url": "https://relief-923f0.firebaseio.com",
+    "project_id": "relief-923f0",
+    "storage_bucket": "relief-923f0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1079502237002:android:fb8f98822739943367a5b3",
+        "mobilesdk_app_id": "1:151752818877:android:cc03483abcf999d27577d4",
         "android_client_info": {
           "package_name": "in.ateesinfomedia.relief"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1079502237002-rhip29h05sj6j4gfa9dqpeuon1d61tha.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "in.ateesinfomedia.relief",
-            "certificate_hash": "5ba4809a25be252aa611c624dc1cacaffb619d5c"
-          }
-        },
-        {
-          "client_id": "1079502237002-1oplf63rh83udqbta78tae09v443ifnh.apps.googleusercontent.com",
+          "client_id": "151752818877-f03md1n1rar8kh99kr0j2a5m8rk0pb4j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDE6Cx1bXs8cjx3AxPrGtFpWrVPdGSGSwg"
+          "current_key": "AIzaSyAqXzrj9DAhrmQGgsupQ_qSQea5-K8NyL8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1079502237002-1oplf63rh83udqbta78tae09v443ifnh.apps.googleusercontent.com",
+              "client_id": "151752818877-f03md1n1rar8kh99kr0j2a5m8rk0pb4j.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "151752818877-8is3dd367gm1s8u1ljmuk0tsd61agi7a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "in.atees.relief"
+              }
             }
           ]
         }

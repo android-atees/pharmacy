@@ -353,4 +353,9 @@ public class OtcOrderDetailActivity extends AppCompatActivity implements Network
         model = (OtcOrderDetailsModel) object;
         ShowCancelPopUp();
     }
+
+    @Override
+    public void buttonClicked(int position, Object object) {
+        //
+    }
 }

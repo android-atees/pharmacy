@@ -1,10 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_4"
+        app:cardCornerRadius="@dimen/margin_4"
+        app:cardElevation="@dimen/margin_2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/cart_offer_tag"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:elevation="10dp"
+                    android:src="@drawable/ic_offer_main"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/product_image"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:padding="@dimen/margin_8"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/product_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:maxLines="2"
+                        android:text=""
+                        android:textSize="14sp"
+                        android:paddingTop="@dimen/margin_4"
+                        android:paddingBottom="@dimen/margin_4"
+                        tools:text="Orthoherb 60 Tabs" />
+
+                    <me.himanshusoni.quantityview.QuantityView
+                        android:id="@+id/quantityCountPickerCart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_4"
+                        android:gravity="center_vertical"
+                        android:visibility="gone"
+                        android:background="@drawable/quantity_view_bg"
+                        app:qv_addButtonTextColor="@android:color/black"
+                        app:qv_removeButtonTextColor="@android:color/black"
+                        app:qv_quantityTextColor="@color/white"
+                        app:qv_quantityBackground="@android:color/black"
+                        app:qv_addButtonBackground="@color/white"
+                        app:qv_removeButtonBackground="@color/white"
+                        app:qv_maxQuantity="10"
+                        app:qv_minQuantity="1"
+                        app:qv_quantity="1"
+                        app:qv_quantityDialog="false" />
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/margin_4"
+                        android:background="@drawable/quantity_view_bg">
+
+                        <Button
+                            android:id="@+id/cart_decrement"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:padding="0dp"
+                            android:textSize="25sp"
+                            android:textColor="@android:color/black"
+                            android:background="@null"
+                            android:text="—"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                        <TextView
+                            android:id="@+id/cart_qty"
+                            android:layout_width="40dp"
+                            android:background="@android:color/black"
+                            android:layout_height="match_parent"
+                            android:text="0"
+                            android:textColor="@android:color/white"
+                            android:gravity="center" />
+
+                        <Button
+                            android:id="@+id/cart_increment"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:padding="0dp"
+                            android:textSize="25sp"
+                            android:textColor="@android:color/black"
+                            android:background="@null"
+                            android:text="+"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/remove"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_8"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:srcCompat="@drawable/delete_cart_item" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="end">
+
+                <TextView
+                    android:id="@+id/strikeprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/margin_4"
+                    android:paddingBottom="@dimen/margin_4"
+                    android:paddingStart="@dimen/margin_4"
+                    android:paddingEnd="@dimen/margin_4"
+                    android:textStyle="bold"
+                    android:text=""
+                    tools:text="Rs 140"/>
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:paddingTop="@dimen/margin_4"
+                    android:paddingBottom="@dimen/margin_4"
+                    android:textStyle="bold"
+                    android:textColor="@color/gradStart"
+                    android:text=""
+                    tools:text="Rs 128"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!--<androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="120dp"
         app:cardCornerRadius="@dimen/margin_4"
@@ -82,10 +257,10 @@
                 android:drawablePadding="3dp"
                 android:text="remove" />
 
-            <!--android:drawableLeft="@drawable/ic_trash"-->
+            &lt;!&ndash;android:drawableLeft="@drawable/ic_trash"&ndash;&gt;
 
         </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>-->
 
 </RelativeLayout>

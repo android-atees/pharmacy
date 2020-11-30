@@ -421,6 +421,11 @@ public class CategoryActivity extends AppCompatActivity implements AdapterView.O
         doGetProducts();
     }
 
+    @Override
+    public void buttonClicked(int position, Object object) {
+        //
+    }
+
     private void doGetProducts() {
         Map<String,String> map = new HashMap<>();
         map.put("subcategory",subCategoryModel.getId());

@@ -126,6 +126,11 @@ public class DoctorDetailsActivity extends AppCompatActivity implements AdapterC
         }
     }
 
+    @Override
+    public void buttonClicked(int position, Object object) {
+        //
+    }
+
     private void doMakeCall(DoctorsDetailModel doctorsDetailModel) {
         showDialogToCall(doctorsDetailModel);
     }

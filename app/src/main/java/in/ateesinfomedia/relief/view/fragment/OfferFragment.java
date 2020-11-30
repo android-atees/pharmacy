@@ -194,4 +194,9 @@ public class OfferFragment extends Fragment implements NetworkCallback, OfferCat
         intent.putExtra("details",productsModel);
         startActivity(intent);
     }
+
+    @Override
+    public void buttonClicked(int position, Object object) {
+        //
+    }
 }

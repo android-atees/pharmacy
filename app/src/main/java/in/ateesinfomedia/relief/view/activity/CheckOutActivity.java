@@ -51,7 +51,7 @@ import in.ateesinfomedia.relief.configurations.Global;
 import in.ateesinfomedia.relief.interfaces.NetworkCallback;
 import in.ateesinfomedia.relief.managers.MyPreferenceManager;
 import in.ateesinfomedia.relief.managers.NetworkManager;
-import in.ateesinfomedia.relief.models.CartModel;
+import in.ateesinfomedia.relief.models.CartsModel;
 import in.ateesinfomedia.relief.models.DeliveryAddressModel;
 import in.ateesinfomedia.relief.view.adapter.CheckOutAdapter;
 import libs.mjn.prettydialog.PrettyDialog;
@@ -74,7 +74,7 @@ public class CheckOutActivity extends AppCompatActivity implements NetworkCallba
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     private RecyclerView recyclercartItems;
-    private List<CartModel> cartList = new ArrayList<>();
+    private List<CartsModel> cartList = new ArrayList<>();
     private CheckOutAdapter mAdapter;
     private TextView pincode;
     private CardView cardAddress;
@@ -227,7 +227,7 @@ public class CheckOutActivity extends AppCompatActivity implements NetworkCallba
 
     public float SumofPrice(){
         float sum = 0;
-        for(CartModel d : cartList)
+        for(CartsModel d : cartList)
 //            price = Float.valueOf(d.getProduct_total());
 //            quan = Integer.valueOf(d.getQu)
             sum += Integer.valueOf(d.getQuantity()) * Float.valueOf(d.getProduct_total_offer());

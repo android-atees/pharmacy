@@ -39,4 +39,16 @@
     <color name="gradStart">#02ae9c</color>
     <color name="gradEnd">#049ec9</color>
 
+    <color name="cartBtnGradStart">#63b554</color>
+    <color name="cartBtnGradEnd">#45b274</color>
+    <color name="overlay_white">#656668</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="order_price">#00AD9A</color>
+    <color name="order_complete">#56AE31</color>
+    <color name="order_processing">#66B2E3</color>
+    <color name="order_cancelled">#EE7854</color>
+    <color name="order_pending">#EAB500</color>
+
+
 </resources>

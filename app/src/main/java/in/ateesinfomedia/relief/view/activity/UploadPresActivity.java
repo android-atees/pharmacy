@@ -17,6 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
@@ -57,6 +58,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.shagi.materialdatepicker.date.DatePickerFragmentDialog;
 
 import org.apache.commons.io.FileUtils;
@@ -105,6 +107,8 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.os.Environment.getExternalStorageDirectory;
 import static in.ateesinfomedia.relief.components.ConnectivityReceiver.isConnected;
+import static in.ateesinfomedia.relief.configurations.Global.CustomerAddressModel;
+import static in.ateesinfomedia.relief.configurations.Global.IsAddressSelected;
 import static in.ateesinfomedia.relief.configurations.Global.PinCode;
 import static in.ateesinfomedia.relief.configurations.Global.dialogWarning;
 
@@ -137,6 +141,8 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
     private int PICK_IMAGE_REQUEST = 1;
     private ArrayList<String> pathList = new ArrayList<>();
     private CardView mCardChangePin;
+    private CardView mCardChangeAddress;
+    private TextView mTxtPinCode;
     private EditText number;
     private TextView notAvail;
     private String pincode;
@@ -165,6 +171,9 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
     private Handler mHandler = new Handler();
     private int RECORD_AUDIO_REQUEST_CODE =123 ;
     private boolean isPlaying = false;
+    private Map<String, String> presMap = new HashMap<String, String>();
+    private Map<String, VolleyMultipartRequest.DataPart> presImageMap = new HashMap<>();
+    private String presDate, presRemark, presDesc, presPinCode, presAddressId;
 
 
 
@@ -200,6 +209,8 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         mtxtPinCode = (TextView) findViewById(R.id.pinCode);
         mCardChangePin = (CardView) findViewById(R.id.cardChangePin);
         mContainer = (RelativeLayout) findViewById(R.id.firstmainLay);
+        mCardChangeAddress = (CardView) findViewById(R.id.uploadAddressChangeCard);
+        mTxtPinCode = (TextView) findViewById(R.id.uploadPinCode);
         //record_view = findViewById(R.id.recordView);
         //btn_send = findViewById(R.id.recordBtn);
         setSupportActionBar(toolbar);
@@ -339,7 +350,8 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
                     //pinCodeEmptyOrNot();
                     //doCheckPincodeValid();
                     String date = mTvDate.getText().toString();
-                    doUpload(date);
+                    //doUpload(date);
+                    doNewUpload(date);
                 } else {
                     Toast.makeText(UploadPresActivity.this, "Please add prescription image..", Toast.LENGTH_SHORT).show();
                 }
@@ -413,6 +425,15 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
             getPermissionToRecordAudio();
         }
 
+        mCardChangeAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UploadPresActivity.this, AddressListActivity.class);
+                intent.putExtra("info", "pres");
+                startActivity(intent);
+            }
+        });
+
         initViews();
 
     }
@@ -474,6 +495,7 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
     private void stopPlaying() {
         try{
             if (mPlayer != null) {
+                lastProgress = mPlayer.getCurrentPosition();
                 mPlayer.release();
             }
         }catch (Exception e){
@@ -504,8 +526,10 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         try {
             mRecorder.prepare();
             mRecorder.start();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            showToast("Oops cant start recording");
+            return;
         }
         lastProgress = 0;
         seekBar.setProgress(0);
@@ -529,6 +553,7 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         //starting the chronometer
         chronometer.stop();
         chronometer.setBase(SystemClock.elapsedRealtime());
+        lastProgress = 0;
         //showing the play button
         Toast.makeText(this, "Recording saved successfully.", Toast.LENGTH_SHORT).show();
     }
@@ -540,18 +565,22 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
             mPlayer.setDataSource(fileName);
             mPlayer.prepare();
             mPlayer.start();
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.e("LOG_TAG", "prepare() failed");
+            showToast("Oops cant play audio");
+            return;
         }
         //making the imageview pause button
         imageViewPlay.setImageResource(R.drawable.ic_pause);
+        chronometer.stop();
+        chronometer.setBase(SystemClock.elapsedRealtime());
 
         seekBar.setProgress(lastProgress);
         mPlayer.seekTo(lastProgress);
         seekBar.setMax(mPlayer.getDuration());
         seekUpdation();
-        chronometer.stop();
-        chronometer.setBase(SystemClock.elapsedRealtime());
+        debug("progress "+lastProgress);
+        chronometer.setBase(SystemClock.elapsedRealtime() - lastProgress);
         chronometer.start();
 
 
@@ -572,6 +601,8 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
                 if( mPlayer!=null && fromUser ){
                     mPlayer.seekTo(progress);
                     chronometer.setBase(SystemClock.elapsedRealtime() - mPlayer.getCurrentPosition());
+                    lastProgress = progress;
+                } else if (fromUser) {
                     lastProgress = progress;
                 }
             }
@@ -882,6 +913,169 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         }
 
         return ret;
+    }
+
+    private void doNewUpload(String date) {
+
+        PrettyDialog prettyDialog=new PrettyDialog(this);
+        boolean isError = false;
+        View mFocusView = null;
+
+        mTvDate.setError(null);
+
+        if (!isDataValid(date)){
+            isError = true;
+            mTvDate.setError("Field can't be empty");
+            mFocusView = mTvDate;
+        }
+        if (!IsAddressSelected) {
+            showToast("Please choose the delivery address...");
+            return;
+        }
+        if (isError){
+            mFocusView.requestFocus();
+            return;
+        }else {
+
+            presDate = date;
+
+            AsyncTaskPrescription asyncTask = new AsyncTaskPrescription();
+            asyncTask.execute();
+
+            /*Map<String, String> map = new HashMap<String, String>();
+            map.put("customer_id", manager.getUserUniqueId());
+            map.put("expected_delivery", date);
+            map.put("description", mEtTextField.getText().toString());
+            map.put("remarka", mEtRemark.getText().toString());
+            map.put("pin_code", "695024");
+            map.put("address_Id", "43");
+
+            Map<String, VolleyMultipartRequest.DataPart> imageMap = new HashMap<>();
+
+            if (thumbnail != null) {
+                imageMap.put("image_one", new VolleyMultipartRequest.DataPart(Calendar.getInstance()
+                        .getTimeInMillis() / 1000 + ".png", getBytearrayFromBitmap(thumbnail)));
+            }
+
+            if (thumbnail2 != null) {
+                imageMap.put("image_two", new VolleyMultipartRequest.DataPart(Calendar.getInstance()
+                        .getTimeInMillis() / 1000 + "relief2.png", getBytearrayFromBitmap(thumbnail2)));
+            }
+
+            if (fileName != null) {
+                try {
+
+                    File mAudioFile = new File(fileName);
+                    if (mAudioFile.exists()) {
+                        //byte[] fileContent = Files.readAllBytes(mAudioFile.toPath());
+                        byte[] fileContent = FileUtils.readFileToByteArray(mAudioFile);
+                        //byte[] bytes = read(this, fileName);
+                        if (fileContent != null) {
+                            imageMap.put("voice_record", new VolleyMultipartRequest.DataPart(Calendar.getInstance()
+                                    .getTimeInMillis() / 1000 + "voice.mp3", fileContent));
+                        }
+                    }
+                } catch (Exception e) {
+                    debug("error" + e.getMessage());
+                }
+            }
+
+            Log.i("Post MAP", "" + new Gson().toJson(map));
+
+
+            new NetworkManager(this).doPostMultiData(
+                    map,
+                    imageMap,
+                    Apis.API_POST_PRESCRIPTION_UPLOAD,
+                    "TAG_UPLOAD_PRESCRIPTION",
+                    REQUEST_UPLOAD_PRESCRIPTION,
+                    this
+            );
+            LoadingDialog.showLoadingDialog(this,"Loading...");*/
+        }
+    }
+
+    private class AsyncTaskPrescription extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            presPinCode = CustomerAddressModel.getPostcode();
+            presAddressId = CustomerAddressModel.getId();
+            presDesc = mEtTextField.getText().toString();
+            presRemark = mEtRemark.getText().toString();
+            LoadingDialog.showLoadingDialog(UploadPresActivity.this,"Loading...");
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("customer_id", manager.getUserUniqueId());
+            map.put("expected_delivery", presDate);
+            map.put("description", presDesc);
+            map.put("remarka", presRemark);
+            map.put("pin_code", presPinCode);
+            map.put("address_Id", presAddressId);
+
+            presMap = map;
+
+            try {
+
+            Map<String, VolleyMultipartRequest.DataPart> imageMap = new HashMap<>();
+
+            if (thumbnail != null) {
+                imageMap.put("image_one", new VolleyMultipartRequest.DataPart(Calendar.getInstance()
+                        .getTimeInMillis() / 1000 + ".png", getBytearrayFromBitmap(thumbnail)));
+            }
+
+            if (thumbnail2 != null) {
+                imageMap.put("image_two", new VolleyMultipartRequest.DataPart(Calendar.getInstance()
+                        .getTimeInMillis() / 1000 + "relief2.png", getBytearrayFromBitmap(thumbnail2)));
+            }
+
+            if (fileName != null) {
+                try {
+
+                    File mAudioFile = new File(fileName);
+                    if (mAudioFile.exists()) {
+                        //byte[] fileContent = Files.readAllBytes(mAudioFile.toPath());
+                        byte[] fileContent = FileUtils.readFileToByteArray(mAudioFile);
+                        //byte[] bytes = read(this, fileName);
+                        if (fileContent != null) {
+                            imageMap.put("voice_record", new VolleyMultipartRequest.DataPart(Calendar.getInstance()
+                                    .getTimeInMillis() / 1000 + "voice.mp3", fileContent));
+                        }
+                    }
+                } catch (Exception e) {
+                    debug("error" + e.getMessage());
+                }
+            }
+
+            Log.i("Post MAP", "" + new Gson().toJson(map));
+
+            presImageMap = imageMap;
+
+            } catch (Exception e) {
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String hashMap) {
+            super.onPostExecute(hashMap);
+
+
+            new NetworkManager(UploadPresActivity.this).doPostMultiData(
+                    presMap,
+                    presImageMap,
+                    Apis.API_POST_PRESCRIPTION_UPLOAD,
+                    "TAG_UPLOAD_PRESCRIPTION",
+                    REQUEST_UPLOAD_PRESCRIPTION,
+                    UploadPresActivity.this
+            );
+            LoadingDialog.showLoadingDialog(UploadPresActivity.this,"Loading...");
+        }
     }
 
     private void doUpload(String date) {
@@ -1243,22 +1437,25 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         }*/
         else if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_IMAGE_REQUEST_ID){
 
-//            thumbnail = (Bitmap) data.getExtras().get("data");
-//
-//
-////           mCover = thumbnail;
-//            Glide.with(this).load(thumbnail).into(mImUpload);
+            if (data.getExtras() != null) {
+
+                thumbnail = (Bitmap) data.getExtras().get("data");
+
+
+//           mCover = thumbnail;
+                Glide.with(this).load(thumbnail).into(mImUpload);
+            }
 
 //Uri outputFileUri = FileProvider.getUriForFile(MainActivity.this, BuildConfig.APPLICATION_ID, newfile);
 
-            File imgFile = new  File(pictureImagePath);
+            /*File imgFile = new  File(pictureImagePath);
             if(imgFile.exists()) {
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 thumbnail=myBitmap;
                 Glide.with(this).load(myBitmap).into(mImUpload);
     //            Log.v("BitmapSizeCam??",""+myBitmap.getHeight()+" , "+myBitmap.getWidth());
 
-            }
+            }*/
 
 
             //mImUpload.setImageBitmap(thumbnail);
@@ -1280,13 +1477,22 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
 
         } else if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_IMAGE_REQUEST_ID_2){
 
-            File imgFile = new  File(pictureImagePath);
+            if (data.getExtras() != null) {
+
+                thumbnail2 = (Bitmap) data.getExtras().get("data");
+
+
+//           mCover = thumbnail;
+                Glide.with(this).load(thumbnail2).into(mImUpload2);
+            }
+
+            /*File imgFile = new  File(pictureImagePath);
             if(imgFile.exists()) {
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 thumbnail2=myBitmap;
                 Glide.with(this).load(myBitmap).into(mImUpload2);
 
-            }
+            }*/
 
 
             //mImUpload.setImageBitmap(thumbnail);
@@ -1525,6 +1731,28 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         Log.v("Thumbanil??",""+response);
         try {
             JSONObject jsonObject = new JSONObject(response);
+            String message = jsonObject.optString("message");
+            if (!message.equals("Prescription Uploaded successfully")){
+                LoadingDialog.cancelLoading();
+//                Toast.makeText(this, "Something went wrong.Please try again!!!", Toast.LENGTH_SHORT).show();
+                showDailog("UPLOAD FAILED!", this.getResources().getString(R.string.upload_failed));
+            } else {
+                LoadingDialog.cancelLoading();
+//                Toast.makeText(this, "Successfully uploaded prescription.", Toast.LENGTH_SHORT).show();
+                //showDailog("UPLOAD SUCCESS!", this.getResources().getString(R.string.upload_sucess));
+                showDailog("UPLOAD SUCCESS!", "Prescription Uploaded successfully");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            LoadingDialog.cancelLoading();
+            dialogWarning(UploadPresActivity.this, "Sorry ! Can't connect to server, try later");
+        }
+    }
+
+    /*private void prodessUploadPres(String response) {
+        Log.v("Thumbanil??",""+response);
+        try {
+            JSONObject jsonObject = new JSONObject(response);
             boolean error = jsonObject.optBoolean("error");
             if (error){
                 LoadingDialog.cancelLoading();
@@ -1540,7 +1768,7 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
             LoadingDialog.cancelLoading();
             dialogWarning(UploadPresActivity.this, "Sorry ! Can't connect to server, try later");
         }
-    }
+    }*/
 
     private void showDailog(String title,String message) {
         final PrettyDialog prettyDialog = new PrettyDialog(this);
@@ -1558,7 +1786,7 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
                             new PrettyDialogCallback() {  // button OnClick listener
                                 @Override
                                 public void onClick() {
-                                    Intent intent = new Intent(UploadPresActivity.this,OrderActivity.class);
+                                    Intent intent = new Intent(UploadPresActivity.this,OrderListActivity.class);//OrderActivity
                                     intent.putExtra("info","payment");
                                     startActivity(intent);
                                     prettyDialog.dismiss();
@@ -1619,7 +1847,7 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
 
     private void openBackCamera(String imgNo) {
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        /*String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = timeStamp + ".jpg";
         File storageDir = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES);
@@ -1628,7 +1856,14 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
 //        Uri outputFileUri = Uri.fromFile(file);
         Uri outputFileUri = FileProvider.getUriForFile(UploadPresActivity.this, BuildConfig.APPLICATION_ID, file);
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);*/
+
+        // Create the camera_intent ACTION_IMAGE_CAPTURE
+        // it will open the camera for capture the image
+        Intent cameraIntent
+                = new Intent(MediaStore
+                .ACTION_IMAGE_CAPTURE);
+
         try {
             if (imgNo.equals("1")) {
                 startActivityForResult(cameraIntent, CAMERA_IMAGE_REQUEST_ID);
@@ -1645,6 +1880,20 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
     protected void onResume() {
         super.onResume();
         toolbar.setTitle("");
+        if (IsAddressSelected) {
+            mTxtPinCode.setText(CustomerAddressModel.getPostcode());
+        } else {
+            mTxtPinCode.setText(null);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mRecorder != null) {
+            prepareforStop();
+            stopRecording();
+        }
     }
 
     //.............................................Camera Algorithm.............................................
