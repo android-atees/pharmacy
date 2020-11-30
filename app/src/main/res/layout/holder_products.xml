@@ -37,6 +37,7 @@
                 android:layout_marginEnd="8dp"
                 android:text="OFFER"
                 android:textSize="10sp"
+                android:visibility="gone"
                 android:textColor="@color/cartBtnGradStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

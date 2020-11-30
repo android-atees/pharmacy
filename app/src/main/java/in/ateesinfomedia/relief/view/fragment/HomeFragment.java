@@ -63,6 +63,7 @@ import in.ateesinfomedia.relief.view.activity.LaborataryActivity;
 import in.ateesinfomedia.relief.view.activity.MainActivity;
 import in.ateesinfomedia.relief.view.activity.ProductsActivity;
 import in.ateesinfomedia.relief.view.activity.SignUpActivity;
+import in.ateesinfomedia.relief.view.activity.SplashActivity;
 import in.ateesinfomedia.relief.view.activity.UploadPresActivity;
 import in.ateesinfomedia.relief.view.adapter.SlidingImagesAdapter;
 
@@ -117,6 +118,7 @@ public class HomeFragment extends Fragment implements NetworkCallback {
     private int REQUEST_CREATE_CART_ID = 9197;
     private String catToolbarName = "Test";
     private int REQUEST_CART_COUNT = 9117;
+    private int REQUEST_CATEGORY = 4825;
 
     Gson gson = new Gson();
 
@@ -183,6 +185,11 @@ public class HomeFragment extends Fragment implements NetworkCallback {
         IsAddressSelected = false;
 
         postCreateCartId();
+
+        if (homeCategoryList == null || homeCategoryList.isEmpty()) {
+            getCategory();
+        }
+
         if (ImagArrayList.size() == 0 || ImagArrayList == null){
             //getSlidingImages();
             getHomeBanner();
@@ -379,6 +386,49 @@ public class HomeFragment extends Fragment implements NetworkCallback {
         }
     }
 
+    private void getCategory() {
+        new NetworkManager(requireContext()).doGet(
+                null,
+                Apis.API_GET_CATEGORY,
+                Apis.ACCESS_TOKEN,
+                "TAG_CATEGORY",
+                REQUEST_CATEGORY,
+                this
+        );
+    }
+
+    private void processJsonCategory(String response) {
+        if(response == null){
+            Log.d(TAG, "processJson: Cant get Category");
+            dialogWarning(requireActivity(), "Sorry ! Can't connect to server, try later");
+        } else {
+            try {
+                JSONObject jsonObject1 = new JSONObject(response);
+                JSONArray jsonArray1 = jsonObject1.optJSONArray("children_data");
+                JSONObject jsonObject2 = jsonArray1.optJSONObject(0);
+                JSONArray jsonArray2 = jsonObject2.optJSONArray("children_data");
+
+                mCateList.clear();
+
+                for (int i = 0;i<jsonArray2.length();i++){
+
+                    JSONObject jsonObject3 = jsonArray2.getJSONObject(i);
+
+                    CategoryModel categoryModel = new CategoryModel();
+                    categoryModel.setId(jsonObject3.optString("id"));
+                    categoryModel.setName(jsonObject3.optString("name"));
+
+                    mCateList.add(categoryModel);
+                }
+
+                CategoryList = mCateList;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                dialogWarning(requireActivity(), "Sorry ! Can't connect to server, try later");
+            }
+        }
+    }
+
     private void getHomeBanner() {
         LoadingDialog.showLoadingDialog(getActivity(),"Loading...");
 
@@ -538,6 +588,8 @@ public class HomeFragment extends Fragment implements NetworkCallback {
                 processJsonCreateCartId(response);
             } else if (requestId == REQUEST_CART_COUNT) {
                 processJsonCartCount(response);
+            } else if (requestId == REQUEST_CATEGORY) {
+                processJsonCategory(response);
             }
         } else {
             LoadingDialog.cancelLoading();
@@ -710,9 +762,13 @@ public class HomeFragment extends Fragment implements NetworkCallback {
 
                 LoadingDialog.cancelLoading();
 
-                Intent intent = new Intent(getActivity(), ProductsActivity.class);
-                intent.putExtra("name", catToolbarName);
-                startActivity(intent);
+                if (mCatProductList.isEmpty()) {
+                    toastComingSoon();
+                } else {
+                    Intent intent = new Intent(getActivity(), ProductsActivity.class);
+                    intent.putExtra("name", catToolbarName);
+                    startActivity(intent);
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();

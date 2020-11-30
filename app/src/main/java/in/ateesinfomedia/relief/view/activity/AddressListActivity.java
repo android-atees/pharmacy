@@ -45,6 +45,7 @@ import in.ateesinfomedia.relief.models.state.StateModel;
 import in.ateesinfomedia.relief.view.adapter.AddressAdapter;
 import in.ateesinfomedia.relief.view.adapter.CartAdapter;
 import in.ateesinfomedia.relief.view.fragment.AddAddressFragment;
+import in.ateesinfomedia.relief.view.fragment.ShippingCostFragment;
 
 import static in.ateesinfomedia.relief.configurations.Global.AddressStateList;
 import static in.ateesinfomedia.relief.configurations.Global.CustomerAddressModel;
@@ -52,7 +53,7 @@ import static in.ateesinfomedia.relief.configurations.Global.IsAddressSelected;
 import static in.ateesinfomedia.relief.configurations.Global.dialogWarning;
 
 public class AddressListActivity extends AppCompatActivity implements NetworkCallback,
-        AddressClickListner, AddAddressFragment.OnAddAddressListener {
+        AddressClickListner, AddAddressFragment.OnAddAddressListener, ShippingCostFragment.OnShippingCostListener {
 
     private Toolbar toolbar;
     private MyPreferenceManager manager;
@@ -137,8 +138,10 @@ public class AddressListActivity extends AppCompatActivity implements NetworkCal
 
     private void goToShippingCostActivity() {
         if (addressSelected) {
-            Intent intent = new Intent(AddressListActivity.this, ShippingCostActivity.class);
-            startActivity(intent);
+            /*Intent intent = new Intent(AddressListActivity.this, ShippingCostActivity.class);
+            startActivity(intent);*/
+            ShippingCostFragment dialog = new ShippingCostFragment();
+            dialog.show(getSupportFragmentManager(), "MyShippingCostDialog");
         } else {
             String message = "";
             if (addressList.size() == 0) {
@@ -344,5 +347,11 @@ public class AddressListActivity extends AppCompatActivity implements NetworkCal
     @Override
     public void newAddress() {
         getAddressList();
+    }
+
+    @Override
+    public void shipCostSelected() {
+        Intent intent = new Intent(AddressListActivity.this, OrderSummaryActivity.class);
+        startActivity(intent);
     }
 }

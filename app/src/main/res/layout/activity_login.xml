@@ -25,12 +25,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/login_goto_sign_up_txt"
+        app:layout_constraintBottom_toTopOf="@id/login_goto_sign_up_txt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_logo_img">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_email_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_32"
@@ -40,7 +41,7 @@
             android:textColorHint="@color/hintTextColor">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/login_number_txt"
+                android:id="@+id/login_email_txt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/edt_bg_selector"
@@ -48,6 +49,31 @@
                 android:drawablePadding="@dimen/margin_16"
                 android:imeOptions="actionDone"
                 android:inputType="textEmailAddress"
+                android:paddingTop="@dimen/margin_10"
+                android:paddingBottom="@dimen/margin_10"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_number_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginEnd="@dimen/margin_32"
+            android:hint="@string/hint_enter_number"
+            android:textColorHint="@color/hintTextColor">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/login_number_txt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edt_bg_selector"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="@dimen/margin_16"
+                android:imeOptions="actionDone"
+                android:inputType="phone"
                 android:paddingTop="@dimen/margin_10"
                 android:paddingBottom="@dimen/margin_10"
                 android:textSize="16sp" />
@@ -98,6 +124,18 @@
             android:layout_marginBottom="@dimen/margin_8"
             android:text="@string/login"
             android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/login_via_alternate_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_32"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Login via mobile?"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"/>
 
     </LinearLayout>
 

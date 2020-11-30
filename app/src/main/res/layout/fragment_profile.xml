@@ -333,6 +333,7 @@
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_change_mob"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:fab_colorNormal="@color/colorPrimary"
@@ -466,6 +467,7 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imEditPro"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"

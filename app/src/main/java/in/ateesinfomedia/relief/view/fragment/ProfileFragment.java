@@ -465,9 +465,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, N
             case R.id.fab_change_mob:
                 //dialogEditEduQua(getActivity(),"number change");
                 Toast.makeText(getActivity(), "Adding Soon...", Toast.LENGTH_SHORT).show();
+                mFabMenu.collapse();
                 break;
             case R.id.fab_change_pass:
                 openChangePassDialog();
+                mFabMenu.collapse();
                 //Toast.makeText(getActivity(), "Adding Soon.", Toast.LENGTH_SHORT).show();
                 //dialogEditEduQua(getActivity(),"forgot");
                 break;

@@ -73,4 +73,16 @@ public class Global {
         });
         builder.show();
     }
+
+    public static void dialogMessage(Context context, String string2) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle((CharSequence)"Message");
+        builder.setMessage((CharSequence)string2);
+        builder.setPositiveButton((CharSequence)"OK", new DialogInterface.OnClickListener(){
+
+            public void onClick(DialogInterface dialogInterface, int n) {
+            }
+        });
+        builder.show();
+    }
 }

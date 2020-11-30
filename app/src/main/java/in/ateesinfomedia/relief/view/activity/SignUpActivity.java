@@ -43,6 +43,7 @@ import in.ateesinfomedia.relief.models.login.LoginModel;
 import in.ateesinfomedia.relief.models.state.AddAddressResponse;
 
 import static in.ateesinfomedia.relief.components.ConnectivityReceiver.isConnected;
+import static in.ateesinfomedia.relief.configurations.Global.dialogMessage;
 import static in.ateesinfomedia.relief.configurations.Global.dialogWarning;
 
 public class SignUpActivity extends AppCompatActivity implements NetworkCallback {
@@ -70,6 +71,7 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
     private String intent_number;
     private boolean isResend = false;
     Gson gson = new Gson();
+    private boolean firstOtp = true;
 
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
@@ -114,8 +116,11 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
         mIBTerms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SignUpActivity.this,RemediotcActivity.class);
-                startActivity(intent);
+                Toast.makeText(SignUpActivity.this,
+                        "Adding soon...",
+                        Toast.LENGTH_SHORT).show();
+                //Intent intent=new Intent(SignUpActivity.this, RemediotcActivity.class);
+                //startActivity(intent);
             }
         });
         /*checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -217,6 +222,10 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
                 isResend = false;
                 mETPhone.setError(null);
                 mTvResend.setText("Get OTP");
+                if (firstOtp && charSequence.length() == 10) {
+                    String number = mETPhone.getText().toString();
+                    doSubmitNumber(number);
+                }
             }
 
             @Override
@@ -605,6 +614,8 @@ public class SignUpActivity extends AppCompatActivity implements NetworkCallback
                 if (message != null) {
                     isResend = true;
                     mTvResend.setText("Resend OTP");
+                    mETOtp.requestFocus();
+                    dialogMessage(SignUpActivity.this, message);
                     Toast.makeText(this, message, Toast.LENGTH_LONG).show();
                 } else {
                     LoadingDialog.cancelLoading();

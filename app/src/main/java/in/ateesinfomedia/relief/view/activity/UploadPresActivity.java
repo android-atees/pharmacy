@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
@@ -330,6 +331,7 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         mImUploadClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("close 1", "img 1");
                 Glide.with(UploadPresActivity.this).load(R.drawable.im_placeholder).into(mImUpload);
                 thumbnail = null;
             }
@@ -338,6 +340,7 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         mImUpload2Close2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("close 2", "img 2");
                 Glide.with(UploadPresActivity.this).load(R.drawable.im_placeholder).into(mImUpload2);
                 thumbnail2 = null;
             }
@@ -366,60 +369,6 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         });
 
         mtxtPinCode.setText(manager.getPincode());
-
-        /*if (hasExternalReadWritePermission()) {
-            File external = new File(getExternalStorageDirectory(), "Relief");
-            if (!external.exists()) external.mkdir();
-
-            record_view.setAudioDirectory(external);
-        } else {
-            askForStoragePermission();
-        }
-
-        btn_send.changeToMessage(false);
-        btn_send.setOnRecordClickListener(this);
-        btn_send.setRecordView(record_view);
-
-        record_view.setOnRecordListener(new OnAudioRecordListener() {
-
-            @Override
-            public void onRecordFinished(RecordingItem recordingItem) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        debug("Recording finished filePath : " + recordingItem.getFilePath() +
-                                "\n fileLength"+ getHumanTimeText(recordingItem.getLength()));
-                    }
-                });
-            }
-
-            @Override
-            public void onError(int errorCode) {
-                record_view.recordTimerStop();
-                if (errorCode == AudioRecording.FILE_NULL) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            record_view.stopRecordingnResetViews(btn_send);
-                            showToast("Destination filePath is null ");
-                            debug("Recording error filepath is null");
-                        }
-                    });
-                    debug("Recording error code " + errorCode);
-                }
-            }
-
-            @Override
-            public void onRecordingStarted() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        debug("Recording started");
-                        record_view.recordTimerStart();
-                    }
-                });
-            }
-        });*/
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getPermissionToRecordAudio();
@@ -941,57 +890,6 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
 
             AsyncTaskPrescription asyncTask = new AsyncTaskPrescription();
             asyncTask.execute();
-
-            /*Map<String, String> map = new HashMap<String, String>();
-            map.put("customer_id", manager.getUserUniqueId());
-            map.put("expected_delivery", date);
-            map.put("description", mEtTextField.getText().toString());
-            map.put("remarka", mEtRemark.getText().toString());
-            map.put("pin_code", "695024");
-            map.put("address_Id", "43");
-
-            Map<String, VolleyMultipartRequest.DataPart> imageMap = new HashMap<>();
-
-            if (thumbnail != null) {
-                imageMap.put("image_one", new VolleyMultipartRequest.DataPart(Calendar.getInstance()
-                        .getTimeInMillis() / 1000 + ".png", getBytearrayFromBitmap(thumbnail)));
-            }
-
-            if (thumbnail2 != null) {
-                imageMap.put("image_two", new VolleyMultipartRequest.DataPart(Calendar.getInstance()
-                        .getTimeInMillis() / 1000 + "relief2.png", getBytearrayFromBitmap(thumbnail2)));
-            }
-
-            if (fileName != null) {
-                try {
-
-                    File mAudioFile = new File(fileName);
-                    if (mAudioFile.exists()) {
-                        //byte[] fileContent = Files.readAllBytes(mAudioFile.toPath());
-                        byte[] fileContent = FileUtils.readFileToByteArray(mAudioFile);
-                        //byte[] bytes = read(this, fileName);
-                        if (fileContent != null) {
-                            imageMap.put("voice_record", new VolleyMultipartRequest.DataPart(Calendar.getInstance()
-                                    .getTimeInMillis() / 1000 + "voice.mp3", fileContent));
-                        }
-                    }
-                } catch (Exception e) {
-                    debug("error" + e.getMessage());
-                }
-            }
-
-            Log.i("Post MAP", "" + new Gson().toJson(map));
-
-
-            new NetworkManager(this).doPostMultiData(
-                    map,
-                    imageMap,
-                    Apis.API_POST_PRESCRIPTION_UPLOAD,
-                    "TAG_UPLOAD_PRESCRIPTION",
-                    REQUEST_UPLOAD_PRESCRIPTION,
-                    this
-            );
-            LoadingDialog.showLoadingDialog(this,"Loading...");*/
         }
     }
 
@@ -1160,12 +1058,6 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
     }
 
     private void chooseImageFromGallary(String imgNo) {
-    //    EasyImage.openGallery(UploadPresActivity.this,0);
-
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_IMAGE_REQUEST_ID);
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -1181,56 +1073,6 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
             debug(e.getMessage());
             showToast("Oops... Unable to open gallery");
         }
-
-
-
-
-
-
-//        Pix.start(this,                    //Activity or Fragment Instance
-//                GALLERY_IMAGE_REQUEST_ID,                //Request code for activity results
-//                1);    //Number of images to restict selection count
-
-
-
-//        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-//                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//        startActivityForResult(galleryIntent, GALLERY_COVER_REQUEST_ID);
-
-//        Intent intent = new Intent();
-//        intent.setAction(android.content.Intent.ACTION_PICK);
-//        intent.setType("image/*");
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivityForResult(intent,GALLERY_COVER_REQUEST_ID);
-
-//        Intent intent = new Intent();
-//// Show only images, no videos or anything else
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//// Always show the chooser (if there are multiple options available)
-//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-
-//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//        intent.addCategory(Intent.CATEGORY_OPENABLE);
-//        intent.setType("image/*");
-//        startActivityForResult(Intent.createChooser(intent, "Select Picture"),GALLERY_COVER_REQUEST_ID);
-
-//        if (Build.VERSION.SDK_INT <19){
-//            Intent intent = new Intent();
-//            intent.setType("image/jpeg");
-//            intent.setAction(Intent.ACTION_GET_CONTENT);
-//            startActivityForResult(Intent.createChooser(intent, "Select Picture"),PICK_IMAGE_REQUEST);
-//        } else {
-//            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-//            intent.addCategory(Intent.CATEGORY_OPENABLE);
-//            intent.setType("image/jpeg");
-//            startActivityForResult(intent, GALLERY_COVER_REQUEST_ID);
-//        }
-
-//        Intent mIntent = new Intent(this, PickImageActivity.class);
-//        mIntent.putExtra(PickImageActivity.KEY_LIMIT_MAX_IMAGE, 1);
-//        mIntent.putExtra(PickImageActivity.KEY_LIMIT_MIN_IMAGE, 1);
-//        startActivityForResult(mIntent, PickImageActivity.PICKER_REQUEST_CODE);
     }
 
     private Uri getUri() {
@@ -1251,8 +1093,6 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         Uri uri = null;
         if (resultCode == Activity.RESULT_OK && requestCode == GALLERY_IMAGE_REQUEST_ID) {
 
-            //..................................Gallery Pick..........................................
-
             Uri mediaUri = data.getData();
             String mediaPath = mediaUri.getPath();
 
@@ -1265,200 +1105,22 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
 
                 thumbnail=bm;
                 Glide.with(this).load(bm).into(mImUpload);
-   //             Log.v("BitmapSizeGall??",""+bm.getHeight()+" , "+bm.getWidth());
-
-
-                //mImUpload.setImageBitmap(bm);
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
 
-            //.................................Gallery Pick...........................................
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        EasyImage.handleActivityResult(requestCode, resultCode, data, this, new DefaultCallback() {
-//                    @Override
-//                    public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
-//                        File userPhoto = imageFile;
-//
-////                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-////                FirebaseHelper.pushProfilePhoto(userId, userPhoto);
-//                        mImUpload.setImageBitmap(BitmapFactory.decodeFile(userPhoto.getPath()));
-//                    }
-//                });
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (resultCode == RESULT_OK) {
-//                    if (requestCode == GALLERY_IMAGE_REQUEST_ID) {
-//                        // Get the url from data
-//                        final Uri selectedImageUri = data.getData();
-//                        if (null != selectedImageUri) {
-//                            // Get the path from the Uri
-//                            String path = getPathFromURI(UploadPresActivity.this,selectedImageUri);
-//                            Log.i("IMAGEEEEEEEEE", "Image Path : " + path);
-//                            // Set the image in ImageView
-//                            findViewById(R.id.uploadImage).post(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    ((ImageView) findViewById(R.id.uploadImage)).setImageURI(selectedImageUri);
-//                                }
-//                            });
-//
-//                        }
-//                    }
-//                }
-//            }
-//        }).start();
-
-            //..................................Gallery Pick..........................................
-
-
-//            ArrayList<String> returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS);
-//            File f = new File(returnValue.get(0));
-//            thumbnail = new BitmapDrawable(getResources(), f.getAbsolutePath()).getBitmap();
-//
-//
-////            thumbnail = com.fxn.utility.Utility.getScaledBitmap(512, com.fxn.utility.Utility.getExifCorrectedBitmap(f));
-//            mImUpload.setImageBitmap(thumbnail);
-
-//
-
-
-                            //.................................Gallery Pick...........................................
-
-
-                } /*else if (resultCode == -1 && requestCode == PickImageActivity.PICKER_REQUEST_CODE) {
-            this.pathList = data.getExtras().getStringArrayList(PickImageActivity.KEY_DATA_RESULT);
-            if (this.pathList != null && !this.pathList.isEmpty()) {
-                StringBuilder sb=new StringBuilder("");
-                for(int i=0;i<pathList.size();i++) {
-                    sb.append("Photo"+(i+1)+":"+pathList.get(i));
-                    sb.append("\n");
-                }
-//                tvResult.setText(sb.toString()); // here this is textview for sample use...
-            }
-        }*/
-//        } else  if (requestCode == PICK_IMAGE_REQUEST) {
-//            uri = data.getData();
-//            try {
-//                thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-//                mImUpload.setImageBitmap(thumbnail);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//        } else if (requestCode == GALLERY_COVER_REQUEST_ID) {
-//            uri = data.getData();
-//            final int takeFlags = data.getFlags()
-//                    & (Intent.FLAG_GRANT_READ_URI_PERMISSION
-//                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//            // Check for the freshest data.
-//            getContentResolver().takePersistableUriPermission(uri, takeFlags);
-//
-//            String id = uri.getLastPathSegment().split(":")[1];
-//            final String[] imageColumns = {MediaStore.Images.Media.DATA };
-//            final String imageOrderBy = null;
-//
-//            Uri uris = getUri();
-//            String selectedImagePath = "path";
-//
-//            Cursor imageCursor = managedQuery(uri, imageColumns,
-//                    MediaStore.Images.Media._ID + "="+id, null, imageOrderBy);
-//
-//            if (imageCursor.moveToFirst()) {
-//                selectedImagePath = imageCursor.getString(imageCursor.getColumnIndex(MediaStore.Images.Media.DATA));
-//            }
-//            Log.e("path",selectedImagePath ); // use selectedImagePath
-//            if (selectedImagePath != null) {
-//                File f = new File(selectedImagePath);
-//                uri = Uri.fromFile(f);
-//            }
-//            // Set the image in ImageView
-//            mImUpload.setImageURI(uri);
-//        }
-
-//        loadSomeStreamAsynkTask(originalUri);
-        /*else if (requestCode == GALLERY_COVER_REQUEST_ID && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
-            Uri uri = data.getData();
-
-            try {
-//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-//             // Log.d(TAG, String.valueOf(bitmap));
-//
-//                ImageView imageView = (ImageView) findViewById(R.id.imageView);
-//                imageView.setImageBitmap(bitmap);
-//                thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-//                mImUpload.setImageBitmap(thumbnail);
-                // Get the path from the Uri
-                final String path = getPathFromURI(uri);
-                if (path != null) {
-                    File f = new File(path);
-                    uri = Uri.fromFile(f);
-                }
-                // Set the image in ImageView
-                mImUpload.setImageURI(uri);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
-        /*if (requestCode == GALLERY_COVER_REQUEST_ID) {
-            if (data != null) {
-                Uri contentURI = data.getData();
-                try {
-                    thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), contentURI);
-                    mImUpload.setImageBitmap(thumbnail);
-//                    int origWidth = thumbnail.getWidth();
-//                    int origHeight = thumbnail.getHeight();
-//
-//                    final int destWidth = 600;
-//
-//                    if(origWidth > destWidth){
-////                        int destHeight = origHeight/( origWidth / destWidth ) ;
-//                        Bitmap b2 = Bitmap.createScaledBitmap(thumbnail, destWidth, 600, false);
-//                        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-//                        b2.compress(Bitmap.CompressFormat.JPEG,80 , outStream);
-//                        uploadImage(b2);
-//                    } else {
-//                        uploadImage(thumbnail);
-//                    }
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Toast.makeText(UploadPresActivity.this, "Please select an valid image!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        }*/
-        else if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_IMAGE_REQUEST_ID){
+        } else if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_IMAGE_REQUEST_ID){
 
             if (data.getExtras() != null) {
 
                 thumbnail = (Bitmap) data.getExtras().get("data");
-
-
-//           mCover = thumbnail;
                 Glide.with(this).load(thumbnail).into(mImUpload);
             }
 
-//Uri outputFileUri = FileProvider.getUriForFile(MainActivity.this, BuildConfig.APPLICATION_ID, newfile);
+            Log.d("cam 1", "result");
 
-            /*File imgFile = new  File(pictureImagePath);
-            if(imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                thumbnail=myBitmap;
-                Glide.with(this).load(myBitmap).into(mImUpload);
-    //            Log.v("BitmapSizeCam??",""+myBitmap.getHeight()+" , "+myBitmap.getWidth());
-
-            }*/
-
-
-            //mImUpload.setImageBitmap(thumbnail);
         } else if (resultCode == Activity.RESULT_OK && requestCode == GALLERY_IMAGE_REQUEST_ID_2) {
 
             Uri mediaUri = data.getData();
@@ -1480,22 +1142,10 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
             if (data.getExtras() != null) {
 
                 thumbnail2 = (Bitmap) data.getExtras().get("data");
-
-
-//           mCover = thumbnail;
                 Glide.with(this).load(thumbnail2).into(mImUpload2);
             }
 
-            /*File imgFile = new  File(pictureImagePath);
-            if(imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                thumbnail2=myBitmap;
-                Glide.with(this).load(myBitmap).into(mImUpload2);
-
-            }*/
-
-
-            //mImUpload.setImageBitmap(thumbnail);
+            Log.d("cam 2", "result");
         }
 
 
@@ -1675,9 +1325,6 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
             JSONObject jsonObject = new JSONObject(response);
             boolean error = jsonObject.optBoolean("error");
             if (error){
-
-//                notAvail.setVisibility(View.VISIBLE);
-
                 Intent intent = new Intent(UploadPresActivity.this,NoLocationActivity.class);
                 startActivity(intent);
             } else {
@@ -1696,23 +1343,6 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
 
     private void ProcessJsonUploadPres(String response) {
 
-//        Toast.makeText(this, "daaata", Toast.LENGTH_SHORT).show();
-//        try {
-//            JSONObject jsonObject = new JSONObject(response);
-//            boolean error = jsonObject.optBoolean("error");
-//            if (error){
-//                LoadingDialog.cancelLoading();
-////                Toast.makeText(this, "Something went wrong.Please try again!!!", Toast.LENGTH_SHORT).show();
-//                showDailog("UPLOAD FAILED!", String.valueOf(R.string.upload_failed));
-//            } else {
-//                LoadingDialog.cancelLoading();
-////                Toast.makeText(this, "Successfully uploaded prescription.", Toast.LENGTH_SHORT).show();
-//                showDailog("UPLOAD SUCCESS!", String.valueOf(R.string.upload_sucess));
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//            LoadingDialog.cancelLoading();
-//        }
     }
 
     @Override
@@ -1786,9 +1416,9 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
                             new PrettyDialogCallback() {  // button OnClick listener
                                 @Override
                                 public void onClick() {
-                                    Intent intent = new Intent(UploadPresActivity.this,OrderListActivity.class);//OrderActivity
+                                    /*Intent intent = new Intent(UploadPresActivity.this,OrderListActivity.class);//OrderActivity
                                     intent.putExtra("info","payment");
-                                    startActivity(intent);
+                                    startActivity(intent);*/
                                     prettyDialog.dismiss();
                                     finish();
                                     Bungee.slideUp(UploadPresActivity.this);
@@ -1846,23 +1476,7 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
 
 
     private void openBackCamera(String imgNo) {
-
-        /*String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = timeStamp + ".jpg";
-        File storageDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES);
-        pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
-        File file = new File(pictureImagePath);
-//        Uri outputFileUri = Uri.fromFile(file);
-        Uri outputFileUri = FileProvider.getUriForFile(UploadPresActivity.this, BuildConfig.APPLICATION_ID, file);
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);*/
-
-        // Create the camera_intent ACTION_IMAGE_CAPTURE
-        // it will open the camera for capture the image
-        Intent cameraIntent
-                = new Intent(MediaStore
-                .ACTION_IMAGE_CAPTURE);
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         try {
             if (imgNo.equals("1")) {
@@ -1874,6 +1488,29 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
             debug(e.getMessage());
             showToast("Oops.. Unable to open camera");
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        if (thumbnail != null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            thumbnail.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            outState.putByteArray("thumbnail", byteArray);
+        }
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("thumbnail")) {
+                byte[] byteArray = savedInstanceState.getByteArray("thumbnail");
+                thumbnail = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                Glide.with(this).load(thumbnail).into(mImUpload);
+            }
+        }
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
@@ -1896,6 +1533,9 @@ public class UploadPresActivity extends AppCompatActivity implements PermissionM
         }
     }
 
-    //.............................................Camera Algorithm.............................................
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("error", "activity destroyed");
+    }
 }
-//359154070168200

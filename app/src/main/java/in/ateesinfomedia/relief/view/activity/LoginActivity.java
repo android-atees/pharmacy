@@ -1,6 +1,5 @@
 package in.ateesinfomedia.relief.view.activity;
 
-import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -10,7 +9,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,12 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -59,11 +54,11 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
     private Button mBtnLogin;
     //private Button mBtnRegister;
     //private Button mIBNext;
-    private TextView mTvForgot;
+    private TextView mTvForgot, mAlternateLoginTxt;
     private TextView mTvGoToSignUp;
     //private TextView mTvShow;
     private EditText mETPass;
-    private EditText mETNumber;
+    private EditText mETEmail, mETNumber;
     //private RelativeLayout mPassLay;
     private int REQUEST_LOGIN = 8989;
     private int REQUEST_CHECK_MOBILE_EXIST = 9099;
@@ -91,6 +86,8 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
     private static final String TAG = LoginActivity.class.getName();
     Gson gson = new Gson();
     private int REQUEST_FORGOT_PASSWORD_NEW = 1289;
+    private boolean emailLogin = true;
+    private TextInputLayout emailMainLayout, numberMainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +98,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
         manager = new MyPreferenceManager(this);
 
         //mPassLay = (RelativeLayout) findViewById(R.id.pass_lay);
+        mETEmail = (EditText) findViewById(R.id.login_email_txt);
         mETNumber = (EditText) findViewById(R.id.login_number_txt);
         mETPass = (EditText) findViewById(R.id.login_password_txt);
         //mTvShow = (TextView) findViewById(R.id.txtShow);
@@ -108,11 +106,16 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
         //mBtnRegister = (Button) findViewById(R.id.btnRegister);
         mTvForgot = (TextView) findViewById(R.id.login_forgot_txt);
         mTvGoToSignUp = (TextView) findViewById(R.id.login_goto_sign_up_txt);
+        mAlternateLoginTxt = (TextView) findViewById(R.id.login_via_alternate_txt);
+        emailMainLayout = (TextInputLayout) findViewById(R.id.login_email_main);
+        numberMainLayout = (TextInputLayout) findViewById(R.id.login_number_main);
+
+        setLayoutVisibility();
 
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String number = mETNumber.getText().toString();
+                String number = getUserInput();
                 String pass = mETPass.getText().toString();
                 doSubmitLogin(number,pass);
 
@@ -146,6 +149,14 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
             }
         });
 
+        mAlternateLoginTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                emailLogin = !emailLogin;
+                setLayoutVisibility();
+            }
+        });
+
         /*mTvShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +184,26 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
                 loadRegister();
             }
         });*/
+    }
+
+    private String getUserInput() {
+        if(emailLogin) {
+            return mETEmail.getText().toString();
+        } else {
+            return mETNumber.getText().toString();
+        }
+    }
+
+    private void setLayoutVisibility() {
+        if (emailLogin) {
+            emailMainLayout.setVisibility(View.VISIBLE);
+            numberMainLayout.setVisibility(View.GONE);
+            mAlternateLoginTxt.setText("Login via mobile?");
+        } else {
+            emailMainLayout.setVisibility(View.GONE);
+            numberMainLayout.setVisibility(View.VISIBLE);
+            mAlternateLoginTxt.setText("Login via email?");
+        }
     }
 
     private void dialogForgotPass(final Context context, final String type) {
@@ -249,7 +280,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
         inputLayoutPassword =  view.findViewById(R.id.input_layout_password);
         inputLayoutotp =  view.findViewById(R.id.input_layout_otp);
 
-        this.number = mETNumber.getText().toString();
+        this.number = mETEmail.getText().toString();
 
         if (this.number.isEmpty() || this.number.equals("")){
             number.setFocusable(true);
@@ -436,21 +467,29 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
         boolean isError = false;
         View mFocusView = null;
 
-        mETNumber.setError(null);
+        mETEmail.setError(null);
         mETPass.setError(null);
+        mETNumber.setError(null);
 
         if (!isDataValid(number)){
             isError = true;
-            mETNumber.setError("Field can't be empty");
-            mFocusView = mETNumber;
+            mETEmail.setError("Field can't be empty");
+            mFocusView = mETEmail;
         }
 
-        /*if (!isValidMobile(number)){
-            isError = true;
-            //mETNumber.setError("Enter valid number");
-            mETNumber.setError("Enter valid email");
-            mFocusView = mETNumber;
-        }*/
+        if (emailLogin) {
+            if (!isValidEmail(number)){
+                isError = true;
+                mETEmail.setError("Enter valid email");
+                mFocusView = mETEmail;
+            }
+        } else {
+            if (!isValidMobile(number)){
+                isError = true;
+                mETNumber.setError("Enter valid number");
+                mFocusView = mETNumber;
+            }
+        }
 
         if (!isDataValid(pass)){
             isError = true;
@@ -471,7 +510,11 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
             try {
                 map.put("username", number);
                 map.put("password", pass);
-                map.put("type", "email");
+                if (emailLogin) {
+                    map.put("type", "email");
+                } else {
+                    map.put("type", "phone");
+                }
                 Log.d("doJSON Request",map.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -553,6 +596,10 @@ public class LoginActivity extends AppCompatActivity implements NetworkCallback 
         }else {
             return false;
         }
+    }
+
+    private boolean isValidEmail(String emailAddress) {
+        return !TextUtils.isEmpty(emailAddress) && android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches();
     }
 
     @Override

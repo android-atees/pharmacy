@@ -294,7 +294,7 @@ public class SplashActivity extends AppCompatActivity implements PermissionManag
                         forcedUpdation = true;
                     }
 
-//                    newVersionString = 10.00;//TODO add this Integer.parseInt(newVersionString);
+//                    newVersionString = 10.00;// add this Integer.parseInt(newVersionString);
                     int newVersion = (int) newVersionString;
 
                     checkVersion(newVersion, forcedUpdation, newFeatures);
@@ -311,7 +311,18 @@ public class SplashActivity extends AppCompatActivity implements PermissionManag
                 //getCategories();
                 postCreateCartId();
             } else {
-                goToLogin();
+                //goToLogin();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (manager.isFirstLaunch()) {
+                            goToWelcomeActivity();
+                        } else {
+                            goToLogin();
+                        }
+                    }
+                },2500);
             }
         } else {
             mPermissionManager.makePermissionRequest(SplashActivity.this);
@@ -320,6 +331,12 @@ public class SplashActivity extends AppCompatActivity implements PermissionManag
 
     private void goToLogin() {
         Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void goToWelcomeActivity() {
+        Intent intent = new Intent(SplashActivity.this, WelcomeActivity.class);
         startActivity(intent);
         finish();
     }

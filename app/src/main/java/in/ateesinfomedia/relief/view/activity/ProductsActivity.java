@@ -470,6 +470,10 @@ public class ProductsActivity extends AppCompatActivity implements AdapterClickL
                     } else {
                         mAdapter.addProducts(mCatProductList);
                     }
+                } else {
+                    Toast.makeText(this,
+                            "Oops no products are available",
+                            Toast.LENGTH_SHORT).show();
                 }
 
                 LoadingDialog.cancelLoading();
